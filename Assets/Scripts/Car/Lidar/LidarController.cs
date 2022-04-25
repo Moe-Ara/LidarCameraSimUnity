@@ -4,6 +4,7 @@ using Unity.Collections;
 using UnityEngine;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
+using Random = System.Random;
 
 namespace Car.Lidar {
     public class LidarController : MonoBehaviour {
@@ -27,6 +28,11 @@ namespace Car.Lidar {
         /// </summary>
         [Range(0.1f, 0.4f)] public float horizontalResolution = 0.4f;
 
+        /// <summary>
+        /// The distance to points is changed randomly by this delta value [-1, +1] [in meters]
+        /// </summary>
+        public float rangeAccuracy = 0.03f;
+        
         /// <summary>
         /// The event that is triggered after a new point cloud was generated
         /// </summary>
@@ -52,6 +58,11 @@ namespace Car.Lidar {
         private float[] values = new float[3];
 
         /// <summary>
+        /// Random variable to generate lidar noise
+        /// </summary>
+        private Random rand;
+        
+        /// <summary>
         /// Initialize the lidar
         /// </summary>
         private void Start() {
@@ -59,6 +70,8 @@ namespace Car.Lidar {
             CreateCommands();
             _results = new NativeArray<RaycastHit>(_commands.Length, Allocator.TempJob);
             data = new byte[12 * _results.Length];
+
+            rand = new Random();
         }
 
         /// <summary>
@@ -123,6 +136,11 @@ namespace Car.Lidar {
             
             for (var i = 0; i < _results.Length; i++) {
                 var resPoint = _results[i].point - transform.position;
+
+                // Simulate noise -> resPoint = resPoint / oldDist * newDist
+                var oldDist = resPoint.magnitude;
+                resPoint *= (oldDist + (rand.Next(0, 10000) / 5000.0f - 1.0f) * rangeAccuracy) / oldDist;
+
                 values[0] = resPoint.z;
                 values[1] = -resPoint.x;
                 values[2] = resPoint.y;
