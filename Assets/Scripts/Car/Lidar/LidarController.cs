@@ -31,7 +31,7 @@ namespace Car.Lidar {
         /// <summary>
         /// The distance to points is changed randomly by this delta value [-1, +1] [in meters]
         /// </summary>
-        public float rangeAccuracy = 0.03f;
+        [Range(0.0f, 0.1f)] public float rangeAccuracy = 0.03f;
         
         /// <summary>
         /// The event that is triggered after a new point cloud was generated
