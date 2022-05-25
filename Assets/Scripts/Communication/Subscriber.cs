@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -42,6 +43,11 @@ namespace Communication {
                         var bytes = new byte[4];
                         _clientSocket.Receive(bytes);
                         var dataSize = BitConverter.ToInt32(bytes, 0);
+
+                        // Check if client has disconnected
+                        if (dataSize == 0) {
+                            throw new IOException();
+                        }
                         
                         // Receive data
                         var data = new byte[dataSize];
