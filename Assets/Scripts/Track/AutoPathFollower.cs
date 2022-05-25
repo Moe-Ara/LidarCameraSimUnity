@@ -20,8 +20,7 @@ namespace Track {
         private void FixedUpdate() {
             if (pathCreator == null) return;
             _distanceTravelled += speed * Time.fixedDeltaTime;
-            transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled, endOfPathInstruction) +
-                                 new Vector3(0, 0.5f, 0);
+            transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(_distanceTravelled, endOfPathInstruction);
             transform.Rotate(0, 0, 90);
         }
