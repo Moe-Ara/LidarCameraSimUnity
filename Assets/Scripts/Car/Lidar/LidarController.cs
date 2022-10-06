@@ -128,8 +128,7 @@ namespace Car.Lidar {
                 command.from = transform.position;
                 _commands[i] = command;
             }
-
-            // Schedule the batch of raycasts
+            // Schedule the batch of raycasts.
             var handle = RaycastCommand.ScheduleBatch(_commands, _results, 64);
             handle.Complete();
 
