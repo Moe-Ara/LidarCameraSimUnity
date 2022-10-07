@@ -1,12 +1,15 @@
 using System;
 
-namespace Communication.Messages {
+namespace Communication.Messages
+{
     [Serializable]
-    public class CarStateMessage : BaseMessage {
+    public class CarStateMessage : BaseMessage
+    {
         /// <summary>
         /// The current car speed
         /// </summary>
         public float speed_actual = 0;
+
         /// <summary>
         /// The yaw rate
         /// </summary>

@@ -12,18 +12,21 @@ public class ChangeTrack : MonoBehaviour
 
     private void OnEnable()
     {
-        rootVisualElement = this.GetComponent<UIDocument>().rootVisualElement;
+        rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         buttonBack = rootVisualElement.Q<Button>("ButtonBack");
 
-        Button buttonAcceleration = rootVisualElement.Q<Button>("ButtonAcceleration");
-        Button buttonSkidpad = rootVisualElement.Q<Button>("ButtonSkidpad");
-        Button buttonEndurance = rootVisualElement.Q<Button>("ButtonEndurance");
-
+        var buttonAcceleration = rootVisualElement.Q<Button>("ButtonAcceleration");
+        var buttonSkidpad = rootVisualElement.Q<Button>("ButtonSkidpad");
+        var buttonEndurance = rootVisualElement.Q<Button>("ButtonEndurance");
+        
+        var buttonCustom = rootVisualElement.Q<Button>("Buttoncustom");
+        buttonCustom.clicked += StartCustomTrack;
+        
         buttonAcceleration.clicked += StartAccerleration;
         buttonSkidpad.clicked += StartSkidpad;
         buttonEndurance.clicked += StartEndurance;
 
-        buttonBack.clicked += () => {this.gameObject.SetActive(false);};
+        buttonBack.clicked += () => { gameObject.SetActive(false); };
     }
 
     private void StartEndurance()
@@ -39,5 +42,10 @@ public class ChangeTrack : MonoBehaviour
     private void StartAccerleration()
     {
         trackManager.SetTrack("acceleration");
+    }
+
+    private void StartCustomTrack()
+    {
+        trackManager.SetTrack("customTrack");
     }
 }

@@ -6,8 +6,10 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
-namespace Car.Lidar {
-    public class LidarController : MonoBehaviour {
+namespace Car.Lidar
+{
+    public class LidarController : MonoBehaviour
+    {
         /// <summary>
         /// The scan frequency of the lidar
         /// </summary>
@@ -32,7 +34,7 @@ namespace Car.Lidar {
         /// The distance to points is changed randomly by this delta value [-1, +1] [in meters]
         /// </summary>
         [Range(0.0f, 0.1f)] public float rangeAccuracy = 0.03f;
-        
+
         /// <summary>
         /// The event that is triggered after a new point cloud was generated
         /// </summary>
@@ -52,7 +54,7 @@ namespace Car.Lidar {
         /// Last time a picture was generated
         /// </summary>
         private DateTime _last;
-        
+
         // Generate the byte array (12 bytes = 3 * 4 bytes and 4 bytes = 1 float)
         private byte[] data;
         private float[] values = new float[3];
@@ -61,11 +63,12 @@ namespace Car.Lidar {
         /// Random variable to generate lidar noise
         /// </summary>
         private Random rand;
-        
+
         /// <summary>
         /// Initialize the lidar
         /// </summary>
-        private void Start() {
+        private void Start()
+        {
             _last = DateTime.Now;
             CreateCommands();
             _results = new NativeArray<RaycastHit>(_commands.Length, Allocator.TempJob);
@@ -77,7 +80,8 @@ namespace Car.Lidar {
         /// <summary>
         /// Generate the lidar data
         /// </summary>
-        private void Update() {
+        private void Update()
+        {
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
@@ -87,7 +91,8 @@ namespace Car.Lidar {
         /// <summary>
         /// Clean up
         /// </summary>
-        private void OnDestroy() {
+        private void OnDestroy()
+        {
             _commands.Dispose();
             _results.Dispose();
         }
@@ -95,23 +100,24 @@ namespace Car.Lidar {
         /// <summary>
         /// Create the raycast commands
         /// </summary>
-        private void CreateCommands() {
+        private void CreateCommands()
+        {
             var result = new List<RaycastCommand>();
-            
-            
-            for (float horizontal = 0; horizontal < 360f; horizontal += horizontalResolution) {
-                for (var vertical = -(verticalAngleRange * 0.5f);
-                    vertical <= verticalAngleRange * 0.5f;
-                    vertical += verticalAngleRange / layers) {
-                    // Calculate the direction vector
-                    var r = transform.forward;
-                    r = Quaternion.Euler(vertical, 0, 0) * r;
-                    r = Quaternion.Euler(0, horizontal, 0) * r;
 
-                    // Create the raycast command
-                    var c = new RaycastCommand(transform.position, r);
-                    result.Add(c);
-                }
+
+            for (float horizontal = 0; horizontal < 360f; horizontal += horizontalResolution)
+            for (var vertical = -(verticalAngleRange * 0.5f);
+                 vertical <= verticalAngleRange * 0.5f;
+                 vertical += verticalAngleRange / layers)
+            {
+                // Calculate the direction vector
+                var r = transform.forward;
+                r = Quaternion.Euler(vertical, 0, 0) * r;
+                r = Quaternion.Euler(0, horizontal, 0) * r;
+
+                // Create the raycast command
+                var c = new RaycastCommand(transform.position, r);
+                result.Add(c);
             }
 
             _commands = new NativeArray<RaycastCommand>(result.Count, Allocator.TempJob);
@@ -121,9 +127,11 @@ namespace Car.Lidar {
         /// <summary>
         /// Generate a new point cloud
         /// </summary>
-        private void GenerateLidarData() {
+        private void GenerateLidarData()
+        {
             // Update position information for each command
-            for (var i = 0; i < _commands.Length; i++) {
+            for (var i = 0; i < _commands.Length; i++)
+            {
                 var command = _commands[i];
                 command.from = transform.position;
                 _commands[i] = command;
@@ -133,10 +141,11 @@ namespace Car.Lidar {
             var handle = RaycastCommand.ScheduleBatch(_commands, _results, 64);
             handle.Complete();
 
-            
-            for (var i = 0; i < _results.Length; i++) {
+
+            for (var i = 0; i < _results.Length; i++)
+            {
                 var resPoint = _results[i].point - transform.position;
-				resPoint = Quaternion.Euler(-transform.eulerAngles) * resPoint;
+                resPoint = Quaternion.Euler(-transform.eulerAngles) * resPoint;
 
                 // Simulate noise -> resPoint = resPoint / oldDist * newDist
                 var oldDist = resPoint.magnitude;
@@ -145,13 +154,14 @@ namespace Car.Lidar {
                 values[0] = resPoint.z;
                 values[1] = -resPoint.x;
                 values[2] = resPoint.y;
-                
-                for (var j = 0; j < values.Length; j++) {
+
+                for (var j = 0; j < values.Length; j++)
+                {
                     var bytes = BitConverter.GetBytes(values[j]);
                     for (var k = 0; k < bytes.Length; k++) data[12 * i + 4 * j + k] = bytes[k];
                 }
-
             }
+
             OnNewPointCloud?.Invoke(data);
         }
     }

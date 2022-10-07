@@ -1,10 +1,11 @@
 using System;
 using Communication.Messages;
 using UnityEngine;
-
+using UnityEngine.UIElements;
+//!!!!REMOVE HERE IF YOU REMOVE CART FEATURE
 namespace Car
 {
-    public class CarController : MonoBehaviour
+    public class CartController : MonoBehaviour
     {
         /// <summary>
         /// The event that is triggered after a new car state was generated
@@ -29,7 +30,8 @@ namespace Car
         /// <summary>
         /// Important data for the car state
         /// </summary>
-        private Vector3 _pos = Vector3.zero, _velocity = Vector3.zero, _rot = Vector3.zero;
+        
+        private Vector3 _pos=Vector3.zero, _velocity = Vector3.zero, _rot = Vector3.zero;
 
         /// <summary>
         /// Update the car state

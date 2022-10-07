@@ -117,12 +117,12 @@ namespace Car.Camera
             for (var i = 0; i < BUFFER_SIZE; ++i)
             {
                 //the uint32s in imageData are composed of r8g8b8a8
-                uint rgba = imageData[i];
+                var rgba = imageData[i];
 
                 //masking the uint32s and bitshifting them into a 1byte representation
-                byte r = (byte)((rgba & 0xFF000000) >> 24);
-                byte g = (byte)((rgba & 0x00FF0000) >> 16);
-                byte b = (byte)((rgba & 0x0000FF00) >> 8);
+                var r = (byte)((rgba & 0xFF000000) >> 24);
+                var g = (byte)((rgba & 0x00FF0000) >> 16);
+                var b = (byte)((rgba & 0x0000FF00) >> 8);
                 data[i * 3 + 0] = r;
                 data[i * 3 + 1] = g;
                 data[i * 3 + 2] = b;

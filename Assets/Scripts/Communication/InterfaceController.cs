@@ -7,8 +7,10 @@ using Car.Lidar;
 using Communication.Messages;
 using UnityEngine;
 
-namespace Communication {
-    public class InterfaceController : MonoBehaviour {
+namespace Communication
+{
+    public class InterfaceController : MonoBehaviour
+    {
         /// <summary>
         /// The important topics
         /// </summary>
@@ -47,12 +49,13 @@ namespace Communication {
         /// <summary>
         /// The queue containing the actions that shall be executed on the main thread
         /// </summary>
-        private readonly Queue<Action> _mainThreadQueue = new Queue<Action>();
+        private readonly Queue<Action> _mainThreadQueue = new();
 
         /// <summary>
         /// Initialize the server
         /// </summary>
-        private void Start() {
+        private void Start()
+        {
             // Init the publishers
             _cameraPublisher = new Publisher(CAMERA);
             _lidarPublisher = new Publisher(LIDAR);
@@ -63,7 +66,8 @@ namespace Communication {
             // Register the sensor events
             carCameraController.OnNewImage = imageData => _cameraPublisher.Publish(imageData);
             lidarController.OnNewPointCloud = pointCloudData => _lidarPublisher.Publish(pointCloudData);
-            carController.OnNewCarState = message => {
+            carController.OnNewCarState = message =>
+            {
                 var json = JsonUtility.ToJson(message);
                 _carStatePublisher.Publish(Encoding.UTF8.GetBytes(json));
             };
@@ -72,11 +76,11 @@ namespace Communication {
         /// <summary>
         /// Execute the main thread actions
         /// </summary>
-        private void FixedUpdate() {
-            lock (_mainThreadQueue) {
-                while (_mainThreadQueue.Count > 0) {
-                    _mainThreadQueue.Dequeue()();
-                }
+        private void FixedUpdate()
+        {
+            lock (_mainThreadQueue)
+            {
+                while (_mainThreadQueue.Count > 0) _mainThreadQueue.Dequeue()();
             }
         }
 
@@ -85,8 +89,10 @@ namespace Communication {
         /// on the main thread with every update
         /// </summary>
         /// <param name="action">The action</param>
-        private void ExecuteOnMainThread(Action action) {
-            lock (_mainThreadQueue) {
+        private void ExecuteOnMainThread(Action action)
+        {
+            lock (_mainThreadQueue)
+            {
                 _mainThreadQueue.Enqueue(action);
             }
         }
@@ -94,7 +100,8 @@ namespace Communication {
         /// <summary>
         /// Handle incoming control target
         /// </summary>
-        private void OnControlTarget(byte[] msg) {
+        private void OnControlTarget(byte[] msg)
+        {
             var controlResult = JsonUtility.FromJson<ControlResultMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carController.ApplyControlResult(controlResult));
         }
@@ -102,7 +109,8 @@ namespace Communication {
         /// <summary>
         /// Handle incoming control target
         /// </summary>
-        private void OnPerceivedCones(byte[] msg) {
+        private void OnPerceivedCones(byte[] msg)
+        {
             var perceivedCones = JsonUtility.FromJson<PerceivedConesMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carCameraController.DrawConeRays(perceivedCones));
         }
@@ -110,7 +118,8 @@ namespace Communication {
         /// <summary>
         /// Shut down the publishers and subscribers
         /// </summary>
-        private void OnDestroy() {
+        private void OnDestroy()
+        {
             _cameraPublisher.Stop();
             _lidarPublisher.Stop();
             _carStatePublisher.Stop();
