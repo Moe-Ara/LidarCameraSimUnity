@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using UnityEngine;
 
 namespace Communication
 {
@@ -58,6 +59,10 @@ namespace Communication
                         var received = 0;
                         while (received < dataSize && _running)
                             received += _clientSocket.Receive(data, received, dataSize - received, SocketFlags.None);
+                        string message = "";
+                        for (int i = 0; i < dataSize; i++)
+                            message += Convert.ToChar(data[i]);
+                        Debug.Log(message);
 
                         // Start subscriber routines
                         if (dataSize > 0) callback(data);
