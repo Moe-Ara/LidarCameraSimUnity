@@ -59,12 +59,10 @@ namespace Communication
                         var received = 0;
                         while (received < dataSize && _running)
                             received += _clientSocket.Receive(data, received, dataSize - received, SocketFlags.None);
-                        string message = "";
-                        for (int i = 0; i < dataSize; i++)
-                            message += Convert.ToChar(data[i]);
-                        Debug.Log(message);
+                            Debug.Log("DATA SIZE: " +dataSize);
+                            Debug.Log(System.Text.Encoding.UTF8.GetString(data));
 
-                        // Start subscriber routines
+                            // Start subscriber routines
                         if (dataSize > 0) callback(data);
                     }
                 }
