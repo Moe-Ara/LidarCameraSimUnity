@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Car;
 using Car.Camera;
+using Car.gss;
 using Car.Lidar;
 using Communication.Messages;
 using UnityEngine;
@@ -36,6 +37,10 @@ namespace Communication
         /// </summary>
         public LidarController lidarController;
 
+        /// <summary>
+        /// The ground speed sensor controller
+        /// </summary>
+        public GssController gssController;
         /// <summary>
         /// The publishers
         /// </summary>
@@ -104,6 +109,8 @@ namespace Communication
         {
             var controlResult = JsonUtility.FromJson<ControlResultMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carController.ApplyControlResult(controlResult));
+            gssController.calculateError(controlResult);
+
         }
 
         /// <summary>
