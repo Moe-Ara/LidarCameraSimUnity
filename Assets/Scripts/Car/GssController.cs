@@ -22,7 +22,7 @@ namespace Car.gss
         public double _speedKmH = 0;
         private float _offset = 0.0f;
         public double _time = 0;
-        
+        public Vector3 velocity = Vector3.zero;
 
         // Start is called before the first frame update
         void Start()
@@ -40,7 +40,8 @@ namespace Car.gss
             Vector3 pos = transform.position;
             Vector3 difference = (pos - _lastPositon) / Time.deltaTime;
             _time = Time.deltaTime;
-            _speed = difference.magnitude;
+            velocity = difference;
+            _speed = difference[2];
             _lastPositon = pos;
             _speedKmH = _speed * 3.6;
             addError();
