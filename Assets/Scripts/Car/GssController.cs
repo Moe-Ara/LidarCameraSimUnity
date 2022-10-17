@@ -21,8 +21,8 @@ namespace Car.gss
         public float _speed = 0.0f;
         public double _speedKmH = 0;
         private float _offset = 0.0f;
-
         public double _time = 0;
+        
 
         // Start is called before the first frame update
         void Start()
