@@ -109,7 +109,6 @@ namespace Communication
         {
             var controlResult = JsonUtility.FromJson<ControlResultMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carController.ApplyControlResult(controlResult));
-            //gssController.calculateError(controlResult);
 
         }
 
