@@ -1,12 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Car;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Linq;
+using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using Button = UnityEngine.UIElements.Button;
+using DropdownField = UnityEngine.UIElements.DropdownField;
+using Toggle = UnityEngine.UIElements.Toggle;
 
 public class MainMenuManger : MonoBehaviour
 {
-
     private VisualElement rootVisualElement;
 
     private TextField frequencyLidarTextField;
@@ -15,58 +22,87 @@ public class MainMenuManger : MonoBehaviour
     private Button resetCarButton;
     private Button changeTrackButton;
     private Button updateSettingsButton;
+    private Button showCamera;
+    public  Dropdown switchtrack;
 
     private RadioButtonGroup radioButtonGroupMode;
 
     public GameObject changeTrackDocument;
 
 
-    
     private void UpdateSettings()
     {
-        int lidarFrequency = Convert.ToInt32(frequencyCameraTextField.text);
-        int cameraFrequency = Convert.ToInt32(frequencyLidarTextField.text);
 
-        DrivingMode mode = (DrivingMode)radioButtonGroupMode.value;
+        var lidarFrequency = Convert.ToInt32(frequencyCameraTextField.text);
+        var cameraFrequency = Convert.ToInt32(frequencyLidarTextField.text);
 
-        var output = String.Format("lidar: {0}, camera {1}, drivingMode: {2}", lidarFrequency, cameraFrequency, mode);
-        
+        var mode = (DrivingMode)radioButtonGroupMode.value;
+
+        var output = string.Format("lidar: {0}, camera {1}, drivingMode: {2}", lidarFrequency, cameraFrequency, mode);
+
         Debug.Log(output);
-
     }
-    
+
     private void ChangeTrack()
     {
         changeTrackDocument.SetActive(true);
     }
 
     private void ResetCar()
-    {
-        throw new NotImplementedException();
-    } 
-    
+    { 
+        GameObject car = GameObject.Find("Car");
+        car.transform.position = new Vector3(0, 0, 0);
+    }
+
 
     private void OnEnable()
     {
-        rootVisualElement = this.GetComponent<UIDocument>().rootVisualElement;
+        rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         Querries();
         AddListeners();
-        
         // How to set the values, when it comes e.g. from a configuration
         SetFrequencyLidar(42);
         SetFrequencyCamera(69);
         SetDrivingMode(DrivingMode.Autonomous);
     }
 
+    
+
     private void AddListeners()
     {
         resetCarButton.clicked += ResetCar;
         changeTrackButton.clicked += ChangeTrack;
         updateSettingsButton.clicked += UpdateSettings;
+        switchtrack.ClearOptions();
+        List<string> options = new  List<string>();
+        options.Add("customTrack");
+        options.Add("endurance");
+        options.Add("skidpad");
+        options.Add("acceleration");
+        switchtrack.AddOptions(options);
+        switchtrack.onValueChanged.AddListener(index =>
+       {
+           Debug.Log("Switch Track" + index);
+           switch (index)
+           {
+               case 1:
+                   trackManager.SetTrack("endurance");
+                   break;
+               case 2:
+                   trackManager.SetTrack("skidpad");
+                   break;
+               case 3:
+                   trackManager.SetTrack("acceleration");
+                   break;
+               default:
+                   trackManager.SetTrack("customTrack");
+                   break;
+           }
+       });
 
     }
-
-   
+    public TrackManager trackManager;
+  
 
     /// <summary>
     /// A Method for assigning all the Buttons of the UI Elements
@@ -79,7 +115,7 @@ public class MainMenuManger : MonoBehaviour
 
         frequencyLidarTextField = rootVisualElement.Q<TextField>("FrequencyLidar");
         frequencyCameraTextField = rootVisualElement.Q<TextField>("FrequencyCamera");
-
+        //switchtrack = rootVisualElement.Q<Dropdown>("DropDownFIeld");
         radioButtonGroupMode = rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroupMode");
     }
 
@@ -88,6 +124,7 @@ public class MainMenuManger : MonoBehaviour
     {
         frequencyLidarTextField.value = freq.ToString();
     }
+
     public void SetFrequencyCamera(int freq)
     {
         frequencyCameraTextField.value = freq.ToString();
@@ -101,7 +138,7 @@ public class MainMenuManger : MonoBehaviour
 
 public enum DrivingMode
 {
-    Auto, 
+    Auto,
     Keyboard,
     Autonomous
 }

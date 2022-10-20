@@ -1,8 +1,10 @@
 using System;
 
-namespace Communication.Messages {
+namespace Communication.Messages
+{
     [Serializable]
-    public class ControlResultMessage : BaseMessage {
+    public class ControlResultMessage : BaseMessage
+    {
         /**
          * Target velocity in driving direction (km/h) unsigned
          */

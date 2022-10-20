@@ -1,8 +1,10 @@
 using System;
 
-namespace Communication.Messages {
+namespace Communication.Messages
+{
     [Serializable]
-    public class BaseMessage {
+    public class BaseMessage
+    {
         /// <summary>
         /// The timestamp of creation
         /// </summary>
@@ -11,7 +13,8 @@ namespace Communication.Messages {
         /// <summary>
         /// Create the timestamp
         /// </summary>
-        public BaseMessage() {
+        public BaseMessage()
+        {
             time_stamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
     }
