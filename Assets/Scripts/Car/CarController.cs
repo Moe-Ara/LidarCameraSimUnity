@@ -1,11 +1,18 @@
 using System;
 using Communication.Messages;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Car
 {
     public class CarController : MonoBehaviour
     {
+        //debuging
+            private float speedOfCar=0f;
+            private float yawRate = 0f;
+            private bool wasRotated = false;
+        
+        
         /// <summary>
         /// The event that is triggered after a new car state was generated
         /// </summary>
@@ -55,8 +62,21 @@ namespace Car
                 yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
             };
             OnNewCarState?.Invoke(carState);
+            
         }
 
+        ///This is just to debug please remove later
+        private void moveCar()
+        {
+            //debugging
+            gameObject.transform.Translate
+                (Vector3.forward * ((float)speedOfCar * Time.deltaTime));
+            
+            gameObject.transform.Rotate(0f,yawRate,0f);
+        }
+
+        /// Remove the method above before production 
+        
         /// <summary>
         /// Update the car
         /// </summary>
@@ -68,6 +88,12 @@ namespace Car
             // TODO: Set max motor torque (motor_moment_target is a relative value)
             rearLeftCollider.motorTorque = control.motor_moment_target * 50;
             rearRightCollider.motorTorque = control.motor_moment_target * 50;
+            
+            //debug; remove this after it has fulfilled its purpose
+            speedOfCar = control.speed_target;
+            yawRate = control.steering_angle_target;
+            
+            moveCar();
         }
 
         /// <summary>

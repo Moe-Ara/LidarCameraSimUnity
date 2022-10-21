@@ -82,7 +82,8 @@ namespace Communication
         /// Execute the main thread actions
         /// </summary>
         private void FixedUpdate()
-        {
+        {                
+
             lock (_mainThreadQueue)
             {
                 while (_mainThreadQueue.Count > 0) _mainThreadQueue.Dequeue()();
@@ -109,7 +110,7 @@ namespace Communication
         {
             var controlResult = JsonUtility.FromJson<ControlResultMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carController.ApplyControlResult(controlResult));
-
+            Debug.Log("OnControlTargetCalled" + controlResult.ToString());
         }
 
         /// <summary>

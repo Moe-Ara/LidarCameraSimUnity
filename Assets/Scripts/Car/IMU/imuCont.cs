@@ -23,10 +23,6 @@ namespace Car.imu
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (acceleration.z > 2)
-            {
-                Debug.Log(acceleration.z);
-            }
 
             calculateSpeed();
             calculateAcceleration();
