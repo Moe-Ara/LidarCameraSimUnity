@@ -142,7 +142,14 @@ namespace Car
             rearLeftCollider.brakeTorque = deceletaionForce * 50;
             rearRightCollider.brakeTorque = deceletaionForce * 50;
         }
-
+        /// <summary>
+        /// Reset Car
+        /// </summary>
+        /// <param name="control">This method resets car to original position</param>
+        public void ResetCar()
+        {
+            transform.position = new Vector3(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0,0,0);
+        }
     }
-
 }
