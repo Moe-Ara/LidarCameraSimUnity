@@ -20,11 +20,17 @@ namespace Car.gss
         
         public float _error;
         private Vector3 _lastPositon = Vector3.zero;
-        public float _speed = 0.0f;
+        [SerializeField]private float _speed = 0.0f;
         public double _speedKmH = 0;
         private float _offset = 0.0f;
         public double _time = 0;
         public Vector3 velocity = Vector3.zero;
+    
+        //getter for speed
+        public float Speed
+        {
+            get => _speed;
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -46,8 +52,8 @@ namespace Car.gss
             _speed = difference[2];
             _lastPositon = pos;
             _speedKmH = _speed * 3.6;
-            addError();
-            return _speed + _offset; // multiply by random for error calculation 
+            // addError();
+            return (float)Math.Round(Math.Abs(_speed + _offset),3); // multiply by random for error calculation 
         }
 
         public void addError()

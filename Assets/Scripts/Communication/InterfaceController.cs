@@ -110,7 +110,6 @@ namespace Communication
         {
             var controlResult = JsonUtility.FromJson<ControlResultMessage>(Encoding.UTF8.GetString(msg));
             ExecuteOnMainThread(() => carController.ApplyControlResult(controlResult));
-            Debug.Log("OnControlTargetCalled" + controlResult.ToString());
         }
 
         /// <summary>

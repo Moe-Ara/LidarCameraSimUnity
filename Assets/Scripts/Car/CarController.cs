@@ -1,18 +1,18 @@
 using System;
+using Car.gss;
 using Communication.Messages;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Car
 {
     public class CarController : MonoBehaviour
     {
-        //debuging
-            private float speedOfCar=0f;
-            private float yawRate = 0f;
-            private bool wasRotated = false;
-        
-        
+        private ControlResultMessage _control;
+        private PIDController _pidController;
+        private float _pidOutput;
+        private float _currentSpeed;
+        private GssController _gssController;
+
         /// <summary>
         /// The event that is triggered after a new car state was generated
         /// </summary>
@@ -37,6 +37,16 @@ namespace Car
         /// Important data for the car state
         /// </summary>
         private Vector3 _pos = Vector3.zero, _velocity = Vector3.zero, _rot = Vector3.zero;
+        
+
+        private void Start()
+        {
+            _currentSpeed = 0f;
+            _pidOutput = 0f;
+            _control = new ControlResultMessage();
+            _pidController = gameObject.GetComponent<PIDController>();
+            _gssController = gameObject.GetComponent<GssController>();
+        }
 
         /// <summary>
         /// Update the car state
@@ -50,6 +60,8 @@ namespace Car
             _pos = trans.position;
             _velocity = (_pos - lastPos) / Time.fixedDeltaTime;
 
+            // _currentSpeed=_gssController.calculateSpeed();
+            _currentSpeed=(float)Math.Round(_gssController.Speed, 3);
             // Calculate the angular velocity
             var lastRot = _rot;
             _rot = trans.rotation.eulerAngles;
@@ -62,38 +74,28 @@ namespace Car
                 yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
             };
             OnNewCarState?.Invoke(carState);
-            
+            Debug.Log("Current Speed"+_currentSpeed.ToString());
+            _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            Debug.Log(_pidOutput.ToString());
+            Acceleration(_control);
         }
 
-        ///This is just to debug please remove later
-        private void moveCar()
-        {
-            //debugging
-            gameObject.transform.Translate
-                (Vector3.forward * ((float)speedOfCar * Time.deltaTime));
-            
-            gameObject.transform.Rotate(0f,yawRate,0f);
-        }
-
-        /// Remove the method above before production 
-        
         /// <summary>
         /// Update the car
         /// </summary>
         /// <param name="control">The control result from the as</param>
         public void ApplyControlResult(ControlResultMessage control)
         {
+            _control = control;
+            //steering
             SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
             SetFrontWheelAngle(frontRightCollider, frontRightWheel, control.steering_angle_target);
             // TODO: Set max motor torque (motor_moment_target is a relative value)
-            rearLeftCollider.motorTorque = control.motor_moment_target * 50;
-            rearRightCollider.motorTorque = control.motor_moment_target * 50;
-            
-            //debug; remove this after it has fulfilled its purpose
-            speedOfCar = control.speed_target;
-            yawRate = control.steering_angle_target;
-            
-            moveCar();
+            // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
+            // rearRightCollider.motorTorque = control.motor_moment_target * 50;
+            // Accelerate; start driving
+            // Steering();
+            // Acceleration(control);
         }
 
         /// <summary>
@@ -108,6 +110,39 @@ namespace Car
             wheelCollider.steerAngle = steeringAngle;
             wheelTransform.rotation = Quaternion.Euler(0, steeringAngle, 90);
         }
-        
+
+        /// <summary>
+        /// Start Acceleration; it is a helper method to be called each time we get data from autonomous system
+        /// </summary>
+        /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
+        private void Acceleration(ControlResultMessage control)
+        {
+            if (control.speed_target != 0f)
+            {
+                rearLeftCollider.brakeTorque = 0;
+                rearRightCollider.brakeTorque = 0;
+                // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
+                rearLeftCollider.motorTorque = 100 * _pidOutput;
+                rearRightCollider.motorTorque = 100 * _pidOutput;
+            }
+            else
+            {
+                Declaration();
+            }
+        }
+
+        /// <summary>
+        /// Start Declaration when the motor torque is 0
+        /// </summary>
+        /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
+        private void Declaration()
+        {
+            var deceletaionForce =
+                1f; // change this if you want the car to decelerate faster; the higher the force the faster the declaration
+            rearLeftCollider.brakeTorque = deceletaionForce * 50;
+            rearRightCollider.brakeTorque = deceletaionForce * 50;
+        }
+
     }
+
 }
