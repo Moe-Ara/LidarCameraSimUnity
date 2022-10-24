@@ -7,7 +7,7 @@ namespace Car
     {
         [SerializeField]
         [Range(-10,10)]
-        public float _proportionalGain,_integralGain,_derivativeGain;
+        public git stfloat _proportionalGain,_integralGain,_derivativeGain;
         private float _errorLast;
         private float _errorSum;
         private float _integrationStored;
