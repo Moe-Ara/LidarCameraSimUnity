@@ -60,7 +60,6 @@ namespace Communication
                         {
                             received += _clientSocket.Receive(data, received, dataSize - received, SocketFlags.None);
                         }
-
                         // Start subscriber routines
                         if (dataSize > 0) callback(data);
                     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Communication.Messages;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,16 +26,24 @@ namespace Car.gss
         private float _offset = 0.0f;
         public double _time = 0;
         public Vector3 velocity = Vector3.zero;
-    
+
+        private comInt _comInt = comInt.InitializeComInterface();
+        
+        
+
         //getter for speed
         public float Speed
         {
+            
             get => _speed;
         }
 
         // Start is called before the first frame update
         void Start()
         {
+            // example of adding objects to com Interface
+            _comInt.Objects.Add(_speed);
+
         }
 
         // Update is called once per frame

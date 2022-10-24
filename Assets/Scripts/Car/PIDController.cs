@@ -7,7 +7,7 @@ namespace Car
     {
         [SerializeField]
         [Range(-10,10)]
-        public git stfloat _proportionalGain,_integralGain,_derivativeGain;
+        public float _proportionalGain,_integralGain,_derivativeGain;
         private float _errorLast;
         private float _errorSum;
         private float _integrationStored;
@@ -43,7 +43,7 @@ namespace Car
             var D= _derivativeGain * dt;
             //Integral
             // _errorSum = AddValueToAverage(_errorSum, Time.deltaTime * error, 1000f);
-            _integrationStored = Mathf.Clamp(_integrationStored + (error * deltaTime), -1, 1); //change min and max depending on the pid controller irl; these are integral saturation
+            _integrationStored = Mathf.Clamp(_integrationStored + (error * deltaTime), -10, 10); //change min and max depending on the pid controller irl; these are integral saturation
             var I = _integralGain * _integrationStored;
             _errorLast = error;
             result = P + I + D;

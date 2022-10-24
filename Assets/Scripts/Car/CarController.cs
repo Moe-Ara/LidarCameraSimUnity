@@ -74,9 +74,7 @@ namespace Car
                 yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
             };
             OnNewCarState?.Invoke(carState);
-            Debug.Log("Current Speed"+_currentSpeed.ToString());
             _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
-            Debug.Log(_pidOutput.ToString());
             Acceleration(_control);
         }
 
@@ -122,8 +120,8 @@ namespace Car
                 rearLeftCollider.brakeTorque = 0;
                 rearRightCollider.brakeTorque = 0;
                 // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
-                rearLeftCollider.motorTorque = 100 * _pidOutput;
-                rearRightCollider.motorTorque = 100 * _pidOutput;
+                rearLeftCollider.motorTorque =30;
+                rearRightCollider.motorTorque =30;
             }
             else
             {
