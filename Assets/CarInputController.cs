@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+// using UnityEngine.InputSystem;
 
 /// <summary>
 /// This class is responsible for controlling the car with the WASD or Gamepad Controls.
@@ -16,14 +16,14 @@ public class CarInputController : MonoBehaviour
         
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        _moveDirection = context.ReadValue<Vector2>();
-        
-        // transform.Translate(new Vector3(_moveDirection.x, 0, _moveDirection.y) * 15f * Time.deltaTime);
-        MoveCar(_moveDirection.x, _moveDirection.y);
-        Debug.Log(_moveDirection.x + " " + _moveDirection.y );
-    }
+    // public void OnMove(InputAction.CallbackContext context)
+    // {
+    //     _moveDirection = context.ReadValue<Vector2>();
+    //     
+    //     // transform.Translate(new Vector3(_moveDirection.x, 0, _moveDirection.y) * 15f * Time.deltaTime);
+    //     MoveCar(_moveDirection.x, _moveDirection.y);
+    //     Debug.Log(_moveDirection.x + " " + _moveDirection.y );
+    // }
 
     private void MoveCar(float x, float y)
     {
