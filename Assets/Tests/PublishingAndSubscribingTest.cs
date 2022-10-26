@@ -8,15 +8,17 @@ using UnityEngine.TestTools;
 using Communication;
 using UnityEditor;
 
-public class NewTestScript
+public class PublishingAndSubscribingTest
 {
-    private GameObject car;
-    private Camera cam;
-    private bool camData;
+    //~Camera
     private Publisher CamPub;
-    Subscriber CamSub;
+    private Subscriber CamSub;
+    
+    //~ Reusables
+    private GameObject car;
+    private bool data;
     private byte[] msg;
-    private CarCameraController _carCamCont;
+
     
     [SetUp]
     public void Setup()
@@ -24,8 +26,8 @@ public class NewTestScript
         {
             //~ CAMERA DATA TEST
             car = GameObject.Instantiate(Resources.Load<GameObject>("Car"));
-            _carCamCont =car.GetComponent<CarCameraController>();
-            camData = false;
+            var _carCamCont =car.GetComponent<CarCameraController>();
+            data = false;
             CamPub = new Publisher(42000);
             _carCamCont.OnNewImage = msg => CamPub.Publish(msg);
             msg = Encoding.UTF8.GetBytes("Hello I am Publisher");
@@ -35,21 +37,18 @@ public class NewTestScript
     }
     
     [UnityTest]
-    public IEnumerator IsThereCameraData()
+    public IEnumerator CameraData()
     {  
         // Use the Assert class to test conditions.
         // Use yield to skip a frame.
-        
         CamPub.Publish(msg);
         yield return new WaitForSeconds(0.3f);
-        // Assert.IsTrue(camData);
-        Assert.IsTrue(camData);
-
+        Assert.IsTrue(data);
     }
 
-    private void onNewData(byte[] data)
+    private void onNewData(byte[] d)
     {
-        if(data!=null)
-            camData = true;
+        if(d!=null)
+            data = true;
     }
 }
