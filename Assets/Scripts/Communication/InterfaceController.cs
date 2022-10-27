@@ -69,8 +69,17 @@ namespace Communication
             _perceivedConesSubscriber = new Subscriber(PERCEIVED_CONES, OnPerceivedCones);
 
             // Register the sensor events
-            carCameraController.OnNewImage = imageData => _cameraPublisher.Publish(imageData);
-            lidarController.OnNewPointCloud = pointCloudData => _lidarPublisher.Publish(pointCloudData);
+            carCameraController.OnNewImage = imageData =>
+            {
+                _cameraPublisher.Publish(imageData);
+                    // Debug.Log(imageData);
+        };
+
+        lidarController.OnNewPointCloud = pointCloudData =>
+        {
+            _lidarPublisher.Publish(pointCloudData);
+            // Debug.Log(pointCloudData);
+        };
             carController.OnNewCarState = message =>
             {
                 var json = JsonUtility.ToJson(message);
