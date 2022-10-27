@@ -8,7 +8,7 @@ namespace PathCreation.Examples
     public class PathSceneToolEditor : Editor
     {
         protected PathSceneTool pathTool;
-        bool isSubscribed;
+        private bool isSubscribed;
 
         public override void OnInspectorGUI()
         {
@@ -24,39 +24,28 @@ namespace PathCreation.Examples
                         Subscribe();
                     }
 
-                    if (pathTool.autoUpdate)
-                    {
-                        TriggerUpdate();
-
-                    }
+                    if (pathTool.autoUpdate) TriggerUpdate();
                 }
             }
 
             if (GUILayout.Button("Manual Update"))
-            {
                 if (TryFindPathCreator())
                 {
                     TriggerUpdate();
                     SceneView.RepaintAll();
                 }
-            }
-
         }
 
 
-        void TriggerUpdate() {
-            if (pathTool.pathCreator != null) {
-                pathTool.TriggerUpdate();
-            }
+        private void TriggerUpdate()
+        {
+            if (pathTool.pathCreator != null) pathTool.TriggerUpdate();
         }
 
 
         protected virtual void OnPathModified()
         {
-            if (pathTool.autoUpdate)
-            {
-                TriggerUpdate();
-            }
+            if (pathTool.autoUpdate) TriggerUpdate();
         }
 
         protected virtual void OnEnable()
@@ -71,13 +60,12 @@ namespace PathCreation.Examples
             }
         }
 
-        void OnToolDestroyed() {
-            if (pathTool != null) {
-                pathTool.pathCreator.pathUpdated -= OnPathModified;
-            }
+        private void OnToolDestroyed()
+        {
+            if (pathTool != null) pathTool.pathCreator.pathUpdated -= OnPathModified;
         }
 
- 
+
         protected virtual void Subscribe()
         {
             if (pathTool.pathCreator != null)
@@ -88,20 +76,16 @@ namespace PathCreation.Examples
             }
         }
 
-        bool TryFindPathCreator()
+        private bool TryFindPathCreator()
         {
             // Try find a path creator in the scene, if one is not already assigned
             if (pathTool.pathCreator == null)
             {
                 if (pathTool.GetComponent<PathCreator>() != null)
-                {
                     pathTool.pathCreator = pathTool.GetComponent<PathCreator>();
-                }
-                else if (FindObjectOfType<PathCreator>())
-                {
-                    pathTool.pathCreator = FindObjectOfType<PathCreator>();
-                }
+                else if (FindObjectOfType<PathCreator>()) pathTool.pathCreator = FindObjectOfType<PathCreator>();
             }
+
             return pathTool.pathCreator != null;
         }
     }
