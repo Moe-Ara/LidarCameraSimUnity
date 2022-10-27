@@ -31,7 +31,7 @@ class JsoEnc(JSONEncoder):
         return obj.__dict__
 
 ##accept connection
-port=42003
+port=42000
 tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_addr = ('localhost', port)
 tcp_socket.bind(server_addr)
@@ -46,25 +46,31 @@ print("Connected to : {}".format(client))
 
 
 try:
-    while 1:
+    slim="hi, my name is, my name is, my name is, slim shady"
+    print("Size: "+str(len(slim)))
+    connection.send(struct.pack('<i',len(slim)))
+    connection.sendall(bytearray(slim.encode()))
+    # while 1:
     
         ## get user input and send it to unity
-        speedOfCar=int(input("Enter Speed: "))
-        yawOfCar= int(input("Enter a yaw rate: "))
+        # speedOfCar=int(input("Enter Speed: "))
+        # yawOfCar= int(input("Enter a yaw rate: "))
         # carObj = Car(speedOfCar, yawOfCar)
         # carObjMsg = json.dumps(carObj, cls=JsoEnc)
         # bytearr=pickle.dumps(carObjMsg)
         # b=bytearray(carObjMsg, "utf8")
-        Ctrlmsg= ControlResultMessage(speedOfCar,yawOfCar, 0, 0, 0,0,0)
-        ctrlmsgjson=json.dumps(Ctrlmsg, cls=JsoEnc)
-        print("[*] Sending: "+ ctrlmsgjson)
-        datasize= len(ctrlmsgjson)
-        ba=struct.pack('<i',datasize)
+        # Ctrlmsg= ControlResultMessage(speedOfCar,yawOfCar, 0, 0, 0,0,0)
+        # ctrlmsgjson=json.dumps(Ctrlmsg, cls=JsoEnc)
+        # print("[*] Sending: "+ ctrlmsgjson)
+        # datasize= len(ctrlmsgjson)
+        # ba=struct.pack('<i',datasize)
         # print("[*] data size is :" +str(len(ctrlmsgjson)))
         # print("[*] data size is in Bytearray :" +ba)
-        connection.send(ba)
-        connection.sendall(bytearray(ctrlmsgjson, 'utf8'))
-        time.sleep(3)
+        
+        # connection.send(ba)
+        # connection.sendall(bytearray(ctrlmsgjson, 'utf8'))
+
+        # time.sleep(3)
 finally:
     print("server stopped")
     connection.close()

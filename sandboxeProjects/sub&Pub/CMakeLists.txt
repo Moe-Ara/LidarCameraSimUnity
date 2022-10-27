@@ -4,7 +4,7 @@ project(sub_Pub)
 set(CMAKE_CXX_STANDARD 14)
 #find_package(OpenCv REQUIRED)
 set (Boost_USE_STATIC_LIBS OFF)
-find_package (Boost REQUIRED COMPONENTS)
+find_package (Boost REQUIRED system COMPONENTS)
 include_directories (${Boost_INCLUDE_DIRS})
 #include_directories(${OpenCv_INCLUDE_DIRS})
 

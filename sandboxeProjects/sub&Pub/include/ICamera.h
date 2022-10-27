@@ -6,7 +6,8 @@
 #include "boost/array.hpp"
 class ICamera{
 public:
-    virtual ~ICamera();
-    virtual auto getImage()->cv::Mat=0;
+    ICamera(){}
+    virtual ~ICamera(){}
+//    virtual auto getImage()->cv::Mat=0;
 };
 #endif
