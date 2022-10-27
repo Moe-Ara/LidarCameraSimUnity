@@ -4,6 +4,7 @@ using Communication.Messages;
 using UnityEngine;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Debug = UnityEngine.Debug;
 
 namespace Car.Camera
@@ -64,6 +65,11 @@ namespace Car.Camera
         private uint[] imageData = new uint[BUFFER_SIZE];
         private byte[] data = new byte[3 * BUFFER_SIZE];
 
+        
+        
+        //!DEBUGGING
+        public RenderTexture renderTexture;
+        //!DEBUGGING
         /// <summary>
         /// Initialize the car camera
         /// </summary>
@@ -71,7 +77,7 @@ namespace Car.Camera
         {
             // Connect the camera with the compute shader
             _pixelsBuffer = new ComputeBuffer(BUFFER_SIZE, sizeof(uint));
-            var renderTexture = new RenderTexture(WIDTH, HEIGHT, 16);
+            renderTexture = new RenderTexture(WIDTH, HEIGHT, 16);
             carCamera.targetTexture = renderTexture;
             computeShader.SetTexture(0, "InputTexture", renderTexture);
 
@@ -97,8 +103,9 @@ namespace Car.Camera
         /// </summary>
         private void OnPostRender()
         {
+            Debug.Log("HiThere");
             var now = DateTime.Now;
-            if ((now - _last).TotalSeconds < 1f / HZ) return;
+            // if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
 
 
@@ -111,7 +118,16 @@ namespace Car.Camera
         private void GenerateImageData()
         {
             computeShader.Dispatch(0, Mathf.CeilToInt(WIDTH * HEIGHT / (float)_numOfThreads), 1, 1);
-            _pixelsBuffer.GetData(imageData);
+            try
+            {
+                _pixelsBuffer.GetData(imageData);
+                Debug.Log(imageData[0].ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
 
             for (var i = 0; i < BUFFER_SIZE; ++i)

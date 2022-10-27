@@ -3,7 +3,9 @@ guid: c60ad02a5cdd542429792917b2b40dbe
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - carCamera: {instanceID: 0}
+  - computeShader: {fileID: 7200000, guid: 62f073f75e1584e479c36b96b4a00cd7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

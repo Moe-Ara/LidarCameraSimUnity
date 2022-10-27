@@ -18,7 +18,9 @@ namespace DefaultNamespace
 
         public static comInt InitializeComInterface()
         {
-            return ComInterfaceInstance ?? new comInt();
+            
+                return ComInterfaceInstance ?? new comInt();
+            
         }
 
         public void DisplayVars()
