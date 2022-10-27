@@ -1,14 +1,5 @@
-"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.2.3/bin/ninja/win/ninja.exe" -G Ninja -S C:\Users\Mohamad\CLionProjects\sub&Pub -B C:\Users\Mohamad\CLionProjects\sub&Pub\cmake-build-debug
-CMake Warning (dev) at C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
-  The package name passed to `find_package_handle_standard_args` (OpenCV)
-  does not match the name of the calling package (OpenCv).  This can lead to
-  problems in calling code that expects `find_package` result variables
-  (e.g., `_FOUND`) to follow a certain pattern.
-Call Stack (most recent call first):
-  C:/opencv/build/OpenCVConfig.cmake:354 (find_package_handle_standard_args)
-  CMakeLists.txt:5 (find_package)
-This warning is for project developers.  Use -Wno-dev to suppress it.
-
+/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub -B /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug
+-- Found Boost: /usr/include (found version "1.65.1")  
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/Mohamad/CLionProjects/sub&Pub/cmake-build-debug
+-- Build files have been written to: /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/sub_Pub.dir/main.cpp.o CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o CMakeFiles/sub_Pub.dir/src/publisher.cpp.o CMakeFiles/sub_Pub.dir/src/simulated_camera.cpp.o -o sub_Pub 

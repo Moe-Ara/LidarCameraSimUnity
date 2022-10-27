@@ -21,6 +21,7 @@ private:
     void Read();
     std::string _host;
     uint16_t _port;
+    
     boost::asio::ip::tcp::socket _socket;
     std::future<void> _result;
     //Message messagetype
