@@ -120,8 +120,8 @@ namespace Car
                 rearLeftCollider.brakeTorque = 0;
                 rearRightCollider.brakeTorque = 0;
                 // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
-                rearLeftCollider.motorTorque =30;
-                rearRightCollider.motorTorque =30;
+                rearLeftCollider.motorTorque =_pidOutput*50;
+                rearRightCollider.motorTorque =_pidOutput*50;
             }
             else
             {
