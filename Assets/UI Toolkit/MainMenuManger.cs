@@ -75,10 +75,10 @@ public class MainMenuManger : MonoBehaviour
         updateSettingsButton.clicked += UpdateSettings;
         switchtrack.ClearOptions();
         List<string> options = new  List<string>();
-        options.Add("customTrack");
+        options.Add("acceleration");
         options.Add("endurance");
         options.Add("skidpad");
-        options.Add("acceleration");
+        options.Add("customTrack");
         switchtrack.AddOptions(options);
         switchtrack.onValueChanged.AddListener(index =>
        {
@@ -92,10 +92,10 @@ public class MainMenuManger : MonoBehaviour
                    trackManager.SetTrack("skidpad");
                    break;
                case 3:
-                   trackManager.SetTrack("acceleration");
+                   trackManager.SetTrack("customTrack");
                    break;
                default:
-                   trackManager.SetTrack("customTrack");
+                   trackManager.SetTrack("acceleration");
                    break;
            }
        });
