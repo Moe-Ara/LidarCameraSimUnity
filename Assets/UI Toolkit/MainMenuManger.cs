@@ -80,6 +80,7 @@ public class MainMenuManger : MonoBehaviour
         options.Add("skidpad");
         options.Add("customTrack");
         switchtrack.AddOptions(options);
+        switchtrack.value = 0;
         switchtrack.onValueChanged.AddListener(index =>
        {
            Debug.Log("Switch Track" + index);

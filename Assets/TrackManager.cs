@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Serialization;
 using PathCreation.Utility;
+using UnityEngine.UI;
 
 /// <summary>
 /// This Class is Responsible for changing the Track
@@ -22,11 +23,13 @@ public class TrackManager : MonoBehaviour
     
     
     public List<GameObject> Tracks; //List of Available tracks
-    public GameObject CurrentTrack; //Current Track
+    public List<GameObject> TrackImgs; 
+    public GameObject CurrentTrack,currentImg; //Current Track
     public AutoPathFollower autoPathFollower; // Autopath follower of the car
     public AutoPathFollower autoPathFollowerCart;   //!!!!REMOVE HERE IF YOU REMOVE CART FEATURE
     public bool isCartActive;
-
+    public Button closeACC;
+    
     public void SetTrack(string track)
     {
       
@@ -41,9 +44,22 @@ public class TrackManager : MonoBehaviour
         //hide all tracks
         //(note: maybe find a better way so we don't have to iterate over all tracks each time we set one)
         foreach (var t in Tracks) t.SetActive(false);
-
         //find the current track
         CurrentTrack = Tracks.Where(x => x.name == track).SingleOrDefault();
+        for (int i = 0; i < TrackImgs.Count ; i++)
+        {
+            if (TrackImgs[i].name == track)
+            {
+                TrackImgs[i].SetActive((true ));
+            }
+            else
+            {
+                TrackImgs[i].SetActive((false ));
+            }
+        }
+     
+
+        
         //set track to active
         CurrentTrack.SetActive(true);
         
