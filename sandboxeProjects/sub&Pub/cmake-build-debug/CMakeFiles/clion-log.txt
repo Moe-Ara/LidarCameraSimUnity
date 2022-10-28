@@ -1,0 +1,5 @@
+/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub -B /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug
+-- Found Boost: /usr/include (found version "1.65.1") found components: system 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug

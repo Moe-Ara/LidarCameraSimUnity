@@ -60,13 +60,12 @@ public class MainMenuManger : MonoBehaviour
         rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         Querries();
         AddListeners();
+
         // How to set the values, when it comes e.g. from a configuration
         SetFrequencyLidar(42);
         SetFrequencyCamera(69);
         SetDrivingMode(DrivingMode.Autonomous);
     }
-
-    
 
     private void AddListeners()
     {
@@ -116,7 +115,7 @@ public class MainMenuManger : MonoBehaviour
 
         frequencyLidarTextField = rootVisualElement.Q<TextField>("FrequencyLidar");
         frequencyCameraTextField = rootVisualElement.Q<TextField>("FrequencyCamera");
-        //switchtrack = rootVisualElement.Q<Dropdown>("DropDownFIeld");
+
         radioButtonGroupMode = rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroupMode");
     }
 

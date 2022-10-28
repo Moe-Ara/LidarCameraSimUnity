@@ -15,7 +15,6 @@ public class ChangeTrack : MonoBehaviour
         rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         buttonBack = rootVisualElement.Q<Button>("ButtonBack");
 
-  
         var buttonAcceleration = rootVisualElement.Q<Button>("ButtonAcceleration");
         var buttonSkidpad = rootVisualElement.Q<Button>("ButtonSkidpad");
         var buttonEndurance = rootVisualElement.Q<Button>("ButtonEndurance");

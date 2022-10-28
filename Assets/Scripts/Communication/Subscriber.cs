@@ -50,7 +50,6 @@ namespace Communication
                         var bytes = new byte[4];
                         _clientSocket.Receive(bytes);
                         var dataSize = BitConverter.ToInt32(bytes, 0);
-
                         // Check if client has disconnected
                         if (dataSize == 0) throw new IOException();
 
@@ -58,11 +57,10 @@ namespace Communication
                         var data = new byte[dataSize];
                         var received = 0;
                         while (received < dataSize && _running)
+                        {
                             received += _clientSocket.Receive(data, received, dataSize - received, SocketFlags.None);
-                            Debug.Log("DATA SIZE: " +dataSize);
-                            Debug.Log(System.Text.Encoding.UTF8.GetString(data));
-
-                            // Start subscriber routines
+                        }
+                        // Start subscriber routines
                         if (dataSize > 0) callback(data);
                     }
                 }
