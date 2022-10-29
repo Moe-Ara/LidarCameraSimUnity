@@ -105,7 +105,7 @@ namespace Car.Camera
         {
             Debug.Log("HiThere");
             var now = DateTime.Now;
-            // if ((now - _last).TotalSeconds < 1f / HZ) return;
+            if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
 
 
