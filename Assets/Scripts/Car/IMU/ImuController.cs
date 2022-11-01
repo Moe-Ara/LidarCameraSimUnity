@@ -9,12 +9,15 @@ namespace Car.imu
         private Vector3 _lastPositon = Vector3.zero;
         public float _speed = 0.0f;
         public double _speedKmH = 0;
-        private float _offset = 0.0f;
+        public float _offset = 0.0f;
         public double _time = 0;
         public Vector3 velocity = Vector3.zero;
         public Vector3 acceleration=Vector3.zero;
         public Vector3 _lastVelocity=Vector3.zero;
-
+        //angle random walk (ARW) in degrees/sqrt(Hr)
+        public float angleRandWalk = 0.0f; 
+        //error rate based off sensor
+        public float errorRate = 0.1f;
         // Start is called before the first frame update
         void Start()
         {
@@ -43,16 +46,11 @@ namespace Car.imu
 
         public void addError()
         {
-            if (_speed < 3.5f)
-            {
-                _speed = calculateErrorGuassian(_speed, (float)(Math.Sqrt(0.03 * _speed)));
+            //simulate random errors based off data sheet;
+            // using a third of the percentage error so as standard deviation so most values will be in +- errorRate %
+                _speed = calculateErrorGuassian(_speed, (float)(errorRate/(100 * 3) * _speed));
             }
-            else if (_speed > 3.5)
-            {
-                _speed = calculateErrorGuassian(_speed, (float)(Math.Sqrt(0.01 * _speed)));
-            }
-            //_speed= _speed+_error;
-        }
+
         public void calculateAcceleration()
             // Calculate = a = ^V/^T
         { 
