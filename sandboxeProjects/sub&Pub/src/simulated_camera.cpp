@@ -59,7 +59,8 @@ cv::Mat simulated_camera::getImage() {
         //convert datasize to int
         std::memcpy(&m_dataSize, &datSize, sizeof(int));
         //array to receive data
-        unsigned char data[m_dataSize];
+        unsigned char *data =new unsigned char [m_dataSize];
+//        auto data=std::make_unique<unsigned int[]>(m_dataSize);
         // read data
         boost::asio::read(*sock, boost::asio::buffer(data, m_dataSize), err);
         //array of pixels
@@ -76,6 +77,7 @@ cv::Mat simulated_camera::getImage() {
             //push pixels into this vector
             pixels.push_back(pixel);
         }
+        delete []data;
         //Converting Image
         cv::Mat Image(PIC_HEIGHT, PIC_WIDTH, CV_8UC4 );
         memcpy(Image.data, pixels.data(),pixels.size()*sizeof(int));
