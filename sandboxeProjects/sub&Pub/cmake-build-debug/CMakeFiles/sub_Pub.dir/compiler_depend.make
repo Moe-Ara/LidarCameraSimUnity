@@ -944,7 +944,145 @@ CMakeFiles/sub_Pub.dir/main.cpp.o: ../main.cpp \
   /usr/include/boost/detail/iterator.hpp \
   ../include/simulated_camera.h \
   ../include/ICamera.h \
-  /usr/include/boost/system/linux_error.hpp
+  /usr/include/boost/system/linux_error.hpp \
+  /usr/include/opencv2/opencv.hpp \
+  /usr/include/opencv2/calib3d.hpp \
+  /usr/include/opencv2/features2d.hpp \
+  /usr/include/opencv2/flann/miniflann.hpp \
+  /usr/include/opencv2/flann/defines.h \
+  /usr/include/opencv2/flann/config.h \
+  /usr/include/opencv2/core/affine.hpp \
+  /usr/include/opencv2/calib3d/calib3d_c.h \
+  /usr/include/opencv2/flann.hpp \
+  /usr/include/opencv2/flann/flann_base.hpp \
+  /usr/include/opencv2/flann/general.h \
+  /usr/include/opencv2/flann/matrix.h \
+  /usr/include/opencv2/flann/params.h \
+  /usr/include/opencv2/flann/any.h \
+  /usr/include/opencv2/flann/defines.h \
+  /usr/include/c++/7/iostream \
+  /usr/include/opencv2/flann/saving.h \
+  /usr/include/opencv2/flann/nn_index.h \
+  /usr/include/opencv2/flann/result_set.h \
+  /usr/include/c++/7/set \
+  /usr/include/c++/7/bits/stl_set.h \
+  /usr/include/c++/7/bits/stl_multiset.h \
+  /usr/include/opencv2/flann/all_indices.h \
+  /usr/include/opencv2/flann/kdtree_index.h \
+  /usr/include/opencv2/flann/dynamic_bitset.h \
+  /usr/include/opencv2/flann/dist.h \
+  /usr/include/opencv2/flann/heap.h \
+  /usr/include/opencv2/flann/allocator.h \
+  /usr/include/opencv2/flann/random.h \
+  /usr/include/opencv2/flann/kdtree_single_index.h \
+  /usr/include/opencv2/flann/kmeans_index.h \
+  /usr/include/opencv2/flann/logger.h \
+  /usr/include/opencv2/flann/composite_index.h \
+  /usr/include/opencv2/flann/linear_index.h \
+  /usr/include/opencv2/flann/hierarchical_clustering_index.h \
+  /usr/include/opencv2/flann/lsh_index.h \
+  /usr/include/opencv2/flann/lsh_table.h \
+  /usr/include/c++/7/iomanip \
+  /usr/include/c++/7/locale \
+  /usr/include/c++/7/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/7/bits/codecvt.h \
+  /usr/include/c++/7/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/7/bits/locale_conv.h \
+  /usr/include/c++/7/bits/stringfwd.h \
+  /usr/include/c++/7/bits/allocator.h \
+  /usr/include/c++/7/bits/codecvt.h \
+  /usr/include/c++/7/bits/unique_ptr.h \
+  /usr/include/c++/7/bits/quoted_string.h \
+  /usr/include/c++/7/unordered_map \
+  /usr/include/c++/7/bits/hashtable.h \
+  /usr/include/c++/7/bits/hashtable_policy.h \
+  /usr/include/c++/7/bits/unordered_map.h \
+  /usr/include/c++/7/math.h \
+  /usr/include/opencv2/flann/autotuned_index.h \
+  /usr/include/opencv2/flann/ground_truth.h \
+  /usr/include/opencv2/flann/index_testing.h \
+  /usr/include/opencv2/flann/timer.h \
+  /usr/include/opencv2/flann/sampling.h \
+  /usr/include/opencv2/highgui.hpp \
+  /usr/include/opencv2/imgcodecs.hpp \
+  /usr/include/opencv2/videoio.hpp \
+  /usr/include/opencv2/highgui/highgui_c.h \
+  /usr/include/opencv2/imgproc/imgproc_c.h \
+  /usr/include/opencv2/imgproc/types_c.h \
+  /usr/include/opencv2/imgcodecs/imgcodecs_c.h \
+  /usr/include/opencv2/videoio/videoio_c.h \
+  /usr/include/opencv2/imgproc.hpp \
+  /usr/include/opencv2/ml.hpp \
+  /usr/include/opencv2/objdetect.hpp \
+  /usr/include/opencv2/objdetect/detection_based_tracker.hpp \
+  /usr/include/opencv2/objdetect/objdetect_c.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
+  /usr/include/opencv2/photo.hpp \
+  /usr/include/opencv2/photo/photo_c.h \
+  /usr/include/opencv2/shape.hpp \
+  /usr/include/opencv2/shape/emdL1.hpp \
+  /usr/include/opencv2/shape/shape_transformer.hpp \
+  /usr/include/opencv2/shape/hist_cost.hpp \
+  /usr/include/opencv2/shape/shape_distance.hpp \
+  /usr/include/opencv2/stitching.hpp \
+  /usr/include/opencv2/stitching/warpers.hpp \
+  /usr/include/opencv2/stitching/detail/warpers.hpp \
+  /usr/include/opencv2/core/cuda.hpp \
+  /usr/include/opencv2/core/cuda_types.hpp \
+  /usr/include/opencv2/core/cuda.inl.hpp \
+  /usr/include/opencv2/stitching/detail/warpers_inl.hpp \
+  /usr/include/opencv2/stitching/detail/warpers.hpp \
+  /usr/include/opencv2/stitching/detail/matchers.hpp \
+  /usr/include/opencv2/stitching/detail/motion_estimators.hpp \
+  /usr/include/opencv2/stitching/detail/matchers.hpp \
+  /usr/include/opencv2/stitching/detail/util.hpp \
+  /usr/include/c++/7/list \
+  /usr/include/c++/7/bits/stl_list.h \
+  /usr/include/c++/7/bits/list.tcc \
+  /usr/include/opencv2/stitching/detail/util_inl.hpp \
+  /usr/include/c++/7/queue \
+  /usr/include/c++/7/bits/stl_queue.h \
+  /usr/include/opencv2/stitching/detail/camera.hpp \
+  /usr/include/opencv2/stitching/detail/exposure_compensate.hpp \
+  /usr/include/opencv2/stitching/detail/seam_finders.hpp \
+  /usr/include/opencv2/stitching/detail/blenders.hpp \
+  /usr/include/opencv2/stitching/detail/camera.hpp \
+  /usr/include/opencv2/superres.hpp \
+  /usr/include/opencv2/superres/optical_flow.hpp \
+  /usr/include/opencv2/video.hpp \
+  /usr/include/opencv2/video/tracking.hpp \
+  /usr/include/opencv2/video/background_segm.hpp \
+  /usr/include/opencv2/video/tracking_c.h \
+  /usr/include/opencv2/videostab.hpp \
+  /usr/include/opencv2/videostab/stabilizer.hpp \
+  /usr/include/opencv2/videostab/global_motion.hpp \
+  /usr/include/c++/7/fstream \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/c++io.h \
+  /usr/include/c++/7/bits/fstream.tcc \
+  /usr/include/opencv2/videostab/optical_flow.hpp \
+  /usr/include/opencv2/videostab/motion_core.hpp \
+  /usr/include/opencv2/videostab/outlier_rejection.hpp \
+  /usr/include/opencv2/videostab/motion_stabilizing.hpp \
+  /usr/include/opencv2/videostab/frame_source.hpp \
+  /usr/include/opencv2/videostab/log.hpp \
+  /usr/include/opencv2/videostab/inpainting.hpp \
+  /usr/include/opencv2/videostab/fast_marching.hpp \
+  /usr/include/opencv2/videostab/fast_marching_inl.hpp \
+  /usr/include/opencv2/videostab/deblurring.hpp \
+  /usr/include/opencv2/videostab/wobble_suppression.hpp \
+  /usr/include/opencv2/videostab/ring_buffer.hpp \
+  /usr/include/opencv2/viz.hpp \
+  /usr/include/opencv2/viz/types.hpp \
+  /usr/include/opencv2/viz/widgets.hpp \
+  /usr/include/opencv2/viz/viz3d.hpp \
+  /usr/include/opencv2/viz/vizcore.hpp \
+  /usr/include/c++/7/bitset
 
 CMakeFiles/sub_Pub.dir/src/publisher.cpp.o: ../src/publisher.cpp \
   /usr/include/stdc-predef.h \
@@ -1978,7 +2116,144 @@ CMakeFiles/sub_Pub.dir/src/simulated_camera.cpp.o: ../src/simulated_camera.cpp \
   /usr/include/boost/core/swap.hpp \
   /usr/include/boost/detail/iterator.hpp \
   /usr/include/boost/system/linux_error.hpp \
-  /usr/include/c++/7/iostream
+  /usr/include/opencv2/opencv.hpp \
+  /usr/include/opencv2/calib3d.hpp \
+  /usr/include/opencv2/features2d.hpp \
+  /usr/include/opencv2/flann/miniflann.hpp \
+  /usr/include/opencv2/flann/defines.h \
+  /usr/include/opencv2/flann/config.h \
+  /usr/include/opencv2/core/affine.hpp \
+  /usr/include/opencv2/calib3d/calib3d_c.h \
+  /usr/include/opencv2/flann.hpp \
+  /usr/include/opencv2/flann/flann_base.hpp \
+  /usr/include/opencv2/flann/general.h \
+  /usr/include/opencv2/flann/matrix.h \
+  /usr/include/opencv2/flann/params.h \
+  /usr/include/opencv2/flann/any.h \
+  /usr/include/opencv2/flann/defines.h \
+  /usr/include/c++/7/iostream \
+  /usr/include/opencv2/flann/saving.h \
+  /usr/include/opencv2/flann/nn_index.h \
+  /usr/include/opencv2/flann/result_set.h \
+  /usr/include/c++/7/set \
+  /usr/include/c++/7/bits/stl_set.h \
+  /usr/include/c++/7/bits/stl_multiset.h \
+  /usr/include/opencv2/flann/all_indices.h \
+  /usr/include/opencv2/flann/kdtree_index.h \
+  /usr/include/opencv2/flann/dynamic_bitset.h \
+  /usr/include/opencv2/flann/dist.h \
+  /usr/include/opencv2/flann/heap.h \
+  /usr/include/opencv2/flann/allocator.h \
+  /usr/include/opencv2/flann/random.h \
+  /usr/include/opencv2/flann/kdtree_single_index.h \
+  /usr/include/opencv2/flann/kmeans_index.h \
+  /usr/include/opencv2/flann/logger.h \
+  /usr/include/opencv2/flann/composite_index.h \
+  /usr/include/opencv2/flann/linear_index.h \
+  /usr/include/opencv2/flann/hierarchical_clustering_index.h \
+  /usr/include/opencv2/flann/lsh_index.h \
+  /usr/include/opencv2/flann/lsh_table.h \
+  /usr/include/c++/7/iomanip \
+  /usr/include/c++/7/locale \
+  /usr/include/c++/7/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/7/bits/codecvt.h \
+  /usr/include/c++/7/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/7/bits/locale_conv.h \
+  /usr/include/c++/7/bits/stringfwd.h \
+  /usr/include/c++/7/bits/allocator.h \
+  /usr/include/c++/7/bits/codecvt.h \
+  /usr/include/c++/7/bits/unique_ptr.h \
+  /usr/include/c++/7/bits/quoted_string.h \
+  /usr/include/c++/7/unordered_map \
+  /usr/include/c++/7/bits/hashtable.h \
+  /usr/include/c++/7/bits/hashtable_policy.h \
+  /usr/include/c++/7/bits/unordered_map.h \
+  /usr/include/c++/7/math.h \
+  /usr/include/opencv2/flann/autotuned_index.h \
+  /usr/include/opencv2/flann/ground_truth.h \
+  /usr/include/opencv2/flann/index_testing.h \
+  /usr/include/opencv2/flann/timer.h \
+  /usr/include/opencv2/flann/sampling.h \
+  /usr/include/opencv2/highgui.hpp \
+  /usr/include/opencv2/imgcodecs.hpp \
+  /usr/include/opencv2/videoio.hpp \
+  /usr/include/opencv2/highgui/highgui_c.h \
+  /usr/include/opencv2/imgproc/imgproc_c.h \
+  /usr/include/opencv2/imgproc/types_c.h \
+  /usr/include/opencv2/imgcodecs/imgcodecs_c.h \
+  /usr/include/opencv2/videoio/videoio_c.h \
+  /usr/include/opencv2/imgproc.hpp \
+  /usr/include/opencv2/ml.hpp \
+  /usr/include/opencv2/objdetect.hpp \
+  /usr/include/opencv2/objdetect/detection_based_tracker.hpp \
+  /usr/include/opencv2/objdetect/objdetect_c.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
+  /usr/include/opencv2/photo.hpp \
+  /usr/include/opencv2/photo/photo_c.h \
+  /usr/include/opencv2/shape.hpp \
+  /usr/include/opencv2/shape/emdL1.hpp \
+  /usr/include/opencv2/shape/shape_transformer.hpp \
+  /usr/include/opencv2/shape/hist_cost.hpp \
+  /usr/include/opencv2/shape/shape_distance.hpp \
+  /usr/include/opencv2/stitching.hpp \
+  /usr/include/opencv2/stitching/warpers.hpp \
+  /usr/include/opencv2/stitching/detail/warpers.hpp \
+  /usr/include/opencv2/core/cuda.hpp \
+  /usr/include/opencv2/core/cuda_types.hpp \
+  /usr/include/opencv2/core/cuda.inl.hpp \
+  /usr/include/opencv2/stitching/detail/warpers_inl.hpp \
+  /usr/include/opencv2/stitching/detail/warpers.hpp \
+  /usr/include/opencv2/stitching/detail/matchers.hpp \
+  /usr/include/opencv2/stitching/detail/motion_estimators.hpp \
+  /usr/include/opencv2/stitching/detail/matchers.hpp \
+  /usr/include/opencv2/stitching/detail/util.hpp \
+  /usr/include/c++/7/list \
+  /usr/include/c++/7/bits/stl_list.h \
+  /usr/include/c++/7/bits/list.tcc \
+  /usr/include/opencv2/stitching/detail/util_inl.hpp \
+  /usr/include/c++/7/queue \
+  /usr/include/c++/7/bits/stl_queue.h \
+  /usr/include/opencv2/stitching/detail/camera.hpp \
+  /usr/include/opencv2/stitching/detail/exposure_compensate.hpp \
+  /usr/include/opencv2/stitching/detail/seam_finders.hpp \
+  /usr/include/opencv2/stitching/detail/blenders.hpp \
+  /usr/include/opencv2/stitching/detail/camera.hpp \
+  /usr/include/opencv2/superres.hpp \
+  /usr/include/opencv2/superres/optical_flow.hpp \
+  /usr/include/opencv2/video.hpp \
+  /usr/include/opencv2/video/tracking.hpp \
+  /usr/include/opencv2/video/background_segm.hpp \
+  /usr/include/opencv2/video/tracking_c.h \
+  /usr/include/opencv2/videostab.hpp \
+  /usr/include/opencv2/videostab/stabilizer.hpp \
+  /usr/include/opencv2/videostab/global_motion.hpp \
+  /usr/include/c++/7/fstream \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/7/bits/c++io.h \
+  /usr/include/c++/7/bits/fstream.tcc \
+  /usr/include/opencv2/videostab/optical_flow.hpp \
+  /usr/include/opencv2/videostab/motion_core.hpp \
+  /usr/include/opencv2/videostab/outlier_rejection.hpp \
+  /usr/include/opencv2/videostab/motion_stabilizing.hpp \
+  /usr/include/opencv2/videostab/frame_source.hpp \
+  /usr/include/opencv2/videostab/log.hpp \
+  /usr/include/opencv2/videostab/inpainting.hpp \
+  /usr/include/opencv2/videostab/fast_marching.hpp \
+  /usr/include/opencv2/videostab/fast_marching_inl.hpp \
+  /usr/include/opencv2/videostab/deblurring.hpp \
+  /usr/include/opencv2/videostab/wobble_suppression.hpp \
+  /usr/include/opencv2/videostab/ring_buffer.hpp \
+  /usr/include/opencv2/viz.hpp \
+  /usr/include/opencv2/viz/types.hpp \
+  /usr/include/opencv2/viz/widgets.hpp \
+  /usr/include/opencv2/viz/viz3d.hpp \
+  /usr/include/opencv2/viz/vizcore.hpp \
+  /usr/include/c++/7/bitset
 
 CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
   /usr/include/stdc-predef.h
@@ -1988,9 +2263,147 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 ../src/simulated_camera.cpp:
 
+../include/publisher.h:
+
+/usr/include/opencv2/viz/vizcore.hpp:
+
+/usr/include/opencv2/viz/viz3d.hpp:
+
+/usr/include/opencv2/viz.hpp:
+
+/usr/include/opencv2/videostab/wobble_suppression.hpp:
+
+/usr/include/opencv2/videostab/deblurring.hpp:
+
+/usr/include/opencv2/videostab/fast_marching.hpp:
+
+/usr/include/opencv2/videostab/inpainting.hpp:
+
+/usr/include/opencv2/videostab/log.hpp:
+
+/usr/include/opencv2/videostab/motion_core.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/basic_file.h:
+
+/usr/include/opencv2/video/background_segm.hpp:
+
+/usr/include/opencv2/video/tracking.hpp:
+
+/usr/include/opencv2/video.hpp:
+
+/usr/include/opencv2/superres.hpp:
+
+/usr/include/opencv2/stitching/detail/seam_finders.hpp:
+
+/usr/include/opencv2/stitching/detail/camera.hpp:
+
+/usr/include/opencv2/stitching/detail/util_inl.hpp:
+
 /usr/include/c++/7/bits/stl_list.h:
 
-../include/publisher.h:
+/usr/include/opencv2/stitching/detail/motion_estimators.hpp:
+
+/usr/include/opencv2/stitching/detail/warpers_inl.hpp:
+
+/usr/include/opencv2/core/cuda.inl.hpp:
+
+/usr/include/opencv2/core/cuda_types.hpp:
+
+/usr/include/opencv2/core/cuda.hpp:
+
+/usr/include/opencv2/stitching/warpers.hpp:
+
+/usr/include/opencv2/stitching.hpp:
+
+/usr/include/opencv2/shape/shape_distance.hpp:
+
+/usr/include/opencv2/shape/shape_transformer.hpp:
+
+/usr/include/opencv2/shape/emdL1.hpp:
+
+/usr/include/opencv2/shape.hpp:
+
+/usr/include/opencv2/photo.hpp:
+
+/usr/include/c++/7/deque:
+
+/usr/include/opencv2/ml.hpp:
+
+/usr/include/opencv2/videoio/videoio_c.h:
+
+/usr/include/opencv2/imgproc/types_c.h:
+
+/usr/include/opencv2/videoio.hpp:
+
+/usr/include/opencv2/imgcodecs.hpp:
+
+/usr/include/opencv2/highgui.hpp:
+
+/usr/include/opencv2/flann/index_testing.h:
+
+/usr/include/c++/7/bits/unordered_map.h:
+
+/usr/include/c++/7/bits/hashtable.h:
+
+/usr/include/c++/7/unordered_map:
+
+/usr/include/opencv2/stitching/detail/matchers.hpp:
+
+/usr/include/c++/7/bits/quoted_string.h:
+
+/usr/include/c++/7/bits/locale_conv.h:
+
+/usr/include/c++/7/bits/codecvt.h:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/messages_members.h:
+
+/usr/include/c++/7/bits/locale_facets_nonio.h:
+
+/usr/include/c++/7/locale:
+
+/usr/include/c++/7/iomanip:
+
+/usr/include/opencv2/flann/lsh_table.h:
+
+/usr/include/opencv2/flann/hierarchical_clustering_index.h:
+
+/usr/include/opencv2/flann/linear_index.h:
+
+/usr/include/opencv2/flann/logger.h:
+
+/usr/include/opencv2/flann/kmeans_index.h:
+
+/usr/include/opencv2/flann/kdtree_single_index.h:
+
+/usr/include/opencv2/flann/heap.h:
+
+/usr/include/opencv2/flann/kdtree_index.h:
+
+/usr/include/opencv2/flann/all_indices.h:
+
+/usr/include/c++/7/bits/stl_multiset.h:
+
+/usr/include/c++/7/bits/stl_set.h:
+
+/usr/include/opencv2/flann/result_set.h:
+
+/usr/include/opencv2/flann/any.h:
+
+/usr/include/opencv2/flann/params.h:
+
+/usr/include/opencv2/flann/nn_index.h:
+
+/usr/include/opencv2/flann/matrix.h:
+
+/usr/include/opencv2/core/affine.hpp:
+
+/usr/include/opencv2/flann/config.h:
+
+/usr/include/opencv2/features2d.hpp:
+
+/usr/include/opencv2/opencv.hpp:
 
 /usr/include/boost/system/linux_error.hpp:
 
@@ -2012,9 +2425,13 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/asio/windows/random_access_handle_service.hpp:
 
+/usr/include/c++/7/bitset:
+
 /usr/include/boost/asio/windows/random_access_handle.hpp:
 
 /usr/include/c++/7/list:
+
+/usr/include/opencv2/imgcodecs/imgcodecs_c.h:
 
 /usr/include/boost/asio/windows/overlapped_ptr.hpp:
 
@@ -2034,6 +2451,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/asio/signal_set.hpp:
 
+/usr/include/opencv2/videostab/global_motion.hpp:
+
 /usr/include/boost/asio/serial_port.hpp:
 
 /usr/include/boost/asio/impl/read_until.hpp:
@@ -2041,6 +2460,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/regex/v4/match_flags.hpp:
 
 /usr/include/boost/regex/v4/regex_fwd.hpp:
+
+/usr/include/opencv2/videostab/stabilizer.hpp:
 
 /usr/include/boost/regex/config/cwchar.hpp:
 
@@ -2067,6 +2488,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/local/datagram_protocol.hpp:
 
 /usr/include/boost/asio/local/connect_pair.hpp:
+
+/usr/include/opencv2/videostab/ring_buffer.hpp:
 
 /usr/include/boost/asio/local/detail/impl/endpoint.ipp:
 
@@ -2122,6 +2545,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/asio/ip/address.hpp:
 
+/usr/include/opencv2/calib3d/calib3d_c.h:
+
 /usr/include/boost/asio/generic/datagram_protocol.hpp:
 
 /usr/include/boost/asio/impl/connect.hpp:
@@ -2131,6 +2556,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/buffers_iterator.hpp:
 
 /usr/include/boost/asio/impl/buffered_write_stream.hpp:
+
+/usr/include/c++/7/fstream:
 
 /usr/include/boost/asio/detail/dependent_type.hpp:
 
@@ -2151,6 +2578,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/buffered_read_stream.hpp:
 
 /usr/include/boost/predef/os/hpux.h:
+
+/usr/include/opencv2/flann/ground_truth.h:
 
 /usr/include/boost/predef/os/haiku.h:
 
@@ -2201,6 +2630,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/c++/7/bits/nested_exception.h:
 
 /usr/include/boost/system/config.hpp:
+
+/usr/include/opencv2/flann/random.h:
 
 /usr/include/boost/predef/library/c/zos.h:
 
@@ -2260,7 +2691,13 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/operators.hpp:
 
+/usr/include/opencv2/videostab/frame_source.hpp:
+
+/usr/include/c++/7/bits/deque.tcc:
+
 /usr/include/boost/predef/architecture/m68k.h:
+
+/usr/include/opencv2/shape/hist_cost.hpp:
 
 /usr/include/wchar.h:
 
@@ -2268,13 +2705,21 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/bits/char_traits.h:
 
+/usr/include/opencv2/calib3d.hpp:
+
 /usr/include/c++/7/bits/functexcept.h:
+
+/usr/include/opencv2/flann/miniflann.hpp:
 
 /usr/include/boost/predef/make.h:
 
 /usr/include/c++/7/bits/stl_algobase.h:
 
 /usr/include/boost/smart_ptr/detail/spinlock_std_atomic.hpp:
+
+/usr/include/c++/7/bits/fstream.tcc:
+
+/usr/include/opencv2/videostab.hpp:
 
 /usr/include/boost/smart_ptr/detail/spinlock.hpp:
 
@@ -2298,6 +2743,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/poll.h:
 
+/usr/include/opencv2/flann/autotuned_index.h:
+
 /usr/include/boost/detail/sp_typeinfo.hpp:
 
 /usr/include/c++/7/ios:
@@ -2316,7 +2763,11 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/throw_exception.hpp:
 
+/usr/include/opencv2/stitching/detail/util.hpp:
+
 /usr/include/boost/asio/basic_raw_socket.hpp:
+
+/usr/include/opencv2/flann/sampling.h:
 
 /usr/include/boost/core/checked_delete.hpp:
 
@@ -2332,6 +2783,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/predef/detail/test.h:
 
+/usr/include/opencv2/videostab/motion_stabilizing.hpp:
+
 /usr/include/c++/7/bits/locale_facets.h:
 
 /usr/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp:
@@ -2339,6 +2792,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/read.hpp:
 
 /usr/include/boost/asio/detail/impl/throw_error.ipp:
+
+/usr/include/libintl.h:
 
 /usr/include/boost/predef/architecture/sys370.h:
 
@@ -2421,6 +2876,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/config/user.hpp:
 
 /usr/include/c++/7/ext/aligned_buffer.h:
+
+/usr/include/opencv2/stitching/detail/blenders.hpp:
 
 /usr/include/boost/predef/architecture/sys390.h:
 
@@ -2560,6 +3017,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/ext/type_traits.h:
 
+/usr/include/opencv2/flann/allocator.h:
+
 /usr/include/boost/predef/detail/comp_detected.h:
 
 /usr/include/c++/7/bits/cxxabi_forced.h:
@@ -2620,6 +3079,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/core/typeinfo.hpp:
 
+/usr/include/c++/7/queue:
+
 /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h:
 
 /usr/include/boost/asio/waitable_timer_service.hpp:
@@ -2670,9 +3131,13 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/preprocessor/tuple/eat.hpp:
 
+/usr/include/opencv2/flann/defines.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/c++/7/bits/basic_ios.h:
+
+/usr/include/opencv2/videostab/optical_flow.hpp:
 
 /usr/include/boost/config/detail/select_compiler_config.hpp:
 
@@ -2730,6 +3195,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/bits/basic_ios.tcc:
 
+/usr/include/c++/7/bits/locale_facets_nonio.tcc:
+
 /usr/include/boost/type_traits/remove_cv.hpp:
 
 /usr/include/boost/predef/architecture/convex.h:
@@ -2750,6 +3217,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/cmath:
 
+/usr/include/opencv2/superres/optical_flow.hpp:
+
 /usr/include/netdb.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
@@ -2768,6 +3237,10 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/assert.hpp:
 
+/usr/include/opencv2/photo/photo_c.h:
+
+/usr/include/c++/7/math.h:
+
 /usr/include/asm-generic/socket.h:
 
 /usr/include/boost/config/detail/suffix.hpp:
@@ -2779,6 +3252,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/preprocessor/comma_if.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/syslimits.h:
+
+/usr/include/opencv2/flann/general.h:
 
 /usr/include/boost/asio/basic_io_object.hpp:
 
@@ -2835,6 +3310,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/opencv2/imgproc/imgproc_c.h:
 
 /usr/include/boost/predef/platform/windows_store.h:
 
@@ -2922,6 +3399,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/config/abi_prefix.hpp:
 
+/usr/include/opencv2/flann/lsh_index.h:
+
 /usr/include/time.h:
 
 /usr/include/c++/7/ext/numeric_traits.h:
@@ -2969,6 +3448,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/ctype_base.h:
+
+/usr/include/opencv2/flann/timer.h:
 
 /usr/include/c++/7/bits/basic_string.h:
 
@@ -3021,6 +3502,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/c++/7/bits/stl_algo.h:
 
 /usr/include/boost/predef/os/ios.h:
+
+/usr/include/opencv2/highgui/highgui_c.h:
 
 /usr/include/features.h:
 
@@ -3140,6 +3623,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/cstdlib:
 
+/usr/include/opencv2/videostab/outlier_rejection.hpp:
+
 /usr/include/c++/7/bits/memoryfwd.h:
 
 /usr/include/boost/predef/os/cygwin.h:
@@ -3156,6 +3641,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/gthr-default.h:
 
+/usr/include/opencv2/flann/dynamic_bitset.h:
+
 /usr/include/boost/system/api_config.hpp:
 
 /usr/include/boost/asio/detail/impl/reactive_socket_service_base.ipp:
@@ -3170,6 +3657,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
+/usr/include/opencv2/objdetect/detection_based_tracker.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h:
@@ -3181,6 +3670,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/c++/7/iostream:
 
 /usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/7/set:
 
 /usr/include/boost/asio/detail/impl/strand_service.hpp:
 
@@ -3197,6 +3688,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/errno.h:
 
 /usr/include/boost/date_time/special_defs.hpp:
+
+/usr/include/opencv2/flann/dist.h:
 
 /usr/include/boost/asio/detail/array.hpp:
 
@@ -3244,6 +3737,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/predef/platform/mingw.h:
 
+/usr/include/c++/7/bits/hashtable_policy.h:
+
 /usr/include/boost/predef/platform/windows_phone.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
@@ -3259,6 +3754,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/datagram_socket_service.hpp:
 
 /usr/include/boost/predef/hardware/simd/x86.h:
+
+/usr/include/opencv2/stitching/detail/exposure_compensate.hpp:
 
 /usr/include/boost/preprocessor/tuple/elem.hpp:
 
@@ -3416,6 +3913,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/asio/detail/task_io_service.hpp:
 
+/usr/include/c++/7/bits/stl_deque.h:
+
 /usr/include/boost/asio/detail/assert.hpp:
 
 /usr/include/boost/asio/detail/impl/posix_event.ipp:
@@ -3430,6 +3929,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/asio/detail/handler_tracking.hpp:
 
+/usr/include/opencv2/objdetect/objdetect_c.h:
+
 /usr/include/boost/predef/compiler/greenhills.h:
 
 /usr/include/boost/asio/detail/array_fwd.hpp:
@@ -3443,6 +3944,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/detail/completion_handler.hpp:
 
 /usr/include/boost/asio/detail/impl/task_io_service.ipp:
+
+/usr/include/opencv2/objdetect.hpp:
 
 /usr/include/boost/asio/detail/std_fenced_block.hpp:
 
@@ -3506,6 +4009,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/ucontext.h:
 
+/usr/include/opencv2/flann/saving.h:
+
 /usr/include/boost/asio/detail/impl/epoll_reactor.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/timerfd.h:
@@ -3530,6 +4035,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
 
+/usr/include/opencv2/viz/widgets.hpp:
+
 /usr/include/boost/preprocessor/control/if.hpp:
 
 /usr/include/boost/asio/detail/reactive_socket_accept_op.hpp:
@@ -3543,6 +4050,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/predef/language/stdcpp.h:
 
 /usr/include/boost/asio/detail/weak_ptr.hpp:
+
+/usr/include/c++/7/bits/stl_queue.h:
 
 /usr/include/boost/asio/buffered_stream_fwd.hpp:
 
@@ -3602,11 +4111,15 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/c++/7/iterator:
 
+/usr/include/opencv2/viz/types.hpp:
+
 /usr/include/boost/date_time/time_defs.hpp:
 
 /usr/include/boost/asio/posix/basic_stream_descriptor.hpp:
 
 /usr/include/boost/mpl/aux_/nttp_decl.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/time_members.h:
 
 /usr/include/boost/date_time/time_resolution_traits.hpp:
 
@@ -3651,6 +4164,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/date_time/filetime_functions.hpp:
 
 /usr/include/boost/mpl/aux_/config/adl.hpp:
+
+/usr/include/opencv2/stitching/detail/warpers.hpp:
 
 /usr/include/boost/asio/ip/unicast.hpp:
 
@@ -3764,6 +4279,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/date_time/date_defs.hpp:
 
+/usr/include/opencv2/imgproc.hpp:
+
 /usr/include/boost/date_time/date_clock_device.hpp:
 
 /usr/include/c++/7/bits/allocator.h:
@@ -3775,6 +4292,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/preprocessor/list/fold_left.hpp:
 
 /usr/include/boost/date_time/gregorian/greg_day_of_year.hpp:
+
+/usr/include/opencv2/flann/composite_index.h:
 
 /usr/include/boost/smart_ptr/detail/local_counted_base.hpp:
 
@@ -3802,6 +4321,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 
 /usr/include/boost/date_time/wrapping_int.hpp:
 
+/usr/include/opencv2/videostab/fast_marching_inl.hpp:
+
 /usr/include/boost/date_time/date_generators.hpp:
 
 /usr/include/boost/date_time/date_iterator.hpp:
@@ -3809,6 +4330,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/ip/resolver_service.hpp:
 
 /usr/include/boost/date_time/posix_time/date_duration_operators.hpp:
+
+/usr/include/opencv2/flann.hpp:
 
 /usr/include/boost/date_time/time_iterator.hpp:
 
@@ -3831,6 +4354,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/predef/hardware/simd/ppc/versions.h:
 
 /usr/include/boost/asio/serial_port_service.hpp:
+
+/usr/include/opencv2/flann/flann_base.hpp:
 
 /usr/include/boost/asio/detail/descriptor_read_op.hpp:
 
@@ -3879,6 +4404,8 @@ CMakeFiles/sub_Pub.dir/src/subscriber.cpp.o: ../src/subscriber.cpp \
 /usr/include/boost/asio/detail/impl/signal_set_service.ipp:
 
 /usr/include/boost/asio/socket_acceptor_service.hpp:
+
+/usr/include/opencv2/video/tracking_c.h:
 
 /usr/include/boost/asio/basic_socket_streambuf.hpp:
 

@@ -8,6 +8,6 @@ class ICamera{
 public:
     ICamera(){}
     virtual ~ICamera(){}
-//    virtual auto getImage()->cv::Mat=0;
+   virtual auto getImage()->cv::Mat=0;
 };
 #endif

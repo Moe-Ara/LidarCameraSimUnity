@@ -34,6 +34,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux.cmake"
   "/snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/UnixPaths.cmake"
   "/snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/ProcessorCount.cmake"
+  "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/share/OpenCV/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:

@@ -90,6 +90,11 @@ namespace Car.Camera
             _last = DateTime.Now;
         }
 
+        private void Update()
+        {
+            StartCoroutine(nameof(OnPostRender));
+        }
+
         /// <summary>
         /// Clean up the pixel buffer
         /// </summary>
@@ -103,7 +108,6 @@ namespace Car.Camera
         /// </summary>
         private void OnPostRender()
         {
-            Debug.Log("HiThere");
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
@@ -121,7 +125,6 @@ namespace Car.Camera
             try
             {
                 _pixelsBuffer.GetData(imageData);
-                Debug.Log(imageData[0].ToString());
             }
             catch (Exception e)
             {

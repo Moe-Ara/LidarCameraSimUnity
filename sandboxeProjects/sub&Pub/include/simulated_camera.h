@@ -7,24 +7,23 @@
 #include "boost/system/error_code.hpp"
 #include "boost/system/linux_error.hpp"
 #include "boost/system/system_error.hpp"
+#include <functional>
+#include "opencv2/opencv.hpp"
 
 #define PORT 42000
 #define IP_ADDRESS "127.0.0.1"
+#define PIC_WIDTH 1024
+#define PIC_HEIGHT 640
+
 using tcp = boost::asio::ip::tcp;
 
 class simulated_camera : public ICamera {
 public:
-    simulated_camera(){
-
-    }
-
+    simulated_camera();
     virtual ~simulated_camera();
-//    cv::Mat getImage() override;
-    void getData();
+    cv::Mat getImage() override;
 private:
-//    cv::Mat convertByteArrayToMat(boost::shared_ptr<unsigned char[1024][640]> &);
-    boost::shared_ptr<unsigned char[1024][640]> m_byteArr;
     int m_dataSize;
-    unsigned char* m_dataArray;
+    tcp::socket *sock;
 };
 #endif// SUB_PUB_SIMULATED_CAMERA_H
