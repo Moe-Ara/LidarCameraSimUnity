@@ -17,7 +17,9 @@ namespace Car.imu
         //angle random walk (ARW) in degrees/sqrt(Hr)
         public float angleRandWalk = 0.0f; 
         //error rate based off sensor
-        public float errorRate = 0.1f;
+        public float errorRate = 0.1f
+        //in HZ
+        public float samplingRate = 500f;
         // Start is called before the first frame update
         void Start()
         {
