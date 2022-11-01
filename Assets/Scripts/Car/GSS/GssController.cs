@@ -25,7 +25,10 @@ namespace Car.gss
         private float _offset = 0.0f;
         public double _time = 0;
         public Vector3 velocity = Vector3.zero;
-
+        //this is a percentage of the measured value - in the sensor used it should be +-0.2
+        public float errorRate = 0.2f;
+        //in HZ
+        public float samplingRate = 500f;
 
 
         //getter for speed
@@ -51,6 +54,7 @@ namespace Car.gss
         {
             Vector3 pos = transform.position;
             Vector3 difference = (pos - _lastPositon) / Time.deltaTime;
+           //should update to 1/samplingRate 
             _time = Time.deltaTime;
             velocity = difference;
             _speed = difference[2];
@@ -62,15 +66,10 @@ namespace Car.gss
 
         public void addError()
         {
-            if (_speed < 3.5f)
-            {
-                _speed = calculateErrorGuassian(_speed, (float)(Math.Sqrt(0.03 * _speed)));
-            }
-            else if (_speed > 3.5)
-            {
-                _speed = calculateErrorGuassian(_speed, (float)(Math.Sqrt(0.01 * _speed)));
-            }
-            //_speed= _speed+_error;
+           //simulate random errors based off data sheet;
+           // using a third of the percentage error so as standard deviation so most values will be in +- errorRate %
+                _speed = calculateErrorGuassian(_speed, (float)(errorRate/(100 * 3) * _speed));
+                
         }
 
         public float calculateErrorGuassian(float mean, float stddev)
