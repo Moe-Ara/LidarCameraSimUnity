@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 namespace Car.imu
 {
-    public class imuCont : MonoBehaviour
+    public class Imu_Controller : MonoBehaviour
     {
         private Vector3 errorAcc=Vector3.zero;
         public float _error;

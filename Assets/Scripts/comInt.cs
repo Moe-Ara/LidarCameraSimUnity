@@ -17,7 +17,7 @@ namespace DefaultNamespace
         #region objects
         //Sensors to get data from
         private GssController _gssController;
-        private ImuController _imuController;
+        private Imu_Controller _imuController;
         private CarCameraController _cameraController;
         private LidarController _lidarController;
         #endregion
@@ -51,9 +51,9 @@ namespace DefaultNamespace
         private void Start()
         {
             _lidarController = _lidar.GetComponent<LidarController>();
-            _cameraController = _camera.GetComponent<CarCameraController>();
+            _cameraController = _car.GetComponent<CarCameraController>();
             _gssController = _gss.GetComponent<GssController>();
-            _imuController = _imu.GetComponent<ImuController>();
+            _imuController = _imu.GetComponent<Imu_Controller>();
             _carRigidBody = _car.GetComponent<Rigidbody>();
             _Mass = _carRigidBody.mass;
             _lidarHz = _lidarController.Hz;

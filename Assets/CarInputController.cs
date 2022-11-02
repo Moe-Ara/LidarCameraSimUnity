@@ -72,5 +72,9 @@ public class CarInputController : MonoBehaviour
         // //rearRightTransform.rotation = rearRightTransform.transform.rotation;
     }
 
-
+    public void ResetCar()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0,0,0);
+    }
 }

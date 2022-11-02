@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 using System.Linq;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Button = UnityEngine.UIElements.Button;
 using DropdownField = UnityEngine.UIElements.DropdownField;
@@ -14,22 +15,37 @@ using Toggle = UnityEngine.UIElements.Toggle;
 
 public class MainMenuManger : MonoBehaviour
 {
+    public GameObject car;
+    public TrackManager trackManager;
     private VisualElement rootVisualElement;
-
     private TextField frequencyLidarTextField;
     private TextField frequencyCameraTextField;
-
     private Button resetCarButton;
     private Button changeTrackButton;
     private Button updateSettingsButton;
     private Button showCamera;
     public  Dropdown switchtrack;
-
     private RadioButtonGroup radioButtonGroupMode;
-
     public GameObject changeTrackDocument;
 
 
+    public void Start()
+    {
+        addOptions();
+    }
+
+    private void addOptions()
+    {
+     List<string> options = new List<string>(trackManager.Tracks.Count);;
+
+        foreach (var track in trackManager.Tracks)
+        {
+            options.Add(track.name);
+        }
+        switchtrack.ClearOptions();
+        switchtrack.AddOptions(options);
+        switchtrack.value = 0;
+    }
     private void UpdateSettings()
     {
 
@@ -39,8 +55,6 @@ public class MainMenuManger : MonoBehaviour
         var mode = (DrivingMode)radioButtonGroupMode.value;
 
         var output = string.Format("lidar: {0}, camera {1}, drivingMode: {2}", lidarFrequency, cameraFrequency, mode);
-
-        Debug.Log(output);
     }
 
     private void ChangeTrack()
@@ -49,18 +63,20 @@ public class MainMenuManger : MonoBehaviour
     }
 
     private void ResetCar()
-    { 
-        GameObject car = GameObject.Find("Car");
-        car.transform.position = new Vector3(0, 0, 0);
+    {
+        //Work on this (if autonomous or Keyboard)
+        car.GetComponent<CarController>().ResetCar();
+        car.GetComponent<CarInputController>().ResetCar();
     }
 
 
     private void OnEnable()
     {
+
         rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         Querries();
         AddListeners();
-
+        
         // How to set the values, when it comes e.g. from a configuration
         SetFrequencyLidar(42);
         SetFrequencyCamera(69);
@@ -72,36 +88,13 @@ public class MainMenuManger : MonoBehaviour
         resetCarButton.clicked += ResetCar;
         changeTrackButton.clicked += ChangeTrack;
         updateSettingsButton.clicked += UpdateSettings;
-        switchtrack.ClearOptions();
-        List<string> options = new  List<string>();
-        options.Add("acceleration");
-        options.Add("endurance");
-        options.Add("skidpad");
-        options.Add("customTrack");
-        switchtrack.AddOptions(options);
-        switchtrack.value = 0;
-        switchtrack.onValueChanged.AddListener(index =>
-       {
-           Debug.Log("Switch Track" + index);
-           switch (index)
-           {
-               case 1:
-                   trackManager.SetTrack("endurance");
-                   break;
-               case 2:
-                   trackManager.SetTrack("skidpad");
-                   break;
-               case 3:
-                   trackManager.SetTrack("customTrack");
-                   break;
-               default:
-                   trackManager.SetTrack("acceleration");
-                   break;
-           }
-       });
-
+        //This changes tracks 
+        switchtrack.onValueChanged.AddListener(value =>
+        {
+            trackManager.SetTrack(switchtrack.options[value].text);
+        });
     }
-    public TrackManager trackManager;
+  
   
 
     /// <summary>
@@ -134,11 +127,12 @@ public class MainMenuManger : MonoBehaviour
     {
         radioButtonGroupMode.value = (int)mode;
     }
+    
+    public enum DrivingMode
+    {
+        Auto,
+        Keyboard,
+        Autonomous
+    }
 }
 
-public enum DrivingMode
-{
-    Auto,
-    Keyboard,
-    Autonomous
-}

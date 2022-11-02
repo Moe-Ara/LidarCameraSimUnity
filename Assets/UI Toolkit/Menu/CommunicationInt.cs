@@ -21,7 +21,7 @@ namespace DefaultNamespace
 
         //Sensors to get data from
         private GssController _gssController;
-        private imuCont _imuController;
+        private Imu_Controller _imuController;
         private CarCameraController _cameraController;
         private LidarController _lidarController;
 
@@ -228,7 +228,7 @@ namespace DefaultNamespace
             _gssController = gss.GetComponent
                 <GssController>();
             _imuController = imu.GetComponent
-                <imuCont>();
+                <Imu_Controller>();
             _carRigidBody = car.GetComponent
                 <Rigidbody>();
             _Mass = _carRigidBody.mass;
