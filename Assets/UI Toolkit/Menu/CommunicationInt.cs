@@ -65,6 +65,12 @@ namespace DefaultNamespace
         private float _Mass;
         private float _lidarHz;
         private float _cameraHz;
+        private float _GSSOffset;
+        private float _GSSError;
+        private float _GSSSampling;
+        private float _IMUOffset;
+        private float _IMUError;
+        private float _IMUSampling;
         #endregion
 
         void Display()
@@ -76,7 +82,7 @@ namespace DefaultNamespace
             IMU.SetText(string.Format("IMU  x: {0} y: {1} z: {2}", Math.Round(_imuController.acceleration.x, 2),
                 Math.Round(_imuController.acceleration.y, 2), Math.Round(_imuController.acceleration.z, 2)));
         }
-        
+
         public void SaveInput()
         {
             if (massInput.text != null)
@@ -87,77 +93,89 @@ namespace DefaultNamespace
                     _carRigidBody.mass = (float)_Mass;
                 }
             }
+
             if (lidarInput.text != null)
             {
-                _lidarHz = float.Parse(lidarInput.text, CultureInfo.InvariantCulture.NumberFormat); 
+                _lidarHz = float.Parse(lidarInput.text, CultureInfo.InvariantCulture.NumberFormat);
                 if (Math.Abs(_lidarHz - _lidarController.Hz) > 0.0001)
                 {
                     _lidarController.Hz = (float)_lidarHz;
                 }
             }
+
             if (cameraInput.text != null)
             {
                 _cameraHz = float.Parse(cameraInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_cameraHz - _cameraController.Hz) > 0.0001) // _cameraController.Hz = (_cameraHz - _cameraController.Hz) > 0.0001 ? _cameraHz : _cameraController.Hz;
+                if (Math.Abs(_cameraHz - _cameraController.Hz) >
+                    0.0001) // _cameraController.Hz = (_cameraHz - _cameraController.Hz) > 0.0001 ? _cameraHz : _cameraController.Hz;
                 {
                     _cameraController.Hz = (float)_cameraHz;
                 }
             }
-            /*
+            /* missing friction 
             if (frictionInput.text != null)
             {
                 _friction = float.Parse(frictionInput.text, CultureInfo.InvariantCulture.NumberFormat);
                 if (Math.Abs(_friction - _cameraController.friction) > 0.0001) 
-                {                {
+                {                
                     _cameraController.friction = (float)_friction;
                 }
             }
+            */
             if (GSSOffsetInput.text != null)
             {
                 _GSSOffset = float.Parse(GSSOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSOffset - _cameraController.GSSOffset) > 0.0001) 
-                {                {
-                    _cameraController.GSSOffset = (float)_GSSOffset;
+                if (Math.Abs(_GSSOffset - _gssController.GSSoffset) > 0.0001)
+                {
+                    _gssController.GSSoffset = (float)_GSSOffset;
                 }
             }
+
             if (GSSErrorInput.text != null)
             {
                 _GSSError = float.Parse(GSSErrorInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSError - _cameraController.GSSError) > 0.0001) 
-                {                {
-                    _cameraController.GSSError = (float)_GSSError;
+                if (Math.Abs(_GSSError - _gssController._error) > 0.0001)
+                {
+                    _gssController._error = (float)_GSSError;
                 }
             }
+
+            /* missing GSSSampling 
             if (GSSSamplingInput.text != null)
             {
                 _GSSSampling = float.Parse(GSSSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
                 if (Math.Abs(_GSSSampling - _cameraController.GSSSampling) > 0.0001) 
-                {                {
+                {                
                     _cameraController.GSSSampling = (float)_GSSSampling;
                 }
             }
+            */
             if (IMUOffsetInput.text != null)
             {
                 _IMUOffset = float.Parse(IMUOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_IMUOffset - _cameraController.IMUOffset) > 0.0001) 
-                {                {
-                    _cameraController.IMUOffset = (float)_IMUOffset;
+                if (Math.Abs(_IMUOffset - _imuController.IMUOffset) > 0.0001)
+                {
+                    _imuController.IMUOffset = (float)_IMUOffset;
                 }
             }
+
             if (IMUErrorInput.text != null)
             {
                 _IMUError = float.Parse(IMUOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_IMUError - _cameraController.IMUError) > 0.0001) 
-                {                {
-                    _cameraController.IMUError = (float)_IMUError;
+                if (Math.Abs(_IMUError - _imuController._error) > 0.0001)
+                {
+                    {
+                        _imuController._error = (float)_IMUError;
+                    }
                 }
             }
+            /* missing IMUSampling 
             if (IMUSamplingInput.text != null)
             {
                 _IMUSampling = float.Parse(IMUSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
                 if (Math.Abs(_IMUSampling - _cameraController.IMUSampling) > 0.0001) 
-                {                {
-                    _cameraController.IMUSampling = (float)_IMUSampling;
+                {                
+                        _cameraController.IMUSampling = (float)_IMUSampling;
                 }
             }
             */
@@ -171,16 +189,26 @@ namespace DefaultNamespace
             lidarInput.text = _lidarController.Hz.ToString("0.00");
             _cameraHz = _cameraController.Hz;
             cameraInput.text = _cameraController.Hz.ToString("0.00");
-            /*
-             * _friction = _cameraController.friction;
-             * _GSSOffset = _cameraController.GSSOffset;
-             * _GSSError = _cameraController.GSSError;
-             * _GSSSampling = _cameraController.GSSSampling;
-             * _IMUOffset = _cameraController.IMUOffset;
-             * _IMUError = _cameraController.IMUError;
-             * _IMUSampling = _cameraController.IMUSampling;
+            /* missing friction 
+            _friction = _cameraController._friction;
+            frictionInput.text = _cameraController._friction.ToString("0.00");
             */
-            
+            _GSSOffset = _gssController.GSSoffset;
+            GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
+            _GSSError = _gssController._error;
+            GSSErrorInput.text = _gssController._error.ToString("0.00");
+            /* missing GSSSampling
+            _GSSSampling = _cameraController.GSSSampling;
+            GSSSamplingInput.text = _cameraController.GSSSampling.ToString("0.00");
+            */
+            _IMUOffset = _imuController.IMUOffset;
+            IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
+            _IMUError = _imuController._error;
+            IMUErrorInput.text = _imuController.IMUOffset.ToString("0.00");
+            /* missing IMUSampling
+            _IMUSampling = _cameraController.IMUSampling;
+            IMUSamplingInput.text = _cameraController.IMUSampling.ToString("0.00");
+            */
         }
 
         private void Start()
@@ -198,16 +226,23 @@ namespace DefaultNamespace
             _Mass = _carRigidBody.mass;
             _lidarHz = _lidarController.Hz;
             _cameraHz = _cameraController.Hz;
+            // missing friction initialization
+            _GSSOffset = _gssController.GSSoffset;
+            _GSSError = _gssController._error;
+            // missing GSSSampling initialization
+            _IMUOffset = _imuController.IMUOffset;
+            _IMUError = _imuController._error;
+            // missing IMUSampling initialization
             massInput.text = _carRigidBody.mass.ToString("0.00");
-            lidarInput.text = "0";
-            cameraInput.text = "0";
-            frictionInput.text = "0";
-            GSSOffsetInput.text = "0";
-            GSSErrorInput.text = "0";
-            GSSSamplingInput.text = "0";
-            IMUOffsetInput.text = "0";
-            IMUErrorInput.text = "0";
-            IMUSamplingInput.text = "0";
+            lidarInput.text = _lidarController.Hz.ToString("0.00");
+            cameraInput.text = _cameraController.Hz.ToString("0.00");
+            frictionInput.text = "0"; // missing friction declaration
+            GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
+            GSSErrorInput.text = _gssController._error.ToString("0.00");
+            GSSSamplingInput.text = "0"; // missing GSSSampling declaration
+            IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
+            IMUErrorInput.text = _imuController._error.ToString("0.00");
+            IMUSamplingInput.text = "0"; // missing IMUSampling declaration
         }
 
         void Update()

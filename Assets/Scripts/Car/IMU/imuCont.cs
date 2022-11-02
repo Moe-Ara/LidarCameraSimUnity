@@ -14,7 +14,13 @@ namespace Car.imu
         public Vector3 velocity = Vector3.zero;
         public Vector3 acceleration=Vector3.zero;
         public Vector3 _lastVelocity=Vector3.zero;
-
+        
+        public float IMUOffset
+        {
+            get => _offset;
+            set => _offset = value;
+        }
+        
         // Start is called before the first frame update
         void Start()
         {
