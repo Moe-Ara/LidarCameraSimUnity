@@ -91,6 +91,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_Mass - _carRigidBody.mass) > 0.0001)
                 {
                     _carRigidBody.mass = (float)_Mass;
+                    massInput.text = _Mass.ToString("0.00");
                 }
             }
 
@@ -100,6 +101,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_lidarHz - _lidarController.Hz) > 0.0001)
                 {
                     _lidarController.Hz = (float)_lidarHz;
+                    lidarInput.text = _lidarHz.ToString("0.00");
                 }
             }
 
@@ -110,6 +112,7 @@ namespace DefaultNamespace
                     0.0001) // _cameraController.Hz = (_cameraHz - _cameraController.Hz) > 0.0001 ? _cameraHz : _cameraController.Hz;
                 {
                     _cameraController.Hz = (float)_cameraHz;
+                    cameraInput.text = _cameraHz.ToString("0.00");
                 }
             }
             /* missing friction 
@@ -119,6 +122,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_friction - _cameraController.friction) > 0.0001) 
                 {                
                     _cameraController.friction = (float)_friction;
+                    frictionInput.text = _friction.ToString("0.00");
                 }
             }
             */
@@ -128,6 +132,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_GSSOffset - _gssController.GSSoffset) > 0.0001)
                 {
                     _gssController.GSSoffset = (float)_GSSOffset;
+                    GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
                 }
             }
 
@@ -137,6 +142,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_GSSError - _gssController._error) > 0.0001)
                 {
                     _gssController._error = (float)_GSSError;
+                    GSSErrorInput.text = _gssController._error.ToString("0.00");
                 }
             }
 
@@ -144,9 +150,10 @@ namespace DefaultNamespace
             if (GSSSamplingInput.text != null)
             {
                 _GSSSampling = float.Parse(GSSSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSSampling - _cameraController.GSSSampling) > 0.0001) 
+                if (Math.Abs(_GSSSampling - _gssController.GSSSampling) > 0.0001) 
                 {                
-                    _cameraController.GSSSampling = (float)_GSSSampling;
+                    _gssController.GSSSampling = (float)_GSSSampling;
+                    GSSSamplingInput.text = _gssController.GSSSampling.ToString("0.00");
                 }
             }
             */
@@ -156,6 +163,7 @@ namespace DefaultNamespace
                 if (Math.Abs(_IMUOffset - _imuController.IMUOffset) > 0.0001)
                 {
                     _imuController.IMUOffset = (float)_IMUOffset;
+                    IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
                 }
             }
 
@@ -164,18 +172,18 @@ namespace DefaultNamespace
                 _IMUError = float.Parse(IMUOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
                 if (Math.Abs(_IMUError - _imuController._error) > 0.0001)
                 {
-                    {
-                        _imuController._error = (float)_IMUError;
-                    }
+                    _imuController._error = (float)_IMUError;
+                    IMUErrorInput.text = _imuController._error.ToString("0.00");
                 }
             }
             /* missing IMUSampling 
             if (IMUSamplingInput.text != null)
             {
                 _IMUSampling = float.Parse(IMUSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_IMUSampling - _cameraController.IMUSampling) > 0.0001) 
+                if (Math.Abs(_IMUSampling - _imuController.IMUSampling) > 0.0001) 
                 {                
-                        _cameraController.IMUSampling = (float)_IMUSampling;
+                    _imuController.IMUSampling = (float)_IMUSampling;
+                    IMUSamplingInput.text = _imuController.IMUSampling.ToString("0.00");
                 }
             }
             */
@@ -204,7 +212,7 @@ namespace DefaultNamespace
             _IMUOffset = _imuController.IMUOffset;
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
             _IMUError = _imuController._error;
-            IMUErrorInput.text = _imuController.IMUOffset.ToString("0.00");
+            IMUErrorInput.text = _imuController._error.ToString("0.00");
             /* missing IMUSampling
             _IMUSampling = _cameraController.IMUSampling;
             IMUSamplingInput.text = _cameraController.IMUSampling.ToString("0.00");
