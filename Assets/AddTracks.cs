@@ -5,13 +5,15 @@ using UnityEngine;
 public class AddTracks : MonoBehaviour
 {
     public TrackManager trackManager;
+
+    // public MainMenuManger MainMenuManger;
     // Start is called before the first frame update
     void Start()
     {
         foreach (Transform child in transform)
         {
             trackManager.Tracks.Add(child.gameObject);
-
+            // MainMenuManger.Tracks.Add(child.gameObject);
         }
     }
 

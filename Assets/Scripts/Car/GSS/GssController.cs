@@ -36,8 +36,12 @@ namespace Car.gss
         {
             
             get => _speed;
+        }   
+        public float GSSoffset
+        {
+            get => _offset;
+            set => _offset = value;
         }
-
         // Start is called before the first frame update
         void Start()
         {

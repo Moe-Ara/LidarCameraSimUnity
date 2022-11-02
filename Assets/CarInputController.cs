@@ -47,4 +47,10 @@ public class CarInputController : MonoBehaviour
         frontLeftCollider.steerAngle = 45.0f * _moveDirection.x;
         frontRightCollider.steerAngle = 45.0f * _moveDirection.x;
     }
+
+    public void ResetCar()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0,0,0);
+    }
 }

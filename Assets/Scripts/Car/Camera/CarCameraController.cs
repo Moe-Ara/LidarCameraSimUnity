@@ -11,6 +11,17 @@ namespace Car.Camera
 {
     public class CarCameraController : MonoBehaviour
     {
+        #region props
+
+        public float Hz
+        {
+            get => HZ;
+            set => HZ = value;
+        }
+
+        #endregion
+        
+        
         /// <summary>
         /// The dimensions of the image
         /// </summary>
@@ -24,7 +35,7 @@ namespace Car.Camera
         /// <summary>
         /// The number of images created per second
         /// </summary>
-        private const float HZ = 20f;
+        private float HZ = 20f;
 
         /// <summary>
         /// The duration of a ray

@@ -3,8 +3,9 @@ guid: bb8dfcd263ad4eb383a33d74a720be6f
 timeCreated: 1441529862
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
-  serializedVersion: 2
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
