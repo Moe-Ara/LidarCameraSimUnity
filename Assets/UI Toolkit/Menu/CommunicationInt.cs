@@ -75,8 +75,8 @@ namespace DefaultNamespace
 
         void Display()
         {
-            mass.SetText($"mass   " + _carRigidBody.mass + " kg");
-            speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2) + " km/h");
+            mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
+            speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2).ToString("0.00") + " km/h");
             GSS.SetText(string.Format("GSS x: {0} y: {1} z: {2}", Math.Round(_gssController.velocity.x, 2),
                 Math.Round(_gssController.velocity.y, 2), Math.Round(_gssController.velocity.z, 2)));
             IMU.SetText(string.Format("IMU  x: {0} y: {1} z: {2}", Math.Round(_imuController.acceleration.x, 2),
