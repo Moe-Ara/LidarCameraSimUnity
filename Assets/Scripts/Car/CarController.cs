@@ -45,9 +45,11 @@ namespace Car
             _pidOutput = 0f;
             _control = new ControlResultMessage();
             _pidController = gameObject.GetComponent<PIDController>();
-            _gssController = gameObject.GetComponent<GssController>();
+            // _gssController = gameObject.GetComponent<GssController>();
+            _gssController = transform.Find("GSS").GetComponent<GssController>();
         }
 
+        public GameManager manager;
         /// <summary>
         /// Update the car state
         /// </summary>
