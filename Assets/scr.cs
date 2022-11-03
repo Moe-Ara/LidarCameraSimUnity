@@ -11,7 +11,7 @@ public class scr : MonoBehaviour
 
     [SerializeField] private LidarController _lidarController;
 
-    [SerializeField] private ImuController _imuController;
+    [SerializeField] private Imu_Controller _imuController;
 
     [SerializeField] private GameObject _car;
     

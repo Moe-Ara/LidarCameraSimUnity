@@ -2,6 +2,7 @@ using System;
 using Car.gss;
 using Communication.Messages;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Car
 {
@@ -49,7 +50,7 @@ namespace Car
             _gssController = transform.Find("GSS").GetComponent<GssController>();
         }
 
-        public GameManager manager;
+        // public GameManager manager;
         /// <summary>
         /// Update the car state
         /// </summary>
@@ -150,6 +151,16 @@ namespace Car
         {
             transform.position = new Vector3(0, 0, 0);
             transform.rotation = Quaternion.Euler(0,0,0);
+        }
+
+        public void onExit(InputAction.CallbackContext context)
+        {
+            Application.Quit();
+        }
+
+        public void onReset(InputAction.CallbackContext context)
+        {
+            ResetCar();
         }
     }
 }
