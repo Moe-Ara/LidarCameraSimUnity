@@ -65,8 +65,8 @@ public class MainMenuManger : MonoBehaviour
     private void ResetCar()
     {
         //Work on this (if autonomous or Keyboard)
-        car.GetComponent<CarController>().ResetCar();
-        car.GetComponent<CarInputController>().ResetCar();
+        // car.GetComponent<CarController>().ResetCar();
+        // car.GetComponent<CarInputController>().ResetCar();
     }
 
 
