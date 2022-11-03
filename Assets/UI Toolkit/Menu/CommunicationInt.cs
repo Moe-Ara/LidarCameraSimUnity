@@ -17,6 +17,14 @@ namespace DefaultNamespace
 {
     public class CommunicationInt : MonoBehaviour
     {
+        /*
+         * FPS (frames per second)
+         * is as connected
+         * 
+         */
+        private bool isASConnected;
+
+        
         #region objects
 
         //Sensors to get data from
