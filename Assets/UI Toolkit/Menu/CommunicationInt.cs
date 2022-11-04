@@ -44,8 +44,14 @@ namespace DefaultNamespace
         [SerializeField] private GameObject gss;
         [SerializeField] public TextMeshProUGUI mass;
         [SerializeField] public TextMeshProUGUI speed;
-        [SerializeField] public TextMeshProUGUI GSS;
-        [SerializeField] public TextMeshProUGUI IMU;
+        //[SerializeField] public TextMeshProUGUI GSS;
+        //[SerializeField] public TextMeshProUGUI IMU;
+        [SerializeField] public TMP_InputField GSSXInput;
+        [SerializeField] public TMP_InputField GSSYInput;
+        [SerializeField] public TMP_InputField GSSZInput;
+        [SerializeField] public TMP_InputField IMUXInput;
+        [SerializeField] public TMP_InputField IMUYInput;
+        [SerializeField] public TMP_InputField IMUZInput;
         [SerializeField] public TMP_InputField massInput;
         [SerializeField] public TMP_InputField lidarInput;
         [SerializeField] public TMP_InputField cameraInput;
@@ -85,10 +91,16 @@ namespace DefaultNamespace
         {
             mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
             speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2).ToString("0.00") + " km/h");
-            GSS.SetText(string.Format("GSS x: {0} y: {1} z: {2}", Math.Round(_gssController.velocity.x, 2),
+            GSSXInput.text = Math.Round(_gssController.velocity.x, 2).ToString("0.00");
+            GSSYInput.text = Math.Round(_gssController.velocity.y, 2).ToString("0.00");
+            GSSZInput.text = Math.Round(_gssController.velocity.z, 2).ToString("0.00");
+            IMUXInput.text = Math.Round(_imuController.acceleration.x, 2).ToString("0.00");
+            IMUYInput.text = Math.Round(_imuController.acceleration.y, 2).ToString("0.00");
+            IMUZInput.text = Math.Round(_imuController.acceleration.z, 2).ToString("0.00");
+            /*GSS.SetText(string.Format("GSS x: {0} y: {1} z: {2}", Math.Round(_gssController.velocity.x, 2),
                 Math.Round(_gssController.velocity.y, 2), Math.Round(_gssController.velocity.z, 2)));
             IMU.SetText(string.Format("IMU  x: {0} y: {1} z: {2}", Math.Round(_imuController.acceleration.x, 2),
-                Math.Round(_imuController.acceleration.y, 2), Math.Round(_imuController.acceleration.z, 2)));
+                Math.Round(_imuController.acceleration.y, 2), Math.Round(_imuController.acceleration.z, 2)));*/
         }
 
         public void SaveInput()
