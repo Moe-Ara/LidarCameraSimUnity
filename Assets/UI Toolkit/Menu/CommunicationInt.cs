@@ -256,7 +256,7 @@ namespace DefaultNamespace
                 ASConnection.color = Color.red;
             }
 
-            FPS.text = FPSValue.ToString("0.00");
+            FPS.SetText("FPS: " + FPSValue.ToString("0.00") + " ms");
         }
 
         private void Start()
