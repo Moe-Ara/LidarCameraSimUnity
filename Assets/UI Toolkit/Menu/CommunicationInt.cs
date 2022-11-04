@@ -12,6 +12,7 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using TMPro;
 using System.Globalization;
+using System.Threading;
 
 namespace DefaultNamespace
 {
@@ -20,9 +21,9 @@ namespace DefaultNamespace
         /*
          * FPS (frames per second)
          * is as connected
-         * 
          */
         private bool isASConnected;
+        private float FPSValue;
 
         
         #region objects
@@ -137,6 +138,7 @@ namespace DefaultNamespace
                     cameraInput.text = _cameraHz.ToString("0.00");
                 }
             }
+
             /* missing friction 
             if (frictionInput.text != null)
             {
@@ -241,6 +243,22 @@ namespace DefaultNamespace
             */
         }
 
+        public void UpdateInfo()
+        {
+            if (isASConnected == true)
+            {
+                ASConnection.SetText("Autonomous system: connected");
+                ASConnection.color = Color.green;
+            }
+            else
+            {
+                ASConnection.SetText("Autonomous system:\nnot connected");
+                ASConnection.color = Color.red;
+            }
+
+            FPS.text = FPSValue.ToString("0.00");
+        }
+
         private void Start()
         {
             _lidarController = lidar.GetComponent
@@ -273,8 +291,8 @@ namespace DefaultNamespace
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
             IMUErrorInput.text = _imuController._error.ToString("0.00");
             IMUSamplingInput.text = "0"; // missing IMUSampling declaration
-            ASConnection.SetText("Autonomous system: connected / not connected");
-            FPS.SetText("FPS: ms");
+            ASConnection.SetText("Autonomous system: ");
+            FPS.SetText("FPS:   ms");
         }
 
         void Update()
@@ -284,6 +302,7 @@ namespace DefaultNamespace
             _AccelerationVector = _imuController.acceleration;
             _Acceleration = _AccelerationVector.magnitude;
             Display();
+            UpdateInfo();
         }
     }
 }
