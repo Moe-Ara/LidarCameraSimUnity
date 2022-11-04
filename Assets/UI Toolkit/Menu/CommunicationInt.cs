@@ -62,6 +62,8 @@ namespace DefaultNamespace
         [SerializeField] public TMP_InputField IMUOffsetInput;
         [SerializeField] public TMP_InputField IMUErrorInput;
         [SerializeField] public TMP_InputField IMUSamplingInput;
+        [SerializeField] public TextMeshProUGUI ASConnection;
+        [SerializeField] public TextMeshProUGUI FPS;
         
         #endregion
 
@@ -271,6 +273,8 @@ namespace DefaultNamespace
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
             IMUErrorInput.text = _imuController._error.ToString("0.00");
             IMUSamplingInput.text = "0"; // missing IMUSampling declaration
+            ASConnection.SetText("Autonomous system: connected / not connected");
+            FPS.SetText("FPS: ms");
         }
 
         void Update()
