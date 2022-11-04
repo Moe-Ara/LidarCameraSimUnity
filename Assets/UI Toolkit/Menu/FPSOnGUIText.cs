@@ -49,7 +49,7 @@ public class FPSOnGUIText : MonoBehaviour
             fontStyle = FontStyle.BoldAndItalic,
         };
         //�Զ����� ���߶ȴ�С ��ɫ��style
-        GUI.Label(new Rect(Screen.width / 2 + 620, Screen.height - 1000, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + " ms </size></color>", style);
+        GUI.Label(new Rect(Screen.width / 2 + 620, Screen.height - 1000, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + " s </size></color>", style);
     }
 }
 
