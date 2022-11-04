@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// FPS ÏÔÊ¾ÓÚOnGUI 
+/// FPS ï¿½ï¿½Ê¾ï¿½ï¿½OnGUI 
 /// </summary>
 public class FPSOnGUIText : MonoBehaviour
 {
 
-    float updateInterval = 1.0f;           //µ±Ç°Ê±¼ä¼ä¸ô
-    private float accumulated = 0.0f;      //ÔÚ´ËÆÚ¼äÀÛ»ý  
-    private float frames = 0;              //ÔÚ¼ä¸ôÄÚ»æÖÆµÄÖ¡  
-    private float timeRemaining;           //µ±Ç°¼ä¸ôµÄÊ£ÓàÊ±¼ä
-    private float fps = 15.0f;             //µ±Ç°Ö¡ Current FPS
+    float updateInterval = 1.0f;           //ï¿½ï¿½Ç°Ê±ï¿½ï¿½ï¿½ï¿½
+    private float accumulated = 0.0f;      //ï¿½Ú´ï¿½ï¿½Ú¼ï¿½ï¿½Û»ï¿½  
+    private float frames = 0;              //ï¿½Ú¼ï¿½ï¿½ï¿½Ú»ï¿½ï¿½Æµï¿½Ö¡  
+    private float timeRemaining;           //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½
+    private float fps = 15.0f;             //ï¿½ï¿½Ç°Ö¡ Current FPS
     private float lastSample;
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject); //²»Ïú»Ù´ËÓÎÏ·¶ÔÏó£¬ÔÚÄÄ¸ö³¡¾°¶¼¿ÉÒÔÏÔÊ¾£¬£¬²»ÐèÒªÔò×¢ÊÍ
+        DontDestroyOnLoad(this.gameObject); //ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½×¢ï¿½ï¿½
         timeRemaining = updateInterval;
-        lastSample = Time.realtimeSinceStartup; //ÊµÊ±×ÔÆô¶¯
+        lastSample = Time.realtimeSinceStartup; //ÊµÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
     void Update()
@@ -48,8 +48,8 @@ public class FPSOnGUIText : MonoBehaviour
             fontSize = 50,
             fontStyle = FontStyle.BoldAndItalic,
         };
-        //×Ô¶¨Òå¿í¶È £¬¸ß¶È´óÐ¡ ÑÕÉ«£¬style
-        GUI.Label(new Rect(Screen.width / 2 + 720, Screen.height - 1070, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + "</size></color>", style);
+        //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¶È´ï¿½Ð¡ ï¿½ï¿½É«ï¿½ï¿½style
+        GUI.Label(new Rect(Screen.width / 2 + 720, Screen.height - 1070, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + "ms </size></color>", style);
     }
 }
 
