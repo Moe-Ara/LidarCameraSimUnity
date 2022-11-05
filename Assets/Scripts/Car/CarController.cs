@@ -8,12 +8,23 @@ namespace Car
 {
     public class CarController : MonoBehaviour
     {
+        #region Props
+
+        public bool Automated
+        {
+            get => _automated;
+            set => _automated = value;
+        }
+
+        #endregion
+        private Vector2 _moveDirection;
+        private bool _automated = false;
         private ControlResultMessage _control;
         private PIDController _pidController;
         private float _pidOutput;
         private float _currentSpeed;
         private GssController _gssController;
-
+        private GameObject _car;
         /// <summary>
         /// The event that is triggered after a new car state was generated
         /// </summary>
@@ -22,7 +33,7 @@ namespace Car
         /// <summary>
         /// The actual front wheels
         /// </summary>
-        public Transform frontLeftWheel, frontRightWheel;
+        public Transform frontLeftWheel, frontRightWheel,rearRightWheel,rearLeftWheel;
 
         /// <summary>
         /// The colliders of the front wheels (for steering)
@@ -42,12 +53,14 @@ namespace Car
 
         private void Start()
         {
+            _car = gameObject;
+            _moveDirection = Vector2.zero;
             _currentSpeed = 0f;
             _pidOutput = 0f;
             _control = new ControlResultMessage();
             _pidController = gameObject.GetComponent<PIDController>();
             // _gssController = gameObject.GetComponent<GssController>();
-            _gssController = transform.Find("GSS").GetComponent<GssController>();
+            _gssController = transform.GetComponent<GssController>();
         }
 
         // public GameManager manager;
@@ -57,29 +70,27 @@ namespace Car
         private void FixedUpdate()
         {
             var trans = transform;
-
-            // Calculate the velocity
-            var lastPos = _pos;
-            _pos = trans.position;
-            _velocity = (_pos - lastPos) / Time.fixedDeltaTime;
-
-            // _currentSpeed=_gssController.calculateSpeed();
+            
+            // // Calculate the velocity
+            // _velocity = _gssController.velocity;
             // _currentSpeed=(float)Math.Round(_gssController.Speed, 3);
-            // Calculate the angular velocity
-            var lastRot = _rot;
-            _rot = trans.rotation.eulerAngles;
-            var angularVelocity = (_rot - lastRot) / Time.fixedDeltaTime;
-
-            // Create the message
-            var carState = new CarStateMessage
-            {
-                speed_actual = _velocity.magnitude,
-                yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
-            };
-            OnNewCarState?.Invoke(carState);
-            _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
-            Acceleration(_control);
-            Debug.Log(_control.steering_angle_target.ToString());
+            // // Calculate the angular velocity
+            // var lastRot = _rot;
+            // _rot = trans.rotation.eulerAngles;
+            // var angularVelocity = (_rot - lastRot) / Time.fixedDeltaTime;
+            //
+            // // Create the message
+            // var carState = new CarStateMessage
+            // {
+            //     speed_actual = _currentSpeed,
+            //     yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
+            // };
+            // OnNewCarState?.Invoke(carState);
+            // _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            if(_automated)
+                Acceleration(_control);
+            else
+                MoveCarUsingInput();
         }
 
         /// <summary>
@@ -90,14 +101,8 @@ namespace Car
         {
             _control = control;
             //steering
-            SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
-            SetFrontWheelAngle(frontRightCollider, frontRightWheel, control.steering_angle_target);
-            // TODO: Set max motor torque (motor_moment_target is a relative value)
-            // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
-            // rearRightCollider.motorTorque = control.motor_moment_target * 50;
-            // Accelerate; start driving
-            // Steering();
-            // Acceleration(control);
+            if (!_automated) return;
+
         }
 
         /// <summary>
@@ -106,11 +111,14 @@ namespace Car
         /// <param name="wheelCollider">The wheel collider</param>
         /// <param name="wheelTransform">The visuals of the wheel</param>
         /// <param name="steeringAngle">The steering angle</param>
-        private static void SetFrontWheelAngle(WheelCollider wheelCollider, Transform wheelTransform,
+        private void SetFrontWheelAngle(WheelCollider wheelCollider, Transform wheelTransform,
             float steeringAngle)
         {
-            wheelCollider.steerAngle = steeringAngle;
-            wheelTransform.rotation = Quaternion.Euler(0, steeringAngle, 90);
+            wheelCollider.GetWorldPose(out var pos,out var wheelColliderRotation);
+            var carAngle=transform.localRotation.eulerAngles.y;
+            carAngle %=360;
+            carAngle= carAngle>180 ? carAngle-360 : carAngle;
+            wheelTransform.rotation = Quaternion.Euler(wheelColliderRotation.eulerAngles.x,steeringAngle+carAngle, -90);
         }
 
         /// <summary>
@@ -119,6 +127,12 @@ namespace Car
         /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Acceleration(ControlResultMessage control)
         {
+            SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
+            SetFrontWheelAngle(frontRightCollider, frontRightWheel, control.steering_angle_target);
+            SetFrontWheelAngle(rearRightCollider, rearRightWheel, 0);
+            SetFrontWheelAngle(rearLeftCollider, rearLeftWheel, 0);
+
+            // Autonomous system moves the car
             if (control.speed_target != 0f)
             {
                 rearLeftCollider.brakeTorque = 0;
@@ -131,6 +145,22 @@ namespace Car
             {
                 Declaration();
             }
+        }
+
+        private void MoveCarUsingInput()
+        {
+            rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
+            rearRightCollider.motorTorque = 10.0f * _moveDirection.y;
+            // Move using Wheel Collider
+            // rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
+            // rearRightCollider.motorTorque = 10.0f * _moveDirection.y;
+            frontLeftCollider.steerAngle = 35.0f * _moveDirection.x;
+            frontRightCollider.steerAngle = 35.0f * _moveDirection.x;
+            //steering visually
+            SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, frontLeftCollider.steerAngle);
+            SetFrontWheelAngle(frontRightCollider, frontRightWheel, frontRightCollider.steerAngle);
+            SetFrontWheelAngle(rearRightCollider, rearRightWheel, 0);
+            SetFrontWheelAngle(rearLeftCollider, rearLeftWheel, 0);
         }
 
         /// <summary>
@@ -154,14 +184,15 @@ namespace Car
             transform.rotation = Quaternion.Euler(0,0,0);
         }
 
-        public void onExit(InputAction.CallbackContext context)
-        {
-            Application.Quit();
-        }
-
         public void onReset(InputAction.CallbackContext context)
         {
             ResetCar();
         }
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            if(!_automated)
+                _moveDirection = context.ReadValue<Vector2>() * new Vector2(1, 10);
+        }
+
     }
 }
