@@ -18,13 +18,7 @@ namespace DefaultNamespace
 {
     public class CommunicationInt : MonoBehaviour
     {
-        /*
-         * FPS (frames per second)
-         * is as connected
-         */
         private bool isASConnected;
-        private float FPSValue;
-
         
         #region objects
 
@@ -64,8 +58,7 @@ namespace DefaultNamespace
         [SerializeField] public TMP_InputField IMUErrorInput;
         [SerializeField] public TMP_InputField IMUSamplingInput;
         [SerializeField] public TextMeshProUGUI ASConnection;
-        [SerializeField] public TextMeshProUGUI FPS;
-        
+
         #endregion
 
         //car rigid body to get mass
@@ -131,8 +124,7 @@ namespace DefaultNamespace
             if (cameraInput.text != null)
             {
                 _cameraHz = float.Parse(cameraInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_cameraHz - _cameraController.Hz) >
-                    0.0001) // _cameraController.Hz = (_cameraHz - _cameraController.Hz) > 0.0001 ? _cameraHz : _cameraController.Hz;
+                if (Math.Abs(_cameraHz - _cameraController.Hz) > 0.0001) 
                 {
                     _cameraController.Hz = (float)_cameraHz;
                     cameraInput.text = _cameraHz.ToString("0.00");
@@ -169,18 +161,15 @@ namespace DefaultNamespace
                     GSSErrorInput.text = _gssController._error.ToString("0.00");
                 }
             }
-
-            /* missing GSSSampling 
             if (GSSSamplingInput.text != null)
             {
                 _GSSSampling = float.Parse(GSSSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSSampling - _gssController.GSSSampling) > 0.0001) 
+                if (Math.Abs(_GSSSampling - _gssController.samplingRate) > 0.0001) 
                 {                
-                    _gssController.GSSSampling = (float)_GSSSampling;
-                    GSSSamplingInput.text = _gssController.GSSSampling.ToString("0.00");
+                    _gssController.samplingRate = (float)_GSSSampling;
+                    GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00");
                 }
             }
-            */
             if (IMUOffsetInput.text != null)
             {
                 _IMUOffset = float.Parse(IMUOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
@@ -229,10 +218,8 @@ namespace DefaultNamespace
             GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
             _GSSError = _gssController._error;
             GSSErrorInput.text = _gssController._error.ToString("0.00");
-            /* missing GSSSampling
-            _GSSSampling = _cameraController.GSSSampling;
-            GSSSamplingInput.text = _cameraController.GSSSampling.ToString("0.00");
-            */
+            _GSSSampling = _gssController.samplingRate;
+            GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00");
             _IMUOffset = _imuController.IMUOffset;
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
             _IMUError = _imuController._error;
@@ -255,8 +242,6 @@ namespace DefaultNamespace
                 ASConnection.SetText("Autonomous system:\nnot connected");
                 ASConnection.color = Color.red;
             }
-
-            //FPS.SetText("FPS: " + FPSValue.ToString("0.00") + " ms");
         }
 
         private void Start()
@@ -277,7 +262,7 @@ namespace DefaultNamespace
             // missing friction initialization
             _GSSOffset = _gssController.GSSoffset;
             _GSSError = _gssController._error;
-            // missing GSSSampling initialization
+            _GSSSampling = _gssController.samplingRate;
             _IMUOffset = _imuController.IMUOffset;
             _IMUError = _imuController._error;
             // missing IMUSampling initialization
@@ -287,12 +272,11 @@ namespace DefaultNamespace
             frictionInput.text = "0"; // missing friction declaration
             GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
             GSSErrorInput.text = _gssController._error.ToString("0.00");
-            GSSSamplingInput.text = "0"; // missing GSSSampling declaration
+            GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00"); 
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
             IMUErrorInput.text = _imuController._error.ToString("0.00");
             IMUSamplingInput.text = "0"; // missing IMUSampling declaration
             ASConnection.SetText("Autonomous system: ");
-            FPS.SetText("FPS:   ms");
         }
 
         void Update()
