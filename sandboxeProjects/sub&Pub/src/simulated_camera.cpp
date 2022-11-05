@@ -49,6 +49,8 @@ simulated_camera::simulated_camera() {
 //
 //}
 cv::Mat simulated_camera::getImage() {
+    cv::Mat Image(PIC_HEIGHT, PIC_WIDTH, CV_8UC4 );
+
     try {
         //data size in an array of 4 bytes
         boost::array<unsigned char, 4> datSize;
@@ -59,32 +61,37 @@ cv::Mat simulated_camera::getImage() {
         //convert datasize to int
         std::memcpy(&m_dataSize, &datSize, sizeof(int));
         //array to receive data
-        unsigned char *data =new unsigned char [m_dataSize];
-//        auto data=std::make_unique<unsigned int[]>(m_dataSize);
+        auto data = std::make_shared<std::vector<unsigned char>>(m_dataSize);
+//                new unsigned char [m_dataSize];
+//        auto data=std::make_shared<unsigned char[]>(m_dataSize);
         // read data
-        boost::asio::read(*sock, boost::asio::buffer(data, m_dataSize), err);
+        boost::asio::read(*sock, boost::asio::buffer(*data, m_dataSize), err);
         //array of pixels
         std::vector<signed int> pixels;
         //create pixels and insert them in an array
         for (int i = 0; i < m_dataSize; i = i + 3) {
             int pixel = 0x00000000;
-            unsigned char r = data[i + 0];    //0x000000012
-            unsigned char g = data[i + 1];    //0x000000011
-            unsigned char b = data[i + 2];    //0x0000000FF
+//            unsigned char r = data[i + 0];    //0x000000012
+//            unsigned char g = data[i + 1];    //0x000000011
+//            unsigned char b = data[i + 2];    //0x0000000FF
+unsigned char r= data->at(i+0);
+            unsigned char g= data->at(i+1);
+
+            unsigned char b= data->at(i+2);
+
             pixel |= (r << 16);
             pixel |= (g << 8);
             pixel |= (b);
             //push pixels into this vector
             pixels.push_back(pixel);
         }
-        delete []data;
         //Converting Image
-        cv::Mat Image(PIC_HEIGHT, PIC_WIDTH, CV_8UC4 );
-        memcpy(Image.data, pixels.data(),pixels.size()*sizeof(int));
-        return Image;
+        memcpy(Image.data, pixels.data(),pixels.size() * sizeof(int));
     } catch (std::system_error &e) {
         e.what();
     }
+    return Image;
+
 }
 
 simulated_camera::~simulated_camera() noexcept {

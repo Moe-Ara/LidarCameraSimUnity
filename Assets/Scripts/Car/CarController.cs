@@ -64,7 +64,7 @@ namespace Car
             _velocity = (_pos - lastPos) / Time.fixedDeltaTime;
 
             // _currentSpeed=_gssController.calculateSpeed();
-            _currentSpeed=(float)Math.Round(_gssController.Speed, 3);
+            // _currentSpeed=(float)Math.Round(_gssController.Speed, 3);
             // Calculate the angular velocity
             var lastRot = _rot;
             _rot = trans.rotation.eulerAngles;
@@ -79,6 +79,7 @@ namespace Car
             OnNewCarState?.Invoke(carState);
             _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
             Acceleration(_control);
+            Debug.Log(_control.steering_angle_target.ToString());
         }
 
         /// <summary>
