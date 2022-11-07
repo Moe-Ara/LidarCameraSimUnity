@@ -1,5 +1,6 @@
 using System;
 using Car.gss;
+using Car.imu;
 using Communication.Messages;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,8 +24,8 @@ namespace Car
         private PIDController _pidController;
         private float _pidOutput;
         private float _currentSpeed;
-        private GssController _gssController;
-        private GameObject _car;
+        public GssController _gssController;
+        public Imu_Controller _ImuController;
         /// <summary>
         /// The event that is triggered after a new car state was generated
         /// </summary>
@@ -53,14 +54,12 @@ namespace Car
 
         private void Start()
         {
-            _car = gameObject;
             _moveDirection = Vector2.zero;
             _currentSpeed = 0f;
             _pidOutput = 0f;
             _control = new ControlResultMessage();
             _pidController = gameObject.GetComponent<PIDController>();
-            // _gssController = gameObject.GetComponent<GssController>();
-            _gssController = transform.GetComponent<GssController>();
+            
         }
 
         // public GameManager manager;
@@ -71,22 +70,23 @@ namespace Car
         {
             var trans = transform;
             
-            // // Calculate the velocity
-            // _velocity = _gssController.velocity;
-            // _currentSpeed=(float)Math.Round(_gssController.Speed, 3);
-            // // Calculate the angular velocity
-            // var lastRot = _rot;
-            // _rot = trans.rotation.eulerAngles;
-            // var angularVelocity = (_rot - lastRot) / Time.fixedDeltaTime;
-            //
-            // // Create the message
-            // var carState = new CarStateMessage
-            // {
-            //     speed_actual = _currentSpeed,
-            //     yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
-            // };
-            // OnNewCarState?.Invoke(carState);
-            // _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            // Calculate the velocity
+            _velocity = _gssController.Velocity;
+            _currentSpeed = _gssController.Speed;
+            Debug.Log(_currentSpeed.ToString());
+            // Calculate the angular velocity
+            var lastRot = _rot;
+            _rot = trans.rotation.eulerAngles;
+            var angularVelocity = (_rot - lastRot) / Time.fixedDeltaTime;
+            
+            // Create the message
+            var carState = new CarStateMessage
+            {
+                speed_actual = _currentSpeed,
+                yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
+            };
+            OnNewCarState?.Invoke(carState);
+            _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
             if(_automated)
                 Acceleration(_control);
             else

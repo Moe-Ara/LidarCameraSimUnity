@@ -55,7 +55,7 @@ public class FollowCar : MonoBehaviour
         // Rotate Camera around Gamobject
         // Get Mouse Rotation 
         var h = horizontalSpeed * Input.GetAxis("Mouse X");
-        var v = verticalSpeed * Input.GetAxis("Mouse Y");
+        var v = -verticalSpeed * Input.GetAxis("Mouse Y");
         var zoom = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
 
         if (isDrag)

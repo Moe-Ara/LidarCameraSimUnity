@@ -72,13 +72,11 @@ namespace Communication
             carCameraController.OnNewImage = imageData =>
             {
                 _cameraPublisher.Publish(imageData);
-                    // Debug.Log(imageData);
-        };
+            };
 
         lidarController.OnNewPointCloud = pointCloudData =>
         {
             _lidarPublisher.Publish(pointCloudData);
-            // Debug.Log(pointCloudData);
         };
             carController.OnNewCarState = message =>
             {

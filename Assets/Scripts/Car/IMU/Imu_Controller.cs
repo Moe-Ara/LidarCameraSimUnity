@@ -1,82 +1,118 @@
 using UnityEngine;
 using System;
+
 namespace Car.imu
 {
     public class Imu_Controller : MonoBehaviour
     {
+        #region Attributes
+
+        private DateTime _last;
+        private Vector3 _errorAcc;
+        private Vector3 _lastPositon;
+        private float _offset;
+        private Vector3 _velocity;
+        private Vector3 _acceleration;
+
+        private Vector3 _lastVelocity;
+
+        //angle random walk (ARW) in degrees/sqrt(Hr)
+        private float _angleRandWalk;
+
+        //error rate based off sensor
+        private float _errorRate;
+        private float _samplingRate;
+
+        #endregion
+        #region GettersAndSetters
+
         public float IMUOffset
         {
             get => _offset;
             set => _offset = value;
         }
 
-        private Vector3 errorAcc=Vector3.zero;
-        public float _error;
-        private Vector3 _lastPositon = Vector3.zero;
-        public float _speed = 0.0f;
-        public double _speedKmH = 0;
-        public float _offset = 0.0f;
-        public double _time = 0;
-        public Vector3 velocity = Vector3.zero;
-        public Vector3 acceleration=Vector3.zero;
-        public Vector3 _lastVelocity=Vector3.zero;
-        //angle random walk (ARW) in degrees/sqrt(Hr)
-        public float angleRandWalk = 0.0f; 
-        //error rate based off sensor
-        public float errorRate = 0.1f;
+        public float Offset
+        {
+            get => _offset;
+            set => _offset = value;
+        }
+
+        public float ErrorRate
+        {
+            get => _errorRate;
+            set => _errorRate = value;
+        }
+
+        public Vector3 ErrorAcc
+        {
+            get => _errorAcc;
+            set => _errorAcc = value;
+        }
+
+        public Vector3 Acceleration
+        {
+            get => _acceleration;
+            set => _acceleration = value;
+        }
+
+        public float SamplingRate
+        {
+            get => _samplingRate;
+            set => _samplingRate = value;
+        }
+
+        #endregion
+
+
         // Start is called before the first frame update
         void Start()
         {
+            _samplingRate = 500f;
+            _errorAcc = Vector3.zero;
+            _lastPositon = Vector3.zero;
+            _offset = 0.0f;
+            _velocity = Vector3.zero;
+            _acceleration = Vector3.zero;
+            _lastVelocity = Vector3.zero;
+            //angle random walk (ARW) in degrees/sqrt(Hr)
+            _angleRandWalk = 0.0f;
+            //error rate based off sensor
+            _errorRate = 0.1f;
+            _angleRandWalk = 0.0f;
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        private void FixedUpdate()
         {
-
-            calculateSpeed();
-            calculateAcceleration();
+            StartCoroutine(nameof(OnCalc));
         }
 
-        public float calculateSpeed()
-        {
-            Vector3 pos = transform.position;
-            Vector3 difference = (pos - _lastPositon) / Time.deltaTime;
-            _time = Time.deltaTime;
-            velocity = difference;
-            _speed = difference[2];
-            _lastPositon = pos;
-            _speedKmH = _speed * 3.6;
-            addError();
-            return _speed + _offset; // multiply by random for error calculation 
-        }
 
-        public void addError()
-        {
-            //simulate random errors based off data sheet;
-            // using a third of the percentage error so as standard deviation so most values will be in +- errorRate %
-                _speed = calculateErrorGuassian(_speed, (float)(errorRate/(100 * 3) * _speed));
-            }
-
-        public void calculateAcceleration()
+        private void calculateAcceleration()
             // Calculate = a = ^V/^T
-        { 
+        {
+            var pos = transform.position;
+            _velocity = (pos - _lastPositon) / Time.deltaTime;
+            _lastPositon = pos;
             //GetComponent<Rigidbody>().
-            acceleration.x = (velocity.x - _lastVelocity.x) / Time.deltaTime;
-            acceleration.z=(velocity.z - _lastVelocity.z) / Time.deltaTime;
-            _lastVelocity = velocity;
+            _acceleration.x = (_velocity.x - _lastVelocity.x) / Time.deltaTime;
+            _acceleration.z = (_velocity.z - _lastVelocity.z) / Time.deltaTime;
+            _lastVelocity = _velocity;
             calculateError();
-            acceleration = errorAcc;
+            _acceleration = _errorAcc;
         }
 
-        public void calculateError()
+        private void calculateError()
         {
             //Think About how to make this better 
-            
-            errorAcc.x = calculateErrorGuassian(acceleration.x, (float)(Math.Sqrt(0.03 * acceleration.x)));
+
+            _errorAcc.x = calculateErrorGuassian(_acceleration.x, (float)(Math.Sqrt(0.03 * _acceleration.x)));
             // errorAcc.y = calculateErrorGuassian(acceleration[1], (float)(Math.Sqrt(0.03 * acceleration[1])));
-            errorAcc.z = calculateErrorGuassian(acceleration.z, (float)(Math.Sqrt(0.03 * acceleration.z)));
-        }		
-        public float calculateErrorGuassian(float mean, float stddev)
+            _errorAcc.z = calculateErrorGuassian(_acceleration.z, (float)(Math.Sqrt(0.03 * _acceleration.z)));
+        }
+
+        private float calculateErrorGuassian(float mean, float stddev)
         {
             System.Random random = new System.Random();
             // The method requires sampling from a uniform random of (0,1]
@@ -88,6 +124,12 @@ namespace Car.imu
             return y1 * stddev + mean;
         }
 
-        
+        private void OnCalc()
+        {
+            var now = DateTime.Now;
+            if ((now - _last).TotalSeconds < 1f / _samplingRate) return;
+            _last = now;
+            calculateAcceleration();
+        }
     }
 }

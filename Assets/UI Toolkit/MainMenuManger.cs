@@ -55,6 +55,8 @@ public class MainMenuManger : MonoBehaviour
         var mode = (DrivingMode)radioButtonGroupMode.value;
 
         var output = string.Format("lidar: {0}, camera {1}, drivingMode: {2}", lidarFrequency, cameraFrequency, mode);
+
+
     }
 
     private void ChangeTrack()
@@ -65,8 +67,7 @@ public class MainMenuManger : MonoBehaviour
     private void ResetCar()
     {
         //Work on this (if autonomous or Keyboard)
-        // car.GetComponent<CarController>().ResetCar();
-        // car.GetComponent<CarInputController>().ResetCar();
+        car.GetComponent<CarController>().ResetCar();
     }
 
 
@@ -94,9 +95,7 @@ public class MainMenuManger : MonoBehaviour
             trackManager.SetTrack(switchtrack.options[value].text);
         });
     }
-  
-  
-
+    
     /// <summary>
     /// A Method for assigning all the Buttons of the UI Elements
     /// </summary>
@@ -105,10 +104,8 @@ public class MainMenuManger : MonoBehaviour
         resetCarButton = rootVisualElement.Q<Button>("ButtonResetCar");
         changeTrackButton = rootVisualElement.Q<Button>("ButtonSwitchTrack");
         updateSettingsButton = rootVisualElement.Q<Button>("ButtonUpdateSettings");
-
         frequencyLidarTextField = rootVisualElement.Q<TextField>("FrequencyLidar");
         frequencyCameraTextField = rootVisualElement.Q<TextField>("FrequencyCamera");
-
         radioButtonGroupMode = rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroupMode");
     }
 

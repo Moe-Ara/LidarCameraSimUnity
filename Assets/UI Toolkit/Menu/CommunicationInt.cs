@@ -87,12 +87,12 @@ namespace DefaultNamespace
         {
             mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
             speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2).ToString("0.00") + " km/h");
-            GSSXInput.text = Math.Round(_gssController.velocity.x, 2).ToString("0.00");
-            GSSYInput.text = Math.Round(_gssController.velocity.y, 2).ToString("0.00");
-            GSSZInput.text = Math.Round(_gssController.velocity.z, 2).ToString("0.00");
-            IMUXInput.text = Math.Round(_imuController.acceleration.x, 2).ToString("0.00");
-            IMUYInput.text = Math.Round(_imuController.acceleration.y, 2).ToString("0.00");
-            IMUZInput.text = Math.Round(_imuController.acceleration.z, 2).ToString("0.00");
+            GSSXInput.text = Math.Round(_gssController.Velocity.x, 2).ToString("0.00");
+            GSSYInput.text = Math.Round(_gssController.Velocity.y, 2).ToString("0.00");
+            GSSZInput.text = Math.Round(_gssController.Velocity.z, 2).ToString("0.00");
+            IMUXInput.text = Math.Round(_imuController.Acceleration.x, 2).ToString("0.00");
+            IMUYInput.text = Math.Round(_imuController.Acceleration.y, 2).ToString("0.00");
+            IMUZInput.text = Math.Round(_imuController.Acceleration.z, 2).ToString("0.00");
             /*GSS.SetText(string.Format("GSS x: {0} y: {1} z: {2}", Math.Round(_gssController.velocity.x, 2),
                 Math.Round(_gssController.velocity.y, 2), Math.Round(_gssController.velocity.z, 2)));
             IMU.SetText(string.Format("IMU  x: {0} y: {1} z: {2}", Math.Round(_imuController.acceleration.x, 2),
@@ -155,19 +155,19 @@ namespace DefaultNamespace
             if (GSSErrorInput.text != null)
             {
                 _GSSError = float.Parse(GSSErrorInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSError - _gssController._error) > 0.0001)
+                if (Math.Abs(_GSSError - _gssController.ErrorRate) > 0.0001)
                 {
-                    _gssController._error = (float)_GSSError;
-                    GSSErrorInput.text = _gssController._error.ToString("0.00");
+                    _gssController.ErrorRate = (float)_GSSError;
+                    GSSErrorInput.text = _gssController.ErrorRate.ToString("0.00");
                 }
             }
             if (GSSSamplingInput.text != null)
             {
                 _GSSSampling = float.Parse(GSSSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_GSSSampling - _gssController.samplingRate) > 0.0001) 
+                if (Math.Abs(_GSSSampling - _gssController.SamplingRate) > 0.0001) 
                 {                
-                    _gssController.samplingRate = (float)_GSSSampling;
-                    GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00");
+                    _gssController.SamplingRate = (float)_GSSSampling;
+                    GSSSamplingInput.text = _gssController.SamplingRate.ToString("0.00");
                 }
             }
             if (IMUOffsetInput.text != null)
@@ -183,23 +183,23 @@ namespace DefaultNamespace
             if (IMUErrorInput.text != null)
             {
                 _IMUError = float.Parse(IMUOffsetInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_IMUError - _imuController._error) > 0.0001)
+                if (Math.Abs(_IMUError - _imuController.ErrorRate) > 0.0001)
                 {
-                    _imuController._error = (float)_IMUError;
-                    IMUErrorInput.text = _imuController._error.ToString("0.00");
+                    _imuController.ErrorRate = (float)_IMUError;
+                    IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
                 }
             }
-            /* missing IMUSampling 
+            // missing IMUSampling 
             if (IMUSamplingInput.text != null)
             {
                 _IMUSampling = float.Parse(IMUSamplingInput.text, CultureInfo.InvariantCulture.NumberFormat);
-                if (Math.Abs(_IMUSampling - _imuController.IMUSampling) > 0.0001) 
+                if (Math.Abs(_IMUSampling - _imuController.SamplingRate) > 0.0001) 
                 {                
-                    _imuController.IMUSampling = (float)_IMUSampling;
-                    IMUSamplingInput.text = _imuController.IMUSampling.ToString("0.00");
+                    _imuController.SamplingRate = (float)_IMUSampling;
+                    IMUSamplingInput.text = _imuController.SamplingRate.ToString("0.00");
                 }
             }
-            */
+            
         }
 
         public void CloseInput()
@@ -216,18 +216,16 @@ namespace DefaultNamespace
             */
             _GSSOffset = _gssController.GSSoffset;
             GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
-            _GSSError = _gssController._error;
-            GSSErrorInput.text = _gssController._error.ToString("0.00");
-            _GSSSampling = _gssController.samplingRate;
-            GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00");
+            _GSSError = _gssController.ErrorRate;
+            GSSErrorInput.text = _gssController.ErrorRate.ToString("0.00");
+            _GSSSampling = _gssController.SamplingRate;
+            GSSSamplingInput.text = _gssController.SamplingRate.ToString("0.00");
             _IMUOffset = _imuController.IMUOffset;
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
-            _IMUError = _imuController._error;
-            IMUErrorInput.text = _imuController._error.ToString("0.00");
-            /* missing IMUSampling
-            _IMUSampling = _cameraController.IMUSampling;
-            IMUSamplingInput.text = _cameraController.IMUSampling.ToString("0.00");
-            */
+            _IMUError = _imuController.ErrorRate;
+            IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
+            _IMUSampling = _imuController.SamplingRate;
+            IMUSamplingInput.text = _imuController.SamplingRate.ToString("0.00");
         }
 
         public void UpdateInfo()
@@ -261,29 +259,29 @@ namespace DefaultNamespace
             _cameraHz = _cameraController.Hz;
             // missing friction initialization
             _GSSOffset = _gssController.GSSoffset;
-            _GSSError = _gssController._error;
-            _GSSSampling = _gssController.samplingRate;
+            _GSSError = _gssController.ErrorRate;
+            _GSSSampling = _gssController.SamplingRate;
             _IMUOffset = _imuController.IMUOffset;
-            _IMUError = _imuController._error;
+            _IMUError = _imuController.ErrorRate;
             // missing IMUSampling initialization
             massInput.text = _carRigidBody.mass.ToString("0.00");
             lidarInput.text = _lidarController.Hz.ToString("0.00");
             cameraInput.text = _cameraController.Hz.ToString("0.00");
             frictionInput.text = "0"; // missing friction declaration
             GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
-            GSSErrorInput.text = _gssController._error.ToString("0.00");
-            GSSSamplingInput.text = _gssController.samplingRate.ToString("0.00"); 
+            GSSErrorInput.text = _gssController.ErrorRate.ToString("0.00");
+            GSSSamplingInput.text = _gssController.SamplingRate.ToString("0.00"); 
             IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
-            IMUErrorInput.text = _imuController._error.ToString("0.00");
+            IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
             IMUSamplingInput.text = "0"; // missing IMUSampling declaration
             ASConnection.SetText("Autonomous system: ");
         }
 
         void Update()
         {
-            _Velocity = _gssController.velocity;
+            _Velocity = _gssController.Velocity;
             _Speed = _gssController.Speed;
-            _AccelerationVector = _imuController.acceleration;
+            _AccelerationVector = _imuController.Acceleration;
             _Acceleration = _AccelerationVector.magnitude;
             Display();
             UpdateInfo();
