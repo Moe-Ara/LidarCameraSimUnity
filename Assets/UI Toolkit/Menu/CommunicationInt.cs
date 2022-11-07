@@ -13,6 +13,7 @@ using Vector3 = UnityEngine.Vector3;
 using TMPro;
 using System.Globalization;
 using System.Threading;
+using Car;
 
 namespace DefaultNamespace
 {
@@ -27,6 +28,7 @@ namespace DefaultNamespace
         private Imu_Controller _imuController;
         private CarCameraController _cameraController;
         private LidarController _lidarController;
+        private PIDController _pidController;
 
         #endregion
 
@@ -37,6 +39,7 @@ namespace DefaultNamespace
         [SerializeField] private GameObject camera;
         [SerializeField] private GameObject imu;
         [SerializeField] private GameObject gss;
+        [SerializeField] private Camera _outSideCamera;
         [SerializeField] public TextMeshProUGUI mass;
         [SerializeField] public TextMeshProUGUI speed;
         //[SerializeField] public TextMeshProUGUI GSS;
@@ -58,6 +61,7 @@ namespace DefaultNamespace
         [SerializeField] public TMP_InputField IMUErrorInput;
         [SerializeField] public TMP_InputField IMUSamplingInput;
         [SerializeField] public TextMeshProUGUI ASConnection;
+        [SerializeField] public TextMeshProUGUI FPSInfo;
 
         #endregion
 
@@ -83,7 +87,7 @@ namespace DefaultNamespace
         private float _IMUSampling;
         #endregion
 
-        void Display()
+        private void Display()
         {
             mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
             speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2).ToString("0.00") + " km/h");
@@ -232,7 +236,7 @@ namespace DefaultNamespace
         {
             if (isASConnected == true)
             {
-                ASConnection.SetText("Autonomous system: connected");
+                ASConnection.SetText("Autonomous system:\nconnected");
                 ASConnection.color = Color.green;
             }
             else
@@ -240,10 +244,13 @@ namespace DefaultNamespace
                 ASConnection.SetText("Autonomous system:\nnot connected");
                 ASConnection.color = Color.red;
             }
+            
+            FPSInfo.SetText("FPS: "+ _outSideCamera.GetComponent<FPSOnGUIText>().FPS.ToString("0"));
         }
 
         private void Start()
         {
+            _pidController = car.GetComponent<PIDController>();
             _lidarController = lidar.GetComponent
                 <LidarController>();
             _cameraController = car.GetComponent
@@ -276,6 +283,7 @@ namespace DefaultNamespace
             IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
             IMUSamplingInput.text = "0"; // missing IMUSampling declaration
             ASConnection.SetText("Autonomous system: ");
+            
         }
 
         void Update()

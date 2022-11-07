@@ -15,6 +15,12 @@ public class FPSOnGUIText : MonoBehaviour
     private float fps = 15.0f;             //��ǰ֡ Current FPS
     private float lastSample;
 
+    public float FPS
+    {
+        get => fps;
+        set => fps = value;
+    }
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject); //�����ٴ���Ϸ�������ĸ�������������ʾ��������Ҫ��ע��
@@ -40,16 +46,16 @@ public class FPSOnGUIText : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        GUIStyle style = new GUIStyle
-        {
-            border = new RectOffset(10, 10, 10, 10),
-            fontSize = 50,
-            fontStyle = FontStyle.BoldAndItalic,
-        };
-        //�Զ����� ���߶ȴ�С ��ɫ��style
-        GUI.Label(new Rect(Screen.width / 2 + 620, Screen.height - 1000, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + " s </size></color>", style);
-    }
+    // void OnGUI()
+    // {
+    //     GUIStyle style = new GUIStyle
+    //     {
+    //         border = new RectOffset(10, 10, 10, 10),
+    //         fontSize = 50,
+    //         fontStyle = FontStyle.BoldAndItalic,
+    //     };
+    //     //�Զ����� ���߶ȴ�С ��ɫ��style
+    //     GUI.Label(new Rect(Screen.width / 2 + 620, Screen.height - 1000, 200, 200), "<color=#FFFFFF><size=30>" + "FPS:" + fps.ToString("f2") + " s </size></color>", style);
+    // }
 }
 

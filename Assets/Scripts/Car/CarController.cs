@@ -136,8 +136,6 @@ namespace Car
             // Autonomous system moves the car
             if (control.speed_target != 0f)
             {
-                rearLeftCollider.brakeTorque = 0;
-                rearRightCollider.brakeTorque = 0;
                 // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
                 rearLeftCollider.motorTorque =_pidOutput*50;
                 rearRightCollider.motorTorque =_pidOutput*50;
