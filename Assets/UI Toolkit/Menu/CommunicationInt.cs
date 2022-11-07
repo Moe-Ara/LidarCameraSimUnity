@@ -264,6 +264,7 @@ namespace DefaultNamespace
             _IMUOffset = _imuController.IMUOffset;
             _IMUError = _imuController.ErrorRate;
             // missing IMUSampling initialization
+            _IMUSampling = _imuController.SamplingRate;
             massInput.text = _carRigidBody.mass.ToString("0.00");
             lidarInput.text = _lidarController.Hz.ToString("0.00");
             cameraInput.text = _cameraController.Hz.ToString("0.00");
@@ -280,7 +281,7 @@ namespace DefaultNamespace
         void Update()
         {
             _Velocity = _gssController.Velocity;
-            _Speed = _gssController.Speed;
+            _Speed = _gssController.SpeedKmH;
             _AccelerationVector = _imuController.Acceleration;
             _Acceleration = _AccelerationVector.magnitude;
             Display();

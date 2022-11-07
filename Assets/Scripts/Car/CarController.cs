@@ -18,8 +18,10 @@ namespace Car
         }
 
         #endregion
+
+        // private bool _breaking;
         private Vector2 _moveDirection;
-        private bool _automated = false;
+        private bool _automated = true;
         private ControlResultMessage _control;
         private PIDController _pidController;
         private float _pidOutput;
@@ -59,7 +61,6 @@ namespace Car
             _pidOutput = 0f;
             _control = new ControlResultMessage();
             _pidController = gameObject.GetComponent<PIDController>();
-            
         }
 
         // public GameManager manager;
@@ -73,7 +74,6 @@ namespace Car
             // Calculate the velocity
             _velocity = _gssController.Velocity;
             _currentSpeed = _gssController.Speed;
-            Debug.Log(_currentSpeed.ToString());
             // Calculate the angular velocity
             var lastRot = _rot;
             _rot = trans.rotation.eulerAngles;
@@ -87,6 +87,7 @@ namespace Car
             };
             OnNewCarState?.Invoke(carState);
             _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            // Debug.Log(_control.speed_target.ToString());
             if(_automated)
                 Acceleration(_control);
             else
@@ -170,7 +171,7 @@ namespace Car
         private void Declaration()
         {
             var deceletaionForce =
-                1f; // change this if you want the car to decelerate faster; the higher the force the faster the declaration
+                10f; // change this if you want the car to decelerate faster; the higher the force the faster the declaration
             rearLeftCollider.brakeTorque = deceletaionForce * 50;
             rearRightCollider.brakeTorque = deceletaionForce * 50;
         }
@@ -193,6 +194,5 @@ namespace Car
             if(!_automated)
                 _moveDirection = context.ReadValue<Vector2>() * new Vector2(1, 10);
         }
-
     }
 }

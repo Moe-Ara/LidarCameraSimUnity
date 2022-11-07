@@ -9,7 +9,7 @@ namespace Car.gss
 {
     public class GssController : MonoBehaviour
     {
-
+        public GameObject car;
         #region Attributes
         private Vector3 _lastPositon;
         [SerializeField]
@@ -68,7 +68,7 @@ namespace Car.gss
         {
             _lastPositon = Vector3.zero;
             _velocity= Vector3.zero;
-            _errorRate = 0.2f;
+            _errorRate = 0.2f; // in percent
             _samplingRate = 500f;
             _speed = 0.0f;
             _speedKmH = 0;
@@ -83,23 +83,17 @@ namespace Car.gss
 
         private void calculateSpeed()
         {
-            Vector3 pos = transform.position;
+            var position = transform.position;
             //should update to 1/samplingRate 
-            _velocity = (pos - _lastPositon) / Time.deltaTime;
-            _speed = _velocity[2];
-            _lastPositon = pos;
+            _velocity = (position - _lastPositon) / Time.deltaTime;
+            _speed = _velocity.magnitude;
+            _lastPositon = position;
             _speedKmH = Math.Round(Math.Abs(_speed * 3.6), 3);
-            addError();
+            if (_speed != 0) 
+                _speed=calculateErrorGuassian(_speed, (float)(_errorRate / (100 * 3) * _speed)) * _speed;
             _speed = (float)Math.Round(Math.Abs(_speed + _offset), 3); // multiply by random for error calculation 
         }
-
-        private void addError()
-        {
-            //simulate random errors based off data sheet;
-            // using a third of the percentage error so as standard deviation so most values will be in +- errorRate %
-            _speed = calculateErrorGuassian(_speed, (float)(_errorRate / (100 * 3) * _speed));
-        }
-
+        
         private float calculateErrorGuassian(float mean, float stddev)
         {
             System.Random random = new System.Random();
@@ -108,7 +102,8 @@ namespace Car.gss
             var x1 = 1 - (float)random.NextDouble();
             var x2 = 1 - (float)random.NextDouble();
             var y1 = (float)(Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2));
-            return y1 * stddev + mean;
+            // Debug.Log(mean / (y1 * stddev + mean));
+            return (y1 * stddev + mean) / mean;
         }
 
         private void OnCalc()
