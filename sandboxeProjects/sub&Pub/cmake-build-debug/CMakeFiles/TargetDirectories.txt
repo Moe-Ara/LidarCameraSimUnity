@@ -1,3 +1,0 @@
-/home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug/CMakeFiles/sub_Pub.dir
-/home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mhd/UnityProjects/LidarCameraSimUnity/sandboxeProjects/sub&Pub/cmake-build-debug/CMakeFiles/rebuild_cache.dir

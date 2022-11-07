@@ -10,8 +10,8 @@
 #include <functional>
 #include "opencv2/opencv.hpp"
 
-#define PORT 42000
-#define IP_ADDRESS "127.0.0.1"
+//#define PORT 42000
+//#define IP_ADDRESS "127.0.0.1"
 #define PIC_WIDTH 1024
 #define PIC_HEIGHT 640
 
