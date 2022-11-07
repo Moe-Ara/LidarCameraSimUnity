@@ -19,7 +19,7 @@ namespace Car
 
         #endregion
 
-        // private bool _breaking;
+        private bool _breaking;
         private Vector2 _moveDirection;
         private bool _automated = true;
         private ControlResultMessage _control;
@@ -101,7 +101,6 @@ namespace Car
         public void ApplyControlResult(ControlResultMessage control)
         {
             _control = control;
-            //steering
             if (!_automated) return;
 
         }
@@ -112,7 +111,7 @@ namespace Car
         /// <param name="wheelCollider">The wheel collider</param>
         /// <param name="wheelTransform">The visuals of the wheel</param>
         /// <param name="steeringAngle">The steering angle</param>
-        private void SetFrontWheelAngle(WheelCollider wheelCollider, Transform wheelTransform,
+        private void UpdateWheelsVisually(WheelCollider wheelCollider, Transform wheelTransform,
             float steeringAngle)
         {
             wheelCollider.GetWorldPose(out var pos,out var wheelColliderRotation);
@@ -128,38 +127,69 @@ namespace Car
         /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Acceleration(ControlResultMessage control)
         {
-            SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
-            SetFrontWheelAngle(frontRightCollider, frontRightWheel, control.steering_angle_target);
-            SetFrontWheelAngle(rearRightCollider, rearRightWheel, 0);
-            SetFrontWheelAngle(rearLeftCollider, rearLeftWheel, 0);
-
-            // Autonomous system moves the car
-            if (control.speed_target != 0f)
+            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
+            UpdateWheelsVisually(frontRightCollider, frontRightWheel, control.steering_angle_target);
+            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
+            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
+            //steering
+            frontLeftCollider.steerAngle = _control.steering_angle_target;
+            frontRightCollider.steerAngle = _control.steering_angle_target;
+            if (_breaking)
             {
-                // rearLeftCollider.motorTorque = control.motor_moment_target * 50;
-                rearLeftCollider.motorTorque =_pidOutput*50;
-                rearRightCollider.motorTorque =_pidOutput*50;
+                brake();
             }
             else
             {
-                Declaration();
+                // Autonomous system moves the car
+                if (control.speed_target != 0f)
+                {   
+                    rearRightCollider.brakeTorque = 0;
+                    rearLeftCollider.brakeTorque = 0;
+                    rearLeftCollider.motorTorque =_pidOutput*50;
+                    rearRightCollider.motorTorque =_pidOutput*50;
+                    
+                }
+                else
+                {
+                    Declaration();
+                }
             }
         }
 
         private void MoveCarUsingInput()
         {
-            rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
-            rearRightCollider.motorTorque = 10.0f * _moveDirection.y;
-            // Move using Wheel Collider
-            // rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
-            // rearRightCollider.motorTorque = 10.0f * _moveDirection.y;
+            //steering visually
+            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, frontLeftCollider.steerAngle);
+            UpdateWheelsVisually(frontRightCollider, frontRightWheel, frontRightCollider.steerAngle);
+            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
+            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
+            
+            
+            //steering
             frontLeftCollider.steerAngle = 35.0f * _moveDirection.x;
             frontRightCollider.steerAngle = 35.0f * _moveDirection.x;
-            //steering visually
-            SetFrontWheelAngle(frontLeftCollider, frontLeftWheel, frontLeftCollider.steerAngle);
-            SetFrontWheelAngle(frontRightCollider, frontRightWheel, frontRightCollider.steerAngle);
-            SetFrontWheelAngle(rearRightCollider, rearRightWheel, 0);
-            SetFrontWheelAngle(rearLeftCollider, rearLeftWheel, 0);
+            //breaking
+            if (_breaking)
+            {
+                brake();
+            }
+            else             //Not breaking
+            {
+                //stop breaking
+                if (rearLeftCollider.brakeTorque > 0 || rearRightCollider.brakeTorque > 0)
+                {
+                    rearLeftCollider.brakeTorque = 0;
+                    rearRightCollider.brakeTorque = 0;
+                
+                }
+
+                //move forward
+                rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
+                rearRightCollider.motorTorque = 10.0f * _moveDirection.y; 
+            }
+
+
+
         }
 
         /// <summary>
@@ -191,6 +221,19 @@ namespace Car
         {
             if(!_automated)
                 _moveDirection = context.ReadValue<Vector2>() * new Vector2(1, 10);
+        }
+
+        public void onBrake(InputAction.CallbackContext context)
+        {
+            _breaking =context.ReadValueAsButton();
+            
+        }
+
+        private void brake()
+        {
+            const int brakeTorque = 100;
+            rearLeftCollider.brakeTorque = brakeTorque * 50;
+            rearRightCollider.brakeTorque = brakeTorque * 50;
         }
     }
 }
