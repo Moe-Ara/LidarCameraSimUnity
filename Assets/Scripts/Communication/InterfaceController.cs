@@ -90,6 +90,8 @@ namespace Communication
         /// </summary>
         private void FixedUpdate()
         {                
+            //gui
+            DefaultNamespace.CommunicationInt.isASConnected = _controlTargetSubscriber.isConnected;
 
             lock (_mainThreadQueue)
             {

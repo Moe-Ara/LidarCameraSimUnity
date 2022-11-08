@@ -19,6 +19,8 @@ namespace Communication
         /// </summary>
         private Socket _clientSocket;
 
+        public bool isConnected => _clientSocket.Connected;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -42,7 +44,6 @@ namespace Communication
                     // Connect with the server      
                     _clientSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
                     _clientSocket.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), port));
-
                     // Handle incoming data
                     while (_running)
                     {
@@ -62,10 +63,13 @@ namespace Communication
                         }
                         // Start subscriber routines
                         if (dataSize > 0) callback(data);
+
                     }
                 }
                 catch (Exception)
                 {
+                    //gui
+                    DefaultNamespace.CommunicationInt.isASConnected = false;
                     // Try again in 1s
                     Thread.Sleep(1000);
                 }
@@ -76,6 +80,7 @@ namespace Communication
         /// </summary>
         public void Stop()
         {
+            DefaultNamespace.CommunicationInt.isASConnected = false;
             _running = false;
             try
             {

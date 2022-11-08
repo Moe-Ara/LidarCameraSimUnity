@@ -19,7 +19,7 @@ namespace Car
 
         #endregion
 
-        private bool _breaking;
+        private bool _braking;
         private Vector2 _moveDirection;
         private bool _automated = true;
         private ControlResultMessage _control;
@@ -69,7 +69,6 @@ namespace Car
         /// </summary>
         private void FixedUpdate()
         {
-            Debug.Log((Mathf.Rad2Deg*0.5).ToString());
             var trans = transform;
             
             // Calculate the velocity
@@ -131,20 +130,12 @@ namespace Car
             var steeringAngleInDegrees = control.steering_angle_target * Mathf.Rad2Deg;
 
             //steering
-
             frontLeftCollider.steerAngle = steeringAngleInDegrees;
             frontRightCollider.steerAngle = steeringAngleInDegrees;
-            if (_breaking)
-            {
-                brake();
-            }
-            else
-            {
-                // Autonomous system moves the car
+            // Autonomous system moves the car
                 if (control.speed_target != 0f)
                 {   
-                    rearRightCollider.brakeTorque = 0;
-                    rearLeftCollider.brakeTorque = 0;
+                    resetBrakes();
                     rearLeftCollider.motorTorque =_pidOutput*50;
                     rearRightCollider.motorTorque =_pidOutput*50;
                     
@@ -153,8 +144,7 @@ namespace Car
                 {
                     Declaration();
                 }
-            }
-            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, steeringAngleInDegrees);
+                UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, steeringAngleInDegrees);
             UpdateWheelsVisually(frontRightCollider, frontRightWheel, steeringAngleInDegrees);
             UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
             UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
@@ -167,20 +157,13 @@ namespace Car
             frontRightCollider.steerAngle = 35.0f * _moveDirection.x;
 
             //breaking
-            if (_breaking)
+            if (_braking)
             {
                 brake();
             }
             else             //Not breaking
             {
-                //stop breaking
-                if (rearLeftCollider.brakeTorque > 0 || rearRightCollider.brakeTorque > 0)
-                {
-                    rearLeftCollider.brakeTorque = 0;
-                    rearRightCollider.brakeTorque = 0;
-                
-                }
-
+                resetBrakes();
                 //move forward
                 rearLeftCollider.motorTorque = 10.0f * _moveDirection.y;
                 rearRightCollider.motorTorque = 10.0f * _moveDirection.y; 
@@ -227,15 +210,25 @@ namespace Car
 
         public void onBrake(InputAction.CallbackContext context)
         {
-            _breaking =context.ReadValueAsButton();
+            _braking =context.ReadValueAsButton();
             
         }
 
         private void brake()
         {
-            const int brakeTorque = 100;
+            const int brakeTorque = 1000;
             rearLeftCollider.brakeTorque = brakeTorque * 50;
             rearRightCollider.brakeTorque = brakeTorque * 50;
+            frontLeftCollider.brakeTorque = brakeTorque * 50;
+            frontRightCollider.brakeTorque = brakeTorque * 50;
+        }
+
+        private void resetBrakes()
+        {
+            rearLeftCollider.brakeTorque = 0;
+            rearRightCollider.brakeTorque = 0;
+            frontLeftCollider.brakeTorque = 0;
+            frontRightCollider.brakeTorque = 0;
         }
     }
 }

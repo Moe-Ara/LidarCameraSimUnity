@@ -17,9 +17,10 @@ using Car;
 
 namespace DefaultNamespace
 {
+       
     public class CommunicationInt : MonoBehaviour
     {
-        private bool isASConnected;
+        public static bool isASConnected; 
         
         #region objects
 
@@ -127,7 +128,7 @@ namespace DefaultNamespace
             
         }
 
-        void Update()
+        private void LateUpdate()
         {
             _Velocity = _gssController.Velocity;
             _Speed = _gssController.SpeedKmH;
