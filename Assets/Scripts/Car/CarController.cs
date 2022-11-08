@@ -136,8 +136,8 @@ namespace Car
                 if (control.speed_target != 0f)
                 {   
                     resetBrakes();
-                    rearLeftCollider.motorTorque =1;
-                    rearRightCollider.motorTorque =1;
+                    rearLeftCollider.motorTorque =_pidOutput;
+                    rearRightCollider.motorTorque =_pidOutput;
                     
                 }
                 else

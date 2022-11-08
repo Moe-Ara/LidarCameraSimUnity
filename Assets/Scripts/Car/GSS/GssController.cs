@@ -69,7 +69,7 @@ namespace Car.gss
             _lastPositon = Vector3.zero;
             _velocity= Vector3.zero;
             _errorRate = 0.2f; // in percent
-            _samplingRate = 500f;
+            _samplingRate = 5000000f;
             _speed = 0.0f;
             _speedKmH = 0;
             _offset = 0.0f;
@@ -108,9 +108,9 @@ namespace Car.gss
 
         private void OnCalc()
         {
-            var now = DateTime.Now;
-            if ((now - _last).TotalSeconds < 1f / _samplingRate) return;
-            _last = now;
+            // var now = DateTime.Now;
+            // if ((now - _last).TotalSeconds < 1f / _samplingRate) return;
+            // _last = now;
             calculateSpeed();
         }
     }

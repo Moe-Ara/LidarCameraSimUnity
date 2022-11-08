@@ -68,7 +68,7 @@ namespace DefaultNamespace
 
         //car rigid body to get mass
         private Rigidbody _carRigidBody;
-
+        private DateTime _last;
         #region Variables
         private Vector3 _Velocity;
         private double _Speed;
@@ -130,17 +130,22 @@ namespace DefaultNamespace
 
         private void LateUpdate()
         {
+            UpdateInfo();
+            //wait a bit before getting and displaying variables
+            var now = DateTime.Now;
+            if ((now - _last).TotalSeconds < 1f / 5) return;
+            _last = now;
             _Velocity = _gssController.Velocity;
             _Speed = _gssController.SpeedKmH;
             _AccelerationVector = _imuController.Acceleration;
             _Acceleration = _AccelerationVector.magnitude;
             Display();
-            UpdateInfo();
+
         }
         private void Display()
         {
             mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
-            speed.SetText($"speed  " + Math.Round(_gssController.Speed, 2).ToString("0.00") + " km/h");
+            speed.SetText($"speed  " + Math.Round(_Speed, 2).ToString("0.00") + " km/h");
             GSSXInput.text = Math.Round(_gssController.Velocity.x, 2).ToString("0.00");
             GSSYInput.text = Math.Round(_gssController.Velocity.y, 2).ToString("0.00");
             GSSZInput.text = Math.Round(_gssController.Velocity.z, 2).ToString("0.00");
