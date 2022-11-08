@@ -127,7 +127,7 @@ namespace Car
         /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Acceleration(ControlResultMessage control)
         {
-            var steeringAngleInDegrees = control.steering_angle_target * Mathf.Rad2Deg;
+            var steeringAngleInDegrees = -control.steering_angle_target * Mathf.Rad2Deg;
 
             //steering
             frontLeftCollider.steerAngle = steeringAngleInDegrees;
@@ -136,8 +136,8 @@ namespace Car
                 if (control.speed_target != 0f)
                 {   
                     resetBrakes();
-                    rearLeftCollider.motorTorque =_pidOutput*50;
-                    rearRightCollider.motorTorque =_pidOutput*50;
+                    rearLeftCollider.motorTorque =1;
+                    rearRightCollider.motorTorque =1;
                     
                 }
                 else
