@@ -14,7 +14,7 @@ namespace Car
         //Sometimes you have to limit the total sum of all errors used in the I
         private float _errorMax = 20f;
 
-        public PIDController() : this(7, 5, 0.1f)
+        public PIDController() : this(1, 0.1f, 0.1f)
         {
             _errorLast = 0;
             _errorSum = 0;
@@ -22,13 +22,12 @@ namespace Car
         }
         public PIDController(float proportionalGain, float integralGain, float derivativeGain)
         {
-            // _proportionalGain = proportionalGain;
-            // _integralGain = integralGain;
-            // _derivativeGain = derivativeGain;
+            _proportionalGain = proportionalGain;
+            _integralGain = integralGain;
+            _derivativeGain = derivativeGain;
             _errorLast = 0;
             _errorSum = 0;
             _integrationStored = 0;
-
         }
 
         public float calcPID(float deltaTime, float currentValue, float targetValue)
@@ -53,7 +52,6 @@ namespace Car
         private static float AddValueToAverage(float oldAverage, float valueToAdd, float count)
         {
             var newAverage = ((oldAverage * count) + valueToAdd) / (count + 1f);
-
             return newAverage;
         }
         

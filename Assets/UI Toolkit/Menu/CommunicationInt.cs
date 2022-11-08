@@ -132,13 +132,13 @@ namespace DefaultNamespace
         {
             UpdateInfo();
             //wait a bit before getting and displaying variables
-            var now = DateTime.Now;
-            if ((now - _last).TotalSeconds < 1f / 5) return;
-            _last = now;
             _Velocity = _gssController.Velocity;
             _Speed = _gssController.SpeedKmH;
             _AccelerationVector = _imuController.Acceleration;
             _Acceleration = _AccelerationVector.magnitude;
+            var now = DateTime.Now;
+            if ((now - _last).TotalSeconds < 1f / 10) return;
+            _last = now;
             Display();
 
         }
