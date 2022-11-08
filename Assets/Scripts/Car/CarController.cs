@@ -69,6 +69,7 @@ namespace Car
         /// </summary>
         private void FixedUpdate()
         {
+            Debug.Log((Mathf.Rad2Deg*0.5).ToString());
             var trans = transform;
             
             // Calculate the velocity
@@ -127,13 +128,12 @@ namespace Car
         /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Acceleration(ControlResultMessage control)
         {
-            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, control.steering_angle_target);
-            UpdateWheelsVisually(frontRightCollider, frontRightWheel, control.steering_angle_target);
-            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
-            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
+            var steeringAngleInDegrees = control.steering_angle_target * Mathf.Rad2Deg;
+
             //steering
-            frontLeftCollider.steerAngle = _control.steering_angle_target;
-            frontRightCollider.steerAngle = _control.steering_angle_target;
+
+            frontLeftCollider.steerAngle = steeringAngleInDegrees;
+            frontRightCollider.steerAngle = steeringAngleInDegrees;
             if (_breaking)
             {
                 brake();
@@ -154,20 +154,18 @@ namespace Car
                     Declaration();
                 }
             }
+            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, steeringAngleInDegrees);
+            UpdateWheelsVisually(frontRightCollider, frontRightWheel, steeringAngleInDegrees);
+            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
+            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
         }
 
         private void MoveCarUsingInput()
         {
-            //steering visually
-            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, frontLeftCollider.steerAngle);
-            UpdateWheelsVisually(frontRightCollider, frontRightWheel, frontRightCollider.steerAngle);
-            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
-            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
-            
-            
             //steering
             frontLeftCollider.steerAngle = 35.0f * _moveDirection.x;
             frontRightCollider.steerAngle = 35.0f * _moveDirection.x;
+
             //breaking
             if (_breaking)
             {
@@ -188,7 +186,11 @@ namespace Car
                 rearRightCollider.motorTorque = 10.0f * _moveDirection.y; 
             }
 
-
+            //steering visually
+            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, frontLeftCollider.steerAngle);
+            UpdateWheelsVisually(frontRightCollider, frontRightWheel, frontRightCollider.steerAngle);
+            UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
+            UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
 
         }
 
