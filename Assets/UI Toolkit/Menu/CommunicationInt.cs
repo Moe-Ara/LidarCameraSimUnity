@@ -87,6 +87,55 @@ namespace DefaultNamespace
         private float _IMUSampling;
         #endregion
 
+        
+        
+         private void Start()
+        {
+            _pidController = car.GetComponent<PIDController>();
+            _lidarController = lidar.GetComponent
+                <LidarController>();
+            _cameraController = car.GetComponent
+                <CarCameraController>();
+            _gssController = gss.GetComponent
+                <GssController>();
+            _imuController = imu.GetComponent
+                <Imu_Controller>();
+            _carRigidBody = car.GetComponent
+                <Rigidbody>();
+            _Mass = _carRigidBody.mass;
+            _lidarHz = _lidarController.Hz;
+            _cameraHz = _cameraController.Hz;
+            // missing friction initialization
+            _GSSOffset = _gssController.GSSoffset;
+            _GSSError = _gssController.ErrorRate;
+            _GSSSampling = _gssController.SamplingRate;
+            _IMUOffset = _imuController.IMUOffset;
+            _IMUError = _imuController.ErrorRate;
+            // missing IMUSampling initialization
+            _IMUSampling = _imuController.SamplingRate;
+            massInput.text = _carRigidBody.mass.ToString("0.00");
+            lidarInput.text = _lidarController.Hz.ToString("0.00");
+            cameraInput.text = _cameraController.Hz.ToString("0.00");
+            frictionInput.text = "0"; // missing friction declaration
+            GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
+            GSSErrorInput.text = _gssController.ErrorRate.ToString("0.00");
+            GSSSamplingInput.text = _gssController.SamplingRate.ToString("0.00"); 
+            IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
+            IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
+            IMUSamplingInput.text = "0"; // missing IMUSampling declaration
+            ASConnection.SetText("Autonomous system: ");
+            
+        }
+
+        void Update()
+        {
+            _Velocity = _gssController.Velocity;
+            _Speed = _gssController.SpeedKmH;
+            _AccelerationVector = _imuController.Acceleration;
+            _Acceleration = _AccelerationVector.magnitude;
+            Display();
+            UpdateInfo();
+        }
         private void Display()
         {
             mass.SetText($"mass   " + _carRigidBody.mass.ToString("0.00") + " kg");
@@ -248,52 +297,6 @@ namespace DefaultNamespace
             FPSInfo.SetText("FPS: "+ _outSideCamera.GetComponent<FPSOnGUIText>().FPS.ToString("0"));
         }
 
-        private void Start()
-        {
-            _pidController = car.GetComponent<PIDController>();
-            _lidarController = lidar.GetComponent
-                <LidarController>();
-            _cameraController = car.GetComponent
-                <CarCameraController>();
-            _gssController = gss.GetComponent
-                <GssController>();
-            _imuController = imu.GetComponent
-                <Imu_Controller>();
-            _carRigidBody = car.GetComponent
-                <Rigidbody>();
-            _Mass = _carRigidBody.mass;
-            _lidarHz = _lidarController.Hz;
-            _cameraHz = _cameraController.Hz;
-            // missing friction initialization
-            _GSSOffset = _gssController.GSSoffset;
-            _GSSError = _gssController.ErrorRate;
-            _GSSSampling = _gssController.SamplingRate;
-            _IMUOffset = _imuController.IMUOffset;
-            _IMUError = _imuController.ErrorRate;
-            // missing IMUSampling initialization
-            _IMUSampling = _imuController.SamplingRate;
-            massInput.text = _carRigidBody.mass.ToString("0.00");
-            lidarInput.text = _lidarController.Hz.ToString("0.00");
-            cameraInput.text = _cameraController.Hz.ToString("0.00");
-            frictionInput.text = "0"; // missing friction declaration
-            GSSOffsetInput.text = _gssController.GSSoffset.ToString("0.00");
-            GSSErrorInput.text = _gssController.ErrorRate.ToString("0.00");
-            GSSSamplingInput.text = _gssController.SamplingRate.ToString("0.00"); 
-            IMUOffsetInput.text = _imuController.IMUOffset.ToString("0.00");
-            IMUErrorInput.text = _imuController.ErrorRate.ToString("0.00");
-            IMUSamplingInput.text = "0"; // missing IMUSampling declaration
-            ASConnection.SetText("Autonomous system: ");
-            
-        }
-
-        void Update()
-        {
-            _Velocity = _gssController.Velocity;
-            _Speed = _gssController.SpeedKmH;
-            _AccelerationVector = _imuController.Acceleration;
-            _Acceleration = _AccelerationVector.magnitude;
-            Display();
-            UpdateInfo();
-        }
+       
     }
 }
