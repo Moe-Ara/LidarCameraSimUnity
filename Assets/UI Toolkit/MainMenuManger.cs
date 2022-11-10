@@ -27,24 +27,56 @@ public class MainMenuManger : MonoBehaviour
     public  Dropdown switchtrack;
     private RadioButtonGroup radioButtonGroupMode;
     public GameObject changeTrackDocument;
-
+    private List<string> options;
 
     public void Start()
     {
-        addOptions();
+        addTracksToDropDown();
     }
 
-    private void addOptions()
+    private void LateUpdate()
     {
-     List<string> options = new List<string>(trackManager.Tracks.Count);;
-
-        foreach (var track in trackManager.Tracks)
+        //check if a new track was added
+        if (trackManager.Tracks.Count != options.Count)
         {
-            options.Add(track.name);
+            updateTracksDropDown();
         }
+    }
+
+    private void addTracksToDropDown()
+    {
+        options= new List<string>(trackManager.Tracks.Count);
+        options.AddRange(trackManager.Tracks.Select(track => track.name));
         switchtrack.ClearOptions();
         switchtrack.AddOptions(options);
         switchtrack.value = 0;
+    }
+
+    private void updateTracksDropDown()
+    {
+        //check again
+        if ((trackManager.Tracks.Count - options.Count) == 0) return;
+        
+        while (true)
+        {
+            var differenceInSizes = trackManager.Tracks.Count  - options.Count;
+            
+            switch (differenceInSizes)
+            {
+                //adding new tracks
+                case > 0:
+                    var track = trackManager.Tracks[^differenceInSizes].name;
+                    options.Add(track);
+                    switchtrack.AddOptions(new List<string> {track});
+                    continue;
+                //deleting tracks -> it has a runtime complexity of O(n), depending on the ClearOptions() method from switchtrack
+                case < 0:
+                    addTracksToDropDown();
+                    continue;
+            }
+
+            break;
+        }
     }
     private void UpdateSettings()
     {
@@ -110,22 +142,22 @@ public class MainMenuManger : MonoBehaviour
     }
 
 
-    public void SetFrequencyLidar(int freq)
+    private void SetFrequencyLidar(int freq)
     {
         frequencyLidarTextField.value = freq.ToString();
     }
 
-    public void SetFrequencyCamera(int freq)
+    private void SetFrequencyCamera(int freq)
     {
         frequencyCameraTextField.value = freq.ToString();
     }
 
-    public void SetDrivingMode(DrivingMode mode)
+    private void SetDrivingMode(DrivingMode mode)
     {
         radioButtonGroupMode.value = (int)mode;
     }
     
-    public enum DrivingMode
+    private enum DrivingMode
     {
         Auto,
         Keyboard,
