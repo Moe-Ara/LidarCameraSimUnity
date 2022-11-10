@@ -65,6 +65,7 @@ namespace Car.gss
         // Start is called before the first frame update
         private void Start()
         {
+            _last= DateTime.Now;
             _lastPositon = Vector3.zero;
             _velocity = Vector3.zero;
             _errorRate = 0.2f; // in percent
@@ -81,6 +82,9 @@ namespace Car.gss
             StartCoroutine(nameof(StartCalc));
         }
 
+        /// <summary>
+        /// Calculates the velocity and the speed in m/s and kmh. It also adds the error to our speed
+        /// </summary>
         private void calculateSpeed()
         {
             var position = transform.position;
@@ -98,7 +102,12 @@ namespace Car.gss
             //rounding the speed up to 3 decimal points
             _speed = (float)Math.Round(Math.Abs(_speed + _offset), 3);
         }
-
+        
+        /// <summary>
+        /// Helper method that calculates a random error based on an error rate
+        /// </summary>
+        /// <param name="mean">this is the mean of all speeds (we don't use a mean since it isn't really necessary for our case )</param>
+        /// <param name="standrad_deviation">the standard deviation</param>
         private float calculateErrorGuassian(float mean, float standrad_deviation)
         {
             var random = new System.Random();
@@ -109,7 +118,10 @@ namespace Car.gss
             var y1 = (float)(Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2));
             return (y1 * standrad_deviation + mean) / mean;
         }
-
+        
+        /// <summary>
+        /// Co-routine that starts the speed calculation
+        /// </summary>
         private void StartCalc()
         {
             //check if sampling rate feature is enabled

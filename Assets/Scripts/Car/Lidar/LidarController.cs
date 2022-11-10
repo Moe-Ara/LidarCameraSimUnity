@@ -93,6 +93,11 @@ namespace Car.Lidar
         /// </summary>
         private void Update()
         {
+            if (Hz < 0)
+            {
+                GenerateLidarData();
+                return;
+            }
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;

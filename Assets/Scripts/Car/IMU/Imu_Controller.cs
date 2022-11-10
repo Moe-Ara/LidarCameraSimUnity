@@ -70,6 +70,7 @@ namespace Car.imu
         // Start is called before the first frame update
         void Start()
         {
+            _last=DateTime.Now;
             _samplingRate = 500f;
             // _errorAcc = Vector3.zero;
             _lastPositon = Vector3.zero;
@@ -85,7 +86,7 @@ namespace Car.imu
         }
 
         // Update is called once per frame
-        private void FixedUpdate()
+        private void Update()
         {
             StartCoroutine(nameof(OnCalc));
         }
@@ -96,6 +97,9 @@ namespace Car.imu
             _offset = _offset + _angleRandomWalk;
         }
 
+        /// <summary>
+        /// Calculate Acceleration vector and add error
+        /// </summary>
         private void calculateAcceleration()
             // Calculate = a = ^V/^T
         {
@@ -115,7 +119,12 @@ namespace Car.imu
             if (_acceleration.z != 0)
                 _acceleration.z = calculateErrorGuassian(_acceleration.z, ((_errorRate / (100 * 3)) * _acceleration.z)) * _acceleration.z + _offset;
         }
-
+        
+        /// <summary>
+        /// Helper method that calculates a random error based on an error rate
+        /// </summary>
+        /// <param name="mean">this is the mean of all speeds (we don't use a mean since it isn't really necessary for our case )</param>
+        /// <param name="standrad_deviation">the standard deviation</param>
         private float calculateErrorGuassian(float mean, float stddev)
         {
             var random = new System.Random();
@@ -127,8 +136,16 @@ namespace Car.imu
             return (y1 * stddev + mean) / mean;
         }
 
+        /// <summary>
+        /// Co-routine that starts the speed calculation
+        /// </summary>
         private void OnCalc()
         {
+            if (_samplingRate < 0)
+            {
+                calculateAcceleration();
+                return;
+            }
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / _samplingRate) return;
             _last = now;

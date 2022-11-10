@@ -35,7 +35,7 @@ namespace Car.Camera
         /// <summary>
         /// The number of images created per second
         /// </summary>
-        private float HZ = 20000f;
+        private float HZ = 20f;
 
         /// <summary>
         /// The duration of a ray
@@ -78,9 +78,8 @@ namespace Car.Camera
 
         
         
-        //!DEBUGGING
         public RenderTexture renderTexture;
-        //!DEBUGGING
+
         /// <summary>
         /// Initialize the car camera
         /// </summary>
@@ -119,9 +118,14 @@ namespace Car.Camera
         /// </summary>
         private void OnPostRender()
         {
-            // var now = DateTime.Now;
-            // if ((now - _last).TotalSeconds < 1f / HZ) return;
-            // _last = now;
+            if (Hz < 0)
+            {
+                GenerateImageData();
+                return;
+            }
+            var now = DateTime.Now;
+            if ((now - _last).TotalSeconds < 1f / HZ) return;
+            _last = now;
             GenerateImageData();
         }
 
