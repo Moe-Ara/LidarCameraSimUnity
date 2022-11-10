@@ -19,6 +19,9 @@ namespace Communication
         /// </summary>
         private Socket _clientSocket;
 
+        /// <summary>
+        /// boolean to check if client is connectd
+        /// </summary>
         public bool isConnected => _clientSocket.Connected;
 
         /// <summary>
