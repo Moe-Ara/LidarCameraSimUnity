@@ -9,16 +9,20 @@ namespace Car
 {
     public class CarController : MonoBehaviour
     {
+        /// <summary>
+        /// Properties of the class
+        /// </summary>
         #region Props
-
         public bool Automated
         {
             get => _automated;
             set => _automated = value;
         }
-
         #endregion
-
+        /// <summary>
+        /// Private variables
+        /// </summary>
+        #region Variables
         private bool _braking;
         private Vector2 _moveDirection;
         private bool _automated = true;
@@ -26,6 +30,8 @@ namespace Car
         private PIDController _pidController;
         private float _pidOutput;
         private float _currentSpeed;
+        #endregion
+
         public GssController _gssController;
         public Imu_Controller _ImuController;
         /// <summary>
@@ -70,7 +76,6 @@ namespace Car
         private void FixedUpdate()
         {
             var trans = transform;
-            
             // Calculate the velocity
             _velocity = _gssController.Velocity;
             _currentSpeed = _gssController.Speed;
@@ -144,12 +149,15 @@ namespace Car
                 {
                     Declaration();
                 }
-                UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, steeringAngleInDegrees);
+            UpdateWheelsVisually(frontLeftCollider, frontLeftWheel, steeringAngleInDegrees);
             UpdateWheelsVisually(frontRightCollider, frontRightWheel, steeringAngleInDegrees);
             UpdateWheelsVisually(rearRightCollider, rearRightWheel, 0);
             UpdateWheelsVisually(rearLeftCollider, rearLeftWheel, 0);
         }
 
+        /// <summary>
+        /// Start Acceleration using input; it is a helper method to be called each time we get input data
+        /// </summary>
         private void MoveCarUsingInput()
         {
             //steering
@@ -180,7 +188,6 @@ namespace Car
         /// <summary>
         /// Start Declaration when the motor torque is 0
         /// </summary>
-        /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Declaration()
         {
             var deceletaionForce =
@@ -191,29 +198,44 @@ namespace Car
         /// <summary>
         /// Reset Car
         /// </summary>
-        /// <param name="control">This method resets car to original position</param>
         public void ResetCar()
         {
             transform.position = new Vector3(0, 0, 0);
             transform.rotation = Quaternion.Euler(0,0,0);
         }
-
+        
+        /// <summary>
+        /// Event function that gets called when a button is pressed
+        /// </summary>
+        /// <param name="context"> Callback context from the input system</param>
         public void onReset(InputAction.CallbackContext context)
         {
             ResetCar();
         }
+        
+        /// <summary>
+        /// Event function that gets called when a button is pressed
+        /// </summary>
+        /// <param name="context"> Callback context from the input system</param>
         public void OnMove(InputAction.CallbackContext context)
         {
             if(!_automated)
                 _moveDirection = context.ReadValue<Vector2>() * new Vector2(1, 10);
         }
 
+        /// <summary>
+        /// Event function that gets called when a button is pressed
+        /// </summary>
+        /// <param name="context"> Callback context from the input system</param>
         public void onBrake(InputAction.CallbackContext context)
         {
             _braking =context.ReadValueAsButton();
             
         }
 
+        /// <summary>
+        /// Helper method that sets brake torque to a specific value on all four wheels 
+        /// </summary>
         private void brake()
         {
             const int brakeTorque = 1000;
@@ -223,6 +245,9 @@ namespace Car
             frontRightCollider.brakeTorque = brakeTorque * 50;
         }
 
+        /// <summary>
+        /// Helper method that sets brake torque to 0 on all four wheels 
+        /// </summary>
         private void resetBrakes()
         {
             rearLeftCollider.brakeTorque = 0;
