@@ -11,13 +11,14 @@ using UnityEngine;
 public class AddTracks : MonoBehaviour
 {
     public TrackManager trackManager;
-    // public MainMenuManger MainMenuManger;
+    public MainMenuManger MainMenuManger;
     // Start is called before the first frame update
     private void Start()
     {
         addTracks();
         //set the current track to the first track we added
         trackManager.CurrentTrack = trackManager.Tracks[0];
+        
     }
 
     // Update is called once per frame
@@ -29,9 +30,9 @@ public class AddTracks : MonoBehaviour
         if (gameObject.transform.childCount!=trackManager.Tracks.Count)
         {
             //safe but slow
-            // addTracks();
+            addTracks();
             //not safe but fast
-            updateTracks();
+            // updateTracks();
         }
     }
 
@@ -51,6 +52,8 @@ public class AddTracks : MonoBehaviour
                     //if the track is already added return 
                     if (trackManager.Tracks.Contains(child.gameObject)) continue;
                     trackManager.Tracks.Add(child.gameObject);
+                    MainMenuManger.AddNewTrack(child.gameObject.name);
+                    
                     //setting new added tracks to 'not active'
                     if (trackManager.Tracks[0] != child.gameObject) child.gameObject.SetActive(false);
                 }
@@ -60,6 +63,7 @@ public class AddTracks : MonoBehaviour
             {
                 //TODO: Find a better way to doing this
                 trackManager.Tracks.Clear();
+                MainMenuManger.DeleteTracks();
                 continue;
             }
 
@@ -77,6 +81,7 @@ public class AddTracks : MonoBehaviour
                 //adding new tracks
                 case > 0:
                     trackManager.Tracks.Add(transform.GetChild(trackManager.Tracks.Count).gameObject);
+                    MainMenuManger.AddNewTrack(transform.GetChild(trackManager.Tracks.Count).gameObject.name);
                     //setting new added tracks to 'not active'
                     transform.GetChild(trackManager.Tracks.Count - 1).gameObject.SetActive(false);
                     continue;
@@ -84,10 +89,6 @@ public class AddTracks : MonoBehaviour
                 case < 0:
                     //switch to first track if the deleted track was active
                     if (trackManager.CurrentTrack == null) trackManager.SetTrack(trackManager.Tracks[0].name);
-                    
-                    //fast but not safe
-                    // trackManager.Tracks.RemoveAt(transform.childCount);
-                    
                     //slow but safe
                     addTracks();
                     continue;

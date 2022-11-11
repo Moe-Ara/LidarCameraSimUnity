@@ -27,8 +27,10 @@ namespace Car
         private Vector2 _moveDirection;
         private bool _automated = true;
         private ControlResultMessage _control;
-        private PIDController _pidController;
-        private float _pidOutput;
+        private PIDController _pidControllerSpeed;
+        private float _pidOutputSpeed;
+        public PIDController _pidControllerTurn;
+        private float _pidOutputTurn;
         private float _currentSpeed;
         #endregion
 
@@ -64,9 +66,10 @@ namespace Car
         {
             _moveDirection = Vector2.zero;
             _currentSpeed = 0f;
-            _pidOutput = 0f;
+            _pidOutputSpeed = 0f;
             _control = new ControlResultMessage();
-            _pidController = gameObject.GetComponent<PIDController>();
+            _pidControllerSpeed = gameObject.GetComponent<PIDController>();
+            _pidOutputTurn = 0f;
         }
 
         // public GameManager manager;
@@ -91,7 +94,9 @@ namespace Car
                 yaw_rate = -angularVelocity.y * Mathf.Deg2Rad
             };
             OnNewCarState?.Invoke(carState);
-            _pidOutput=_pidController.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            _pidOutputSpeed=_pidControllerSpeed.calcPID(Time.fixedDeltaTime, _currentSpeed, _control.speed_target);
+            _pidOutputTurn = _pidControllerTurn.calcPID(Time.fixedDeltaTime, carState.yaw_rate,
+                (-_control.steering_angle_target * Mathf.Rad2Deg));
             // Debug.Log(_control.speed_target.ToString());
             if(_automated)
                 Acceleration(_control);
@@ -132,8 +137,8 @@ namespace Car
         /// <param name="control">The control result from the as;i.e the values that we get from automation system</param>
         private void Acceleration(ControlResultMessage control)
         {
-            var steeringAngleInDegrees = -control.steering_angle_target * Mathf.Rad2Deg;
-
+            // var steeringAngleInDegrees = -control.steering_angle_target * Mathf.Rad2Deg;
+            var steeringAngleInDegrees =_pidOutputTurn;
             //steering
             frontLeftCollider.steerAngle = steeringAngleInDegrees;
             frontRightCollider.steerAngle = steeringAngleInDegrees;
@@ -141,8 +146,8 @@ namespace Car
                 if (control.speed_target != 0f)
                 {   
                     resetBrakes();
-                    rearLeftCollider.motorTorque =_pidOutput;
-                    rearRightCollider.motorTorque =_pidOutput;
+                    rearLeftCollider.motorTorque =_pidOutputSpeed;
+                    rearRightCollider.motorTorque =_pidOutputSpeed;
                     
                 }
                 else

@@ -28,56 +28,36 @@ public class MainMenuManger : MonoBehaviour
     private RadioButtonGroup radioButtonGroupMode;
     public GameObject changeTrackDocument;
     private List<string> options;
+    
 
     public void Start()
     {
+        options= new List<string>(trackManager.Tracks.Count);
         addTracksToDropDown();
-    }
-
-    private void LateUpdate()
-    {
-        //check if a new track was added
-        if (trackManager.Tracks.Count != options.Count)
-        {
-            updateTracksDropDown();
-        }
     }
 
     private void addTracksToDropDown()
     {
-        options= new List<string>(trackManager.Tracks.Count);
+        
         options.AddRange(trackManager.Tracks.Select(track => track.name));
         switchtrack.ClearOptions();
         switchtrack.AddOptions(options);
         switchtrack.value = 0;
     }
 
-    private void updateTracksDropDown()
+    public void AddNewTrack(string trackName)
     {
-        //check again
-        if ((trackManager.Tracks.Count - options.Count) == 0) return;
-        
-        while (true)
-        {
-            var differenceInSizes = trackManager.Tracks.Count  - options.Count;
-            
-            switch (differenceInSizes)
-            {
-                //adding new tracks
-                case > 0:
-                    var track = trackManager.Tracks[^differenceInSizes].name;
-                    options.Add(track);
-                    switchtrack.AddOptions(new List<string> {track});
-                    continue;
-                //deleting tracks -> it has a runtime complexity of O(n), depending on the ClearOptions() method from switchtrack
-                case < 0:
-                    addTracksToDropDown();
-                    continue;
-            }
-
-            break;
-        }
+        if(options==null || options.Contains(trackName))return;
+        options.Add(trackName);
+        switchtrack.AddOptions(new List<string>(){trackName});
     }
+
+    public void DeleteTracks()
+    {
+        options.Clear();
+        switchtrack.ClearOptions();
+    }
+    
     private void UpdateSettings()
     {
 

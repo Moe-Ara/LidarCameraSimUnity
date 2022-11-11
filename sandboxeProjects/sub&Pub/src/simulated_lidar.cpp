@@ -8,9 +8,28 @@
 simulated_lidar::simulated_lidar() {    tcp::endpoint ep(boost::asio::ip::address::from_string(IP_ADDRESS), PORT);
     boost::asio::io_service ioService;
     sock=std::make_unique<tcp::socket>(ioService, ep.protocol());
-//    sock = new tcp::socket(ioService, ep.protocol());
+m_counter=10;
+m_connected=false;
 
-    sock->connect(ep);}
+while (m_counter!=0)
+{
+    if (m_connected)break;
+    try
+    {
+       sock->connect(ep);
+       m_connected=true;
+    }
+    catch(const std::exception& e)
+    {
+    std::cerr << e.what() << '\n';
+    m_connected=false;
+    }    /* code */
+
+    sleep(5);
+    m_counter--;
+}
+
+    }
 
 auto simulated_lidar::get_PointCloud() -> pcl::PointCloud<pcl::PointXYZI>::Ptr {
 
