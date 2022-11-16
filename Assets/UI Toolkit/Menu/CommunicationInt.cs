@@ -39,7 +39,7 @@ namespace DefaultNamespace
         [SerializeField] private GameObject lidar;
         [SerializeField] private GameObject camera;
         [SerializeField] private GameObject imu;
-        [SerializeField] private GameObject gss;
+        // [SerializeField] private GameObject gss;
         [SerializeField] private Camera _outSideCamera;
         [SerializeField] public TextMeshProUGUI mass;
         [SerializeField] public TextMeshProUGUI speed;
@@ -97,7 +97,7 @@ namespace DefaultNamespace
                 <LidarController>();
             _cameraController = car.GetComponent
                 <CarCameraController>();
-            _gssController = gss.GetComponent
+            _gssController = car.GetComponent
                 <GssController>();
             _imuController = imu.GetComponent
                 <Imu_Controller>();
