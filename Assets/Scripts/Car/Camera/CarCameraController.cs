@@ -4,12 +4,24 @@ using Communication.Messages;
 using UnityEngine;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Debug = UnityEngine.Debug;
 
 namespace Car.Camera
 {
     public class CarCameraController : MonoBehaviour
     {
+        #region props
+
+        public float Hz
+        {
+            get => HZ;
+            set => HZ = value;
+        }
+
+        #endregion
+        
+        
         /// <summary>
         /// The dimensions of the image
         /// </summary>
@@ -23,7 +35,7 @@ namespace Car.Camera
         /// <summary>
         /// The number of images created per second
         /// </summary>
-        private const float HZ = 20f;
+        private float HZ = 20f;
 
         /// <summary>
         /// The duration of a ray
@@ -64,6 +76,10 @@ namespace Car.Camera
         private uint[] imageData = new uint[BUFFER_SIZE];
         private byte[] data = new byte[3 * BUFFER_SIZE];
 
+        
+        
+        public RenderTexture renderTexture;
+
         /// <summary>
         /// Initialize the car camera
         /// </summary>
@@ -71,7 +87,7 @@ namespace Car.Camera
         {
             // Connect the camera with the compute shader
             _pixelsBuffer = new ComputeBuffer(BUFFER_SIZE, sizeof(uint));
-            var renderTexture = new RenderTexture(WIDTH, HEIGHT, 16);
+            renderTexture = new RenderTexture(WIDTH, HEIGHT, 16);
             carCamera.targetTexture = renderTexture;
             computeShader.SetTexture(0, "InputTexture", renderTexture);
 
@@ -82,6 +98,11 @@ namespace Car.Camera
             computeShader.GetKernelThreadGroupSizes(0, out var x, out _, out _);
             _numOfThreads = (int)x;
             _last = DateTime.Now;
+        }
+
+        private void Update()
+        {
+            StartCoroutine(nameof(OnPostRender));
         }
 
         /// <summary>
@@ -97,11 +118,14 @@ namespace Car.Camera
         /// </summary>
         private void OnPostRender()
         {
+            if (Hz < 0)
+            {
+                GenerateImageData();
+                return;
+            }
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
-
-
             GenerateImageData();
         }
 
@@ -111,7 +135,15 @@ namespace Car.Camera
         private void GenerateImageData()
         {
             computeShader.Dispatch(0, Mathf.CeilToInt(WIDTH * HEIGHT / (float)_numOfThreads), 1, 1);
-            _pixelsBuffer.GetData(imageData);
+            try
+            {
+                _pixelsBuffer.GetData(imageData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
 
             for (var i = 0; i < BUFFER_SIZE; ++i)

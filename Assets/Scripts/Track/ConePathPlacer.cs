@@ -1,4 +1,5 @@
-﻿using PathCreation;
+﻿using System;
+using PathCreation;
 using PathCreation.Examples;
 using UnityEngine;
 
@@ -18,6 +19,11 @@ namespace Track
         private const float minSpacing = .1f;
 
         private Vector3 riseCones = new(0, 0, 0);
+
+        private void Start()
+        {
+            Generate();
+        }
 
         //Place Cones along track
         private void Generate()

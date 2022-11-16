@@ -1,0 +1,126 @@
+\hypertarget{classCar_1_1Camera_1_1CarCameraController}{}\doxysection{Car.\+Camera.\+Car\+Camera\+Controller Class Reference}
+\label{classCar_1_1Camera_1_1CarCameraController}\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+
+
+Inheritance diagram for Car.\+Camera.\+Car\+Camera\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{classCar_1_1Camera_1_1CarCameraController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Car.\+Camera.\+Car\+Camera\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCar_1_1Camera_1_1CarCameraController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_a1da4af9340cba9a9cd5ea8dde702ed58}{Draw\+Cone\+Rays}} (\mbox{\hyperlink{classCommunication_1_1Messages_1_1PerceivedConesMessage}{Perceived\+Cones\+Message}} perceived\+Cones\+Message)
+\begin{DoxyCompactList}\small\item\em Draw rays for the perceived cones. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_a272980807dbccfce93dd95c490464541}{ray\+Duration}} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em The duration of a ray. \end{DoxyCompactList}\item 
+Action$<$ byte\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_a8c5ae402e0a17f722dc2f4d35701e2f2}{On\+New\+Image}}
+\begin{DoxyCompactList}\small\item\em The event that is triggered after a new image was generated. \end{DoxyCompactList}\item 
+Unity\+Engine.\+Camera \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_ac4019ebd247f8f3e5cb97478a974898e}{car\+Camera}}
+\begin{DoxyCompactList}\small\item\em The camera object. \end{DoxyCompactList}\item 
+Compute\+Shader \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_a358a61cc670cb902d016c350cc3753ce}{compute\+Shader}}
+\begin{DoxyCompactList}\small\item\em The cam compute shader. \end{DoxyCompactList}\item 
+Render\+Texture \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_a9badb452635b9816b035e4e0789ec5a8}{render\+Texture}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classCar_1_1Camera_1_1CarCameraController_ac0847d8a92bff88302f00b9b401c5d08}{Hz}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_a1da4af9340cba9a9cd5ea8dde702ed58}\label{classCar_1_1Camera_1_1CarCameraController_a1da4af9340cba9a9cd5ea8dde702ed58}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!DrawConeRays@{DrawConeRays}}
+\index{DrawConeRays@{DrawConeRays}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{DrawConeRays()}{DrawConeRays()}}
+{\footnotesize\ttfamily void Car.\+Camera.\+Car\+Camera\+Controller.\+Draw\+Cone\+Rays (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommunication_1_1Messages_1_1PerceivedConesMessage}{Perceived\+Cones\+Message}}}]{perceived\+Cones\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draw rays for the perceived cones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em perceived\+Cones\+Message} & The perceived cones\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_ac4019ebd247f8f3e5cb97478a974898e}\label{classCar_1_1Camera_1_1CarCameraController_ac4019ebd247f8f3e5cb97478a974898e}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!carCamera@{carCamera}}
+\index{carCamera@{carCamera}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{carCamera}{carCamera}}
+{\footnotesize\ttfamily Unity\+Engine.\+Camera Car.\+Camera.\+Car\+Camera\+Controller.\+car\+Camera}
+
+
+
+The camera object. 
+
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_a358a61cc670cb902d016c350cc3753ce}\label{classCar_1_1Camera_1_1CarCameraController_a358a61cc670cb902d016c350cc3753ce}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!computeShader@{computeShader}}
+\index{computeShader@{computeShader}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{computeShader}{computeShader}}
+{\footnotesize\ttfamily Compute\+Shader Car.\+Camera.\+Car\+Camera\+Controller.\+compute\+Shader}
+
+
+
+The cam compute shader. 
+
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_a8c5ae402e0a17f722dc2f4d35701e2f2}\label{classCar_1_1Camera_1_1CarCameraController_a8c5ae402e0a17f722dc2f4d35701e2f2}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!OnNewImage@{OnNewImage}}
+\index{OnNewImage@{OnNewImage}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{OnNewImage}{OnNewImage}}
+{\footnotesize\ttfamily Action$<$byte\mbox{[}$\,$\mbox{]}$>$ Car.\+Camera.\+Car\+Camera\+Controller.\+On\+New\+Image}
+
+
+
+The event that is triggered after a new image was generated. 
+
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_a272980807dbccfce93dd95c490464541}\label{classCar_1_1Camera_1_1CarCameraController_a272980807dbccfce93dd95c490464541}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!rayDuration@{rayDuration}}
+\index{rayDuration@{rayDuration}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{rayDuration}{rayDuration}}
+{\footnotesize\ttfamily float Car.\+Camera.\+Car\+Camera\+Controller.\+ray\+Duration = 0.\+5f}
+
+
+
+The duration of a ray. 
+
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_a9badb452635b9816b035e4e0789ec5a8}\label{classCar_1_1Camera_1_1CarCameraController_a9badb452635b9816b035e4e0789ec5a8}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!renderTexture@{renderTexture}}
+\index{renderTexture@{renderTexture}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{renderTexture}{renderTexture}}
+{\footnotesize\ttfamily Render\+Texture Car.\+Camera.\+Car\+Camera\+Controller.\+render\+Texture}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classCar_1_1Camera_1_1CarCameraController_ac0847d8a92bff88302f00b9b401c5d08}\label{classCar_1_1Camera_1_1CarCameraController_ac0847d8a92bff88302f00b9b401c5d08}} 
+\index{Car.Camera.CarCameraController@{Car.Camera.CarCameraController}!Hz@{Hz}}
+\index{Hz@{Hz}!Car.Camera.CarCameraController@{Car.Camera.CarCameraController}}
+\doxysubsubsection{\texorpdfstring{Hz}{Hz}}
+{\footnotesize\ttfamily float Car.\+Camera.\+Car\+Camera\+Controller.\+Hz\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Car/\+Camera/\mbox{\hyperlink{CarCameraController_8cs}{Car\+Camera\+Controller.\+cs}}\end{DoxyCompactItemize}

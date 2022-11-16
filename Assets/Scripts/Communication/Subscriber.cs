@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using UnityEngine;
 
 namespace Communication
 {
@@ -17,6 +18,11 @@ namespace Communication
         /// The client socket
         /// </summary>
         private Socket _clientSocket;
+
+        /// <summary>
+        /// boolean to check if client is connectd
+        /// </summary>
+        public bool isConnected => _clientSocket.Connected;
 
         /// <summary>
         /// Constructor
@@ -41,7 +47,6 @@ namespace Communication
                     // Connect with the server      
                     _clientSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
                     _clientSocket.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), port));
-
                     // Handle incoming data
                     while (_running)
                     {
@@ -49,7 +54,6 @@ namespace Communication
                         var bytes = new byte[4];
                         _clientSocket.Receive(bytes);
                         var dataSize = BitConverter.ToInt32(bytes, 0);
-
                         // Check if client has disconnected
                         if (dataSize == 0) throw new IOException();
 
@@ -57,14 +61,18 @@ namespace Communication
                         var data = new byte[dataSize];
                         var received = 0;
                         while (received < dataSize && _running)
+                        {
                             received += _clientSocket.Receive(data, received, dataSize - received, SocketFlags.None);
-
+                        }
                         // Start subscriber routines
                         if (dataSize > 0) callback(data);
+
                     }
                 }
                 catch (Exception)
                 {
+                    //gui
+                    DefaultNamespace.CommunicationInt.isASConnected = false;
                     // Try again in 1s
                     Thread.Sleep(1000);
                 }
@@ -75,6 +83,7 @@ namespace Communication
         /// </summary>
         public void Stop()
         {
+            DefaultNamespace.CommunicationInt.isASConnected = false;
             _running = false;
             try
             {

@@ -10,10 +10,21 @@ namespace Car.Lidar
 {
     public class LidarController : MonoBehaviour
     {
+        #region porps
+
+        public float Hz
+        {
+            get => HZ;
+            set => HZ = value;
+        }
+
+        #endregion
+        
+        
         /// <summary>
         /// The scan frequency of the lidar
         /// </summary>
-        private const float HZ = 15f;
+        private float HZ = 15f;
 
         /// <summary>
         /// The amount of layers the lidar shall have
@@ -82,6 +93,11 @@ namespace Car.Lidar
         /// </summary>
         private void Update()
         {
+            if (Hz < 0)
+            {
+                GenerateLidarData();
+                return;
+            }
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;

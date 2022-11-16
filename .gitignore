@@ -50,3 +50,6 @@ crashlytics-build.properties
 /TCP_Connector
 /Robotics_Repo
 /.idea
+
+UserSettings/Layouts/
+UserSettings/EditorUserSettings.asset

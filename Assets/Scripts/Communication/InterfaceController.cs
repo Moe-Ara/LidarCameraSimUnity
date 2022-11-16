@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Car;
 using Car.Camera;
+using Car.gss;
 using Car.Lidar;
 using Communication.Messages;
 using UnityEngine;
@@ -37,6 +38,11 @@ namespace Communication
         public LidarController lidarController;
 
         /// <summary>
+        /// The ground speed sensor controller
+        /// </summary>
+        public GssController gssController;
+
+        /// <summary>
         /// The publishers
         /// </summary>
         private Publisher _cameraPublisher, _lidarPublisher, _carStatePublisher;
@@ -64,8 +70,9 @@ namespace Communication
             _perceivedConesSubscriber = new Subscriber(PERCEIVED_CONES, OnPerceivedCones);
 
             // Register the sensor events
-            carCameraController.OnNewImage = imageData => _cameraPublisher.Publish(imageData);
-            lidarController.OnNewPointCloud = pointCloudData => _lidarPublisher.Publish(pointCloudData);
+            carCameraController.OnNewImage = imageData => { _cameraPublisher.Publish(imageData); };
+
+            lidarController.OnNewPointCloud = pointCloudData => { _lidarPublisher.Publish(pointCloudData); };
             carController.OnNewCarState = message =>
             {
                 var json = JsonUtility.ToJson(message);
@@ -78,6 +85,12 @@ namespace Communication
         /// </summary>
         private void FixedUpdate()
         {
+            //This is only for GUI and should be removed if it affects the performance of the code
+            if (DefaultNamespace.CommunicationInt.isASConnected != _controlTargetSubscriber.isConnected)
+            {
+                DefaultNamespace.CommunicationInt.isASConnected = _controlTargetSubscriber.isConnected;
+            }
+
             lock (_mainThreadQueue)
             {
                 while (_mainThreadQueue.Count > 0) _mainThreadQueue.Dequeue()();
