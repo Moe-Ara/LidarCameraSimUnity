@@ -1,0 +1,123 @@
+\hypertarget{classCar_1_1PIDController}{}\doxysection{Car.\+PIDController Class Reference}
+\label{classCar_1_1PIDController}\index{Car.PIDController@{Car.PIDController}}
+
+
+Inheritance diagram for Car.\+PIDController\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classCar_1_1PIDController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Car.\+PIDController\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{classCar_1_1PIDController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCar_1_1PIDController_a09b73b9da989ad3b051fa96cd9e9ab48}{PIDController}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCar_1_1PIDController_a2295917e0dcf704676596f307f521c83}{PIDController}} (float proportional\+Gain, float integral\+Gain, float derivative\+Gain)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classCar_1_1PIDController_a7743175808d44927103423f1b7d08de7}{calc\+PID}} (float delta\+Time, float current\+Value, float target\+Value)
+\begin{DoxyCompactList}\small\item\em Method to calculate the error based on the PID gains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classCar_1_1PIDController_a8d0ea3e6006f0d1a1a884dbb9f159749}{\+\_\+proportional\+Gain}}
+\item 
+float \mbox{\hyperlink{classCar_1_1PIDController_a67f5858f3fbda5f109bf8493cfe4b36b}{\+\_\+integral\+Gain}}
+\item 
+float \mbox{\hyperlink{classCar_1_1PIDController_aa9b72037252d6cbe241b8c6c9a511150}{\+\_\+derivative\+Gain}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCar_1_1PIDController_a09b73b9da989ad3b051fa96cd9e9ab48}\label{classCar_1_1PIDController_a09b73b9da989ad3b051fa96cd9e9ab48}} 
+\index{Car.PIDController@{Car.PIDController}!PIDController@{PIDController}}
+\index{PIDController@{PIDController}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{PIDController()}{PIDController()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Car.\+PIDController.\+PIDController (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+\mbox{\Hypertarget{classCar_1_1PIDController_a2295917e0dcf704676596f307f521c83}\label{classCar_1_1PIDController_a2295917e0dcf704676596f307f521c83}} 
+\index{Car.PIDController@{Car.PIDController}!PIDController@{PIDController}}
+\index{PIDController@{PIDController}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{PIDController()}{PIDController()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Car.\+PIDController.\+PIDController (\begin{DoxyParamCaption}\item[{float}]{proportional\+Gain,  }\item[{float}]{integral\+Gain,  }\item[{float}]{derivative\+Gain }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em proportional\+Gain} & proportional gain of the pid controller\\
+\hline
+{\em integral\+Gain} & integral gain of the pid controller\\
+\hline
+{\em derivative\+Gain} & derivative gain of the pid controller\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCar_1_1PIDController_a7743175808d44927103423f1b7d08de7}\label{classCar_1_1PIDController_a7743175808d44927103423f1b7d08de7}} 
+\index{Car.PIDController@{Car.PIDController}!calcPID@{calcPID}}
+\index{calcPID@{calcPID}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{calcPID()}{calcPID()}}
+{\footnotesize\ttfamily float Car.\+PIDController.\+calc\+PID (\begin{DoxyParamCaption}\item[{float}]{delta\+Time,  }\item[{float}]{current\+Value,  }\item[{float}]{target\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method to calculate the error based on the PID gains. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & delta time\\
+\hline
+{\em current\+Value} & current value\\
+\hline
+{\em target\+Value} & target value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCar_1_1PIDController_aa9b72037252d6cbe241b8c6c9a511150}\label{classCar_1_1PIDController_aa9b72037252d6cbe241b8c6c9a511150}} 
+\index{Car.PIDController@{Car.PIDController}!\_derivativeGain@{\_derivativeGain}}
+\index{\_derivativeGain@{\_derivativeGain}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{\_derivativeGain}{\_derivativeGain}}
+{\footnotesize\ttfamily float Car.\+PIDController.\+\_\+derivative\+Gain}
+
+\mbox{\Hypertarget{classCar_1_1PIDController_a67f5858f3fbda5f109bf8493cfe4b36b}\label{classCar_1_1PIDController_a67f5858f3fbda5f109bf8493cfe4b36b}} 
+\index{Car.PIDController@{Car.PIDController}!\_integralGain@{\_integralGain}}
+\index{\_integralGain@{\_integralGain}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{\_integralGain}{\_integralGain}}
+{\footnotesize\ttfamily float Car.\+PIDController.\+\_\+integral\+Gain}
+
+\mbox{\Hypertarget{classCar_1_1PIDController_a8d0ea3e6006f0d1a1a884dbb9f159749}\label{classCar_1_1PIDController_a8d0ea3e6006f0d1a1a884dbb9f159749}} 
+\index{Car.PIDController@{Car.PIDController}!\_proportionalGain@{\_proportionalGain}}
+\index{\_proportionalGain@{\_proportionalGain}!Car.PIDController@{Car.PIDController}}
+\doxysubsubsection{\texorpdfstring{\_proportionalGain}{\_proportionalGain}}
+{\footnotesize\ttfamily float Car.\+PIDController.\+\_\+proportional\+Gain}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Car/\mbox{\hyperlink{PIDController_8cs}{PIDController.\+cs}}\end{DoxyCompactItemize}

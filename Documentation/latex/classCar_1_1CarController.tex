@@ -1,0 +1,249 @@
+\hypertarget{classCar_1_1CarController}{}\doxysection{Car.\+Car\+Controller Class Reference}
+\label{classCar_1_1CarController}\index{Car.CarController@{Car.CarController}}
+
+
+Inheritance diagram for Car.\+Car\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classCar_1_1CarController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Car.\+Car\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCar_1_1CarController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCar_1_1CarController_ac9edbc47051c4f03ba9f8f4cceab236c}{Apply\+Control\+Result}} (\mbox{\hyperlink{classCommunication_1_1Messages_1_1ControlResultMessage}{Control\+Result\+Message}} control)
+\begin{DoxyCompactList}\small\item\em Update the car. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCar_1_1CarController_a8205aa435bd5b3d4a0d175a374bcd587}{Reset\+Car}} ()
+\begin{DoxyCompactList}\small\item\em Reset \mbox{\hyperlink{namespaceCar}{Car}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCar_1_1CarController_aa63b3f1111258313eab196da373780e2}{on\+Reset}} (Input\+Action.\+Callback\+Context context)
+\begin{DoxyCompactList}\small\item\em Event function that gets called when a button is pressed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCar_1_1CarController_ae5e1540efa7e65a353b9601815fd6a31}{On\+Move}} (Input\+Action.\+Callback\+Context context)
+\begin{DoxyCompactList}\small\item\em Event function that gets called when a button is pressed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCar_1_1CarController_af63e14f88b2aea396a289151c30fdf53}{on\+Brake}} (Input\+Action.\+Callback\+Context context)
+\begin{DoxyCompactList}\small\item\em Event function that gets called when a button is pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCar_1_1PIDController}{PIDController}} \mbox{\hyperlink{classCar_1_1CarController_ad59f3d7e48bf4704e1681882dae4cb69}{\+\_\+pid\+Controller\+Turn}}
+\item 
+\mbox{\hyperlink{classCar_1_1gss_1_1GssController}{Gss\+Controller}} \mbox{\hyperlink{classCar_1_1CarController_a91497e73f981b4eeef70b0c8c89c7d2a}{\+\_\+gss\+Controller}}
+\item 
+\mbox{\hyperlink{classCar_1_1imu_1_1Imu__Controller}{Imu\+\_\+\+Controller}} \mbox{\hyperlink{classCar_1_1CarController_a3af796ff643e2e34781c587e5d63cac4}{\+\_\+\+Imu\+Controller}}
+\item 
+Action$<$ \mbox{\hyperlink{classCommunication_1_1Messages_1_1CarStateMessage}{Car\+State\+Message}} $>$ \mbox{\hyperlink{classCar_1_1CarController_afaf0f064561fe661413833fac5fea475}{On\+New\+Car\+State}}
+\begin{DoxyCompactList}\small\item\em The event that is triggered after a new car state was generated. \end{DoxyCompactList}\item 
+Transform \mbox{\hyperlink{classCar_1_1CarController_a775f0e9116bf9bfb5aa760d825d51e33}{front\+Left\+Wheel}}
+\begin{DoxyCompactList}\small\item\em The actual front wheels. \end{DoxyCompactList}\item 
+Transform \mbox{\hyperlink{classCar_1_1CarController_ac111e03062f25a956b63a1afc7f8c051}{front\+Right\+Wheel}}
+\item 
+Transform \mbox{\hyperlink{classCar_1_1CarController_a0bed545d3aa738c1fdb119405be03a91}{rear\+Right\+Wheel}}
+\item 
+Transform \mbox{\hyperlink{classCar_1_1CarController_a23bc6f311cd3a81b249fb2ecf370b1fd}{rear\+Left\+Wheel}}
+\item 
+Wheel\+Collider \mbox{\hyperlink{classCar_1_1CarController_aa7a3767e90b9c3f9d2a0ca1cef59abd6}{front\+Left\+Collider}}
+\begin{DoxyCompactList}\small\item\em The colliders of the front wheels (for steering) \end{DoxyCompactList}\item 
+Wheel\+Collider \mbox{\hyperlink{classCar_1_1CarController_ac9bcb00b5ed67a51d168bca33834bfa6}{front\+Right\+Collider}}
+\item 
+Wheel\+Collider \mbox{\hyperlink{classCar_1_1CarController_ad5868812ada72d6f148e2d84ec7ce969}{rear\+Left\+Collider}}
+\begin{DoxyCompactList}\small\item\em The colliders of the rear wheels (for thrust) \end{DoxyCompactList}\item 
+Wheel\+Collider \mbox{\hyperlink{classCar_1_1CarController_a254c2553907aa31b8682e7b7d4618cb7}{rear\+Right\+Collider}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classCar_1_1CarController_afa1a5ba28730f7ca722d5af20e36977a}{Automated}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Properties of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCar_1_1CarController_ac9edbc47051c4f03ba9f8f4cceab236c}\label{classCar_1_1CarController_ac9edbc47051c4f03ba9f8f4cceab236c}} 
+\index{Car.CarController@{Car.CarController}!ApplyControlResult@{ApplyControlResult}}
+\index{ApplyControlResult@{ApplyControlResult}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{ApplyControlResult()}{ApplyControlResult()}}
+{\footnotesize\ttfamily void Car.\+Car\+Controller.\+Apply\+Control\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCommunication_1_1Messages_1_1ControlResultMessage}{Control\+Result\+Message}}}]{control }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the car. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & The control result from the as\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCar_1_1CarController_af63e14f88b2aea396a289151c30fdf53}\label{classCar_1_1CarController_af63e14f88b2aea396a289151c30fdf53}} 
+\index{Car.CarController@{Car.CarController}!onBrake@{onBrake}}
+\index{onBrake@{onBrake}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{onBrake()}{onBrake()}}
+{\footnotesize\ttfamily void Car.\+Car\+Controller.\+on\+Brake (\begin{DoxyParamCaption}\item[{Input\+Action\+::\+Callback\+Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Event function that gets called when a button is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & Callback context from the input system\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCar_1_1CarController_ae5e1540efa7e65a353b9601815fd6a31}\label{classCar_1_1CarController_ae5e1540efa7e65a353b9601815fd6a31}} 
+\index{Car.CarController@{Car.CarController}!OnMove@{OnMove}}
+\index{OnMove@{OnMove}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{OnMove()}{OnMove()}}
+{\footnotesize\ttfamily void Car.\+Car\+Controller.\+On\+Move (\begin{DoxyParamCaption}\item[{Input\+Action\+::\+Callback\+Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Event function that gets called when a button is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & Callback context from the input system\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCar_1_1CarController_aa63b3f1111258313eab196da373780e2}\label{classCar_1_1CarController_aa63b3f1111258313eab196da373780e2}} 
+\index{Car.CarController@{Car.CarController}!onReset@{onReset}}
+\index{onReset@{onReset}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{onReset()}{onReset()}}
+{\footnotesize\ttfamily void Car.\+Car\+Controller.\+on\+Reset (\begin{DoxyParamCaption}\item[{Input\+Action\+::\+Callback\+Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Event function that gets called when a button is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & Callback context from the input system\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCar_1_1CarController_a8205aa435bd5b3d4a0d175a374bcd587}\label{classCar_1_1CarController_a8205aa435bd5b3d4a0d175a374bcd587}} 
+\index{Car.CarController@{Car.CarController}!ResetCar@{ResetCar}}
+\index{ResetCar@{ResetCar}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{ResetCar()}{ResetCar()}}
+{\footnotesize\ttfamily void Car.\+Car\+Controller.\+Reset\+Car (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset \mbox{\hyperlink{namespaceCar}{Car}}. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCar_1_1CarController_a91497e73f981b4eeef70b0c8c89c7d2a}\label{classCar_1_1CarController_a91497e73f981b4eeef70b0c8c89c7d2a}} 
+\index{Car.CarController@{Car.CarController}!\_gssController@{\_gssController}}
+\index{\_gssController@{\_gssController}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{\_gssController}{\_gssController}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCar_1_1gss_1_1GssController}{Gss\+Controller}} Car.\+Car\+Controller.\+\_\+gss\+Controller}
+
+\mbox{\Hypertarget{classCar_1_1CarController_a3af796ff643e2e34781c587e5d63cac4}\label{classCar_1_1CarController_a3af796ff643e2e34781c587e5d63cac4}} 
+\index{Car.CarController@{Car.CarController}!\_ImuController@{\_ImuController}}
+\index{\_ImuController@{\_ImuController}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{\_ImuController}{\_ImuController}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCar_1_1imu_1_1Imu__Controller}{Imu\+\_\+\+Controller}} Car.\+Car\+Controller.\+\_\+\+Imu\+Controller}
+
+\mbox{\Hypertarget{classCar_1_1CarController_ad59f3d7e48bf4704e1681882dae4cb69}\label{classCar_1_1CarController_ad59f3d7e48bf4704e1681882dae4cb69}} 
+\index{Car.CarController@{Car.CarController}!\_pidControllerTurn@{\_pidControllerTurn}}
+\index{\_pidControllerTurn@{\_pidControllerTurn}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{\_pidControllerTurn}{\_pidControllerTurn}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCar_1_1PIDController}{PIDController}} Car.\+Car\+Controller.\+\_\+pid\+Controller\+Turn}
+
+\mbox{\Hypertarget{classCar_1_1CarController_aa7a3767e90b9c3f9d2a0ca1cef59abd6}\label{classCar_1_1CarController_aa7a3767e90b9c3f9d2a0ca1cef59abd6}} 
+\index{Car.CarController@{Car.CarController}!frontLeftCollider@{frontLeftCollider}}
+\index{frontLeftCollider@{frontLeftCollider}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{frontLeftCollider}{frontLeftCollider}}
+{\footnotesize\ttfamily Wheel\+Collider Car.\+Car\+Controller.\+front\+Left\+Collider}
+
+
+
+The colliders of the front wheels (for steering) 
+
+\mbox{\Hypertarget{classCar_1_1CarController_a775f0e9116bf9bfb5aa760d825d51e33}\label{classCar_1_1CarController_a775f0e9116bf9bfb5aa760d825d51e33}} 
+\index{Car.CarController@{Car.CarController}!frontLeftWheel@{frontLeftWheel}}
+\index{frontLeftWheel@{frontLeftWheel}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{frontLeftWheel}{frontLeftWheel}}
+{\footnotesize\ttfamily Transform Car.\+Car\+Controller.\+front\+Left\+Wheel}
+
+
+
+The actual front wheels. 
+
+\mbox{\Hypertarget{classCar_1_1CarController_ac9bcb00b5ed67a51d168bca33834bfa6}\label{classCar_1_1CarController_ac9bcb00b5ed67a51d168bca33834bfa6}} 
+\index{Car.CarController@{Car.CarController}!frontRightCollider@{frontRightCollider}}
+\index{frontRightCollider@{frontRightCollider}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{frontRightCollider}{frontRightCollider}}
+{\footnotesize\ttfamily Wheel\+Collider Car.\+Car\+Controller.\+front\+Right\+Collider}
+
+\mbox{\Hypertarget{classCar_1_1CarController_ac111e03062f25a956b63a1afc7f8c051}\label{classCar_1_1CarController_ac111e03062f25a956b63a1afc7f8c051}} 
+\index{Car.CarController@{Car.CarController}!frontRightWheel@{frontRightWheel}}
+\index{frontRightWheel@{frontRightWheel}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{frontRightWheel}{frontRightWheel}}
+{\footnotesize\ttfamily Transform Car.\+Car\+Controller.\+front\+Right\+Wheel}
+
+\mbox{\Hypertarget{classCar_1_1CarController_afaf0f064561fe661413833fac5fea475}\label{classCar_1_1CarController_afaf0f064561fe661413833fac5fea475}} 
+\index{Car.CarController@{Car.CarController}!OnNewCarState@{OnNewCarState}}
+\index{OnNewCarState@{OnNewCarState}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{OnNewCarState}{OnNewCarState}}
+{\footnotesize\ttfamily Action$<$\mbox{\hyperlink{classCommunication_1_1Messages_1_1CarStateMessage}{Car\+State\+Message}}$>$ Car.\+Car\+Controller.\+On\+New\+Car\+State}
+
+
+
+The event that is triggered after a new car state was generated. 
+
+\mbox{\Hypertarget{classCar_1_1CarController_ad5868812ada72d6f148e2d84ec7ce969}\label{classCar_1_1CarController_ad5868812ada72d6f148e2d84ec7ce969}} 
+\index{Car.CarController@{Car.CarController}!rearLeftCollider@{rearLeftCollider}}
+\index{rearLeftCollider@{rearLeftCollider}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{rearLeftCollider}{rearLeftCollider}}
+{\footnotesize\ttfamily Wheel\+Collider Car.\+Car\+Controller.\+rear\+Left\+Collider}
+
+
+
+The colliders of the rear wheels (for thrust) 
+
+\mbox{\Hypertarget{classCar_1_1CarController_a23bc6f311cd3a81b249fb2ecf370b1fd}\label{classCar_1_1CarController_a23bc6f311cd3a81b249fb2ecf370b1fd}} 
+\index{Car.CarController@{Car.CarController}!rearLeftWheel@{rearLeftWheel}}
+\index{rearLeftWheel@{rearLeftWheel}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{rearLeftWheel}{rearLeftWheel}}
+{\footnotesize\ttfamily Transform Car.\+Car\+Controller.\+rear\+Left\+Wheel}
+
+\mbox{\Hypertarget{classCar_1_1CarController_a254c2553907aa31b8682e7b7d4618cb7}\label{classCar_1_1CarController_a254c2553907aa31b8682e7b7d4618cb7}} 
+\index{Car.CarController@{Car.CarController}!rearRightCollider@{rearRightCollider}}
+\index{rearRightCollider@{rearRightCollider}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{rearRightCollider}{rearRightCollider}}
+{\footnotesize\ttfamily Wheel\+Collider Car.\+Car\+Controller.\+rear\+Right\+Collider}
+
+\mbox{\Hypertarget{classCar_1_1CarController_a0bed545d3aa738c1fdb119405be03a91}\label{classCar_1_1CarController_a0bed545d3aa738c1fdb119405be03a91}} 
+\index{Car.CarController@{Car.CarController}!rearRightWheel@{rearRightWheel}}
+\index{rearRightWheel@{rearRightWheel}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{rearRightWheel}{rearRightWheel}}
+{\footnotesize\ttfamily Transform Car.\+Car\+Controller.\+rear\+Right\+Wheel}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classCar_1_1CarController_afa1a5ba28730f7ca722d5af20e36977a}\label{classCar_1_1CarController_afa1a5ba28730f7ca722d5af20e36977a}} 
+\index{Car.CarController@{Car.CarController}!Automated@{Automated}}
+\index{Automated@{Automated}!Car.CarController@{Car.CarController}}
+\doxysubsubsection{\texorpdfstring{Automated}{Automated}}
+{\footnotesize\ttfamily bool Car.\+Car\+Controller.\+Automated\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Properties of the class. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Car/\mbox{\hyperlink{CarController_8cs}{Car\+Controller.\+cs}}\end{DoxyCompactItemize}

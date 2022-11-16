@@ -1,0 +1,8 @@
+<map id="AddTracks" name="AddTracks">
+<area shape="rect" id="node1" title="Helper class to add all tracks to the list of tracks when the simulator starts." alt="" coords="155,300,240,377"/>
+<area shape="rect" id="node2" href="$classMonoBehaviour.html" title=" " alt="" coords="5,5,117,83"/>
+<area shape="rect" id="node3" href="$classTrackManager.html" title="This Class is Responsible for changing the Track." alt="" coords="145,160,250,237"/>
+<area shape="rect" id="node4" title=" " alt="" coords="142,5,282,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="306,5,401,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="275,160,400,237"/>
+</map>
