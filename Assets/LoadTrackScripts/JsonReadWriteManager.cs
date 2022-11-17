@@ -176,7 +176,7 @@ public class JsonReadWriteManager : MonoBehaviour
           example.waypoints[i] = Instantiate(prefab, saveFilePos[i], Quaternion.identity, nodeHolder.transform).GetComponent<Transform>();
           example.closedLoop = nd.closedPath;
           example.waypoints[i].position = saveFilePos[i];
-          Debug.Log("Path Data Loaded from JSON file!");
+          
         
         }
 
