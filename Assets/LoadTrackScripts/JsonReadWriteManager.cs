@@ -27,6 +27,8 @@ public class JsonReadWriteManager : MonoBehaviour
     public GameObject yellowCone = null;
     public GameObject startCone = null;
     public GameObject otherTracks = null;
+    public GameObject meshHolder;
+    public MeshRenderer mr;
 
    
 
@@ -91,7 +93,14 @@ public class JsonReadWriteManager : MonoBehaviour
     }
 
     public void LoadFromJSON(){
-        otherTracks.SetActive(false);
+        ClearScene();
+
+
+        for(int i = 0;  i<otherTracks.transform.childCount;i++){
+            if(otherTracks.transform.GetChild(i).gameObject.activeSelf){
+            otherTracks.transform.GetChild(i).gameObject.SetActive(false);        
+        }
+        }
         string json = File.ReadAllText(Application.dataPath + "/RoadDataFile.json");
         NodeData nd = JsonUtility.FromJson<NodeData>(json);
        // spawnScript.pointCount = nd.arrayLength;
@@ -107,6 +116,25 @@ public class JsonReadWriteManager : MonoBehaviour
         
         
     }
+
+
+    public void ClearScene(){
+        example.waypoints = new Transform[1];
+
+        mr.enabled = false;
+
+        foreach (Transform child in blueConeHolder.transform) {
+     GameObject.Destroy(child.gameObject);
+ }
+        foreach (Transform child in startConeHolder.transform) {
+     GameObject.Destroy(child.gameObject);
+ }
+        foreach (Transform child in yellowConeHolder.transform) {
+     GameObject.Destroy(child.gameObject);
+ }
+    }
+    
+
 
 
     public void AdjustPositions(NodeData nd){
@@ -132,6 +160,7 @@ public class JsonReadWriteManager : MonoBehaviour
     }
 
     public void CreateNewPath(NodeData nd){
+        mr.enabled = true;
         //adjust size of the main array
         example.waypoints = copy;
         saveFilePos = nd.nodePositions1;
@@ -147,7 +176,7 @@ public class JsonReadWriteManager : MonoBehaviour
           example.waypoints[i] = Instantiate(prefab, saveFilePos[i], Quaternion.identity, nodeHolder.transform).GetComponent<Transform>();
           example.closedLoop = nd.closedPath;
           example.waypoints[i].position = saveFilePos[i];
-          Debug.Log("Path Data Loaded from JSON file!");
+          
         
         }
 
