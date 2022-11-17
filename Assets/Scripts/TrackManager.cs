@@ -8,12 +8,14 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Serialization;
 using PathCreation.Utility;
+using PathCreation.Examples;
 
 /// <summary>
 /// This Class is Responsible for changing the Track
 /// </summary>
 public class TrackManager : MonoBehaviour
 {
+    public GameObject jsonTrack;
     public List<GameObject> Tracks; //List of Available tracks
     public List<GameObject> TrackImgs;
     public GameObject CurrentTrack, currentImg; //Current Track
@@ -37,6 +39,8 @@ public class TrackManager : MonoBehaviour
         //set track to active
         try
         {
+            
+            jsonTrack.GetComponent<JsonReadWriteManager>().ClearScene();
             CurrentTrack.SetActive(true);
         }
         //if a deleted track is chosen
